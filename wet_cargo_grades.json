@@ -1,0 +1,2682 @@
+[
+  {
+    "cargo_type_description": "Blending Component",
+    "dry_or_wet": "W",
+    "cargo_grade": "Catfeed",
+    "api": "27.1",
+    "density": "0.8917",
+    "heated": "1",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Gasoline",
+    "dry_or_wet": "W",
+    "cargo_grade": "Corn Argentina",
+    "api": "",
+    "density": "",
+    "heated": "0",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Gasoline",
+    "dry_or_wet": "W",
+    "cargo_grade": "UMS",
+    "api": "59.7",
+    "density": "0.74",
+    "heated": "0",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Distillate",
+    "dry_or_wet": "W",
+    "cargo_grade": "Soyabeans Argentina",
+    "api": "",
+    "density": "",
+    "heated": "0",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "CLEAN",
+    "dry_or_wet": "W",
+    "cargo_grade": "NAPHTHA",
+    "api": "73.6",
+    "density": "0.69",
+    "heated": "0",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Condensate",
+    "dry_or_wet": "W",
+    "cargo_grade": "Brunei Condensate",
+    "api": "70.6",
+    "density": "0.7",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Condensate",
+    "dry_or_wet": "W",
+    "cargo_grade": "Bayu Undan",
+    "api": "62.6",
+    "density": "0.7288",
+    "heated": "0",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Condensate",
+    "dry_or_wet": "W",
+    "cargo_grade": "Arun Condensate",
+    "api": "56.1",
+    "density": "0.7543",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Condensate",
+    "dry_or_wet": "W",
+    "cargo_grade": "Algerian Condensate",
+    "api": "67.4",
+    "density": "0.7112",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Condensate",
+    "dry_or_wet": "W",
+    "cargo_grade": "Comingled Condensate",
+    "api": "57.3",
+    "density": "0.7492",
+    "heated": "0",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Condensate",
+    "dry_or_wet": "W",
+    "cargo_grade": "Yetagun Condensate",
+    "api": "56.4",
+    "density": "0.7528",
+    "heated": "0",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Condensate",
+    "dry_or_wet": "W",
+    "cargo_grade": "Uweinat Condensate",
+    "api": "52.7",
+    "density": "0.7679",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Condensate",
+    "dry_or_wet": "W",
+    "cargo_grade": "Sliepner Condensate",
+    "api": "59.9",
+    "density": "0.739",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Condensate",
+    "dry_or_wet": "W",
+    "cargo_grade": "Senipah Condensate",
+    "api": "52.4",
+    "density": "0.7694",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Condensate",
+    "dry_or_wet": "W",
+    "cargo_grade": "Ras Gas Condensate",
+    "api": "55.5",
+    "density": "0.7564",
+    "heated": "1",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Condensate",
+    "dry_or_wet": "W",
+    "cargo_grade": "Oso Condensate",
+    "api": "47.6",
+    "density": "0.7897",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Condensate",
+    "dry_or_wet": "W",
+    "cargo_grade": "NFC 2",
+    "api": "57.3",
+    "density": "0.7492",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Condensate",
+    "dry_or_wet": "W",
+    "cargo_grade": "Elang Condensate",
+    "api": "56.6",
+    "density": "0.752",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Condensate",
+    "dry_or_wet": "W",
+    "cargo_grade": "Dukhan Condensate",
+    "api": "70.4",
+    "density": "0.7007",
+    "heated": "0",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "CPP",
+    "dry_or_wet": "W",
+    "cargo_grade": "DIESEL",
+    "api": "37.0",
+    "density": "0.84",
+    "heated": "0",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "CPP",
+    "dry_or_wet": "W",
+    "cargo_grade": "Recycled Base Oil",
+    "api": "30.1",
+    "density": "0.8752",
+    "heated": "1",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "CPP",
+    "dry_or_wet": "W",
+    "cargo_grade": "Naphtha",
+    "api": "79.0",
+    "density": "0.6721",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "CPP",
+    "dry_or_wet": "W",
+    "cargo_grade": "VGO",
+    "api": "32.7",
+    "density": "0.8613",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "CPP",
+    "dry_or_wet": "W",
+    "cargo_grade": "Low Sulphur Gasoil",
+    "api": "35.8",
+    "density": "0.8454",
+    "heated": "0",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "CPP",
+    "dry_or_wet": "W",
+    "cargo_grade": "Low Sulphur Decant",
+    "api": "5.0",
+    "density": "1.036",
+    "heated": "1",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "CPP",
+    "dry_or_wet": "W",
+    "cargo_grade": "Clairified Oil",
+    "api": "9.8",
+    "density": "1.0008",
+    "heated": "1",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "CPP",
+    "dry_or_wet": "W",
+    "cargo_grade": "Chemical Feed Naphtha",
+    "api": "72.6",
+    "density": "0.6931",
+    "heated": "0",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "CPP",
+    "dry_or_wet": "W",
+    "cargo_grade": "LCGO (Cutter)",
+    "api": "16.8",
+    "density": "0.9536",
+    "heated": "0",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "CPP",
+    "dry_or_wet": "W",
+    "cargo_grade": "Kerosene",
+    "api": "45.4",
+    "density": "0.7995",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "CPP",
+    "dry_or_wet": "W",
+    "cargo_grade": "gasoil",
+    "api": "35.0",
+    "density": "0.85",
+    "heated": "0",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "CPP",
+    "dry_or_wet": "W",
+    "cargo_grade": "Jet Oil",
+    "api": "48.4",
+    "density": "0.7862",
+    "heated": "0",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "CPP",
+    "dry_or_wet": "W",
+    "cargo_grade": "Splitter Naphtha",
+    "api": "73.0",
+    "density": "0.6918",
+    "heated": "0",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "CPP",
+    "dry_or_wet": "W",
+    "cargo_grade": "High Sulphur Gas Oil",
+    "api": "18.0",
+    "density": "0.9459",
+    "heated": "0",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "CPP",
+    "dry_or_wet": "W",
+    "cargo_grade": "Eocene",
+    "api": "24.3",
+    "density": "0.9045",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "CPP",
+    "dry_or_wet": "W",
+    "cargo_grade": "Low Sulphur Naphtha",
+    "api": "78.0",
+    "density": "0.6753",
+    "heated": "1",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Abu Safah Crude",
+    "api": "28.9",
+    "density": "0.8817",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Alba Crude",
+    "api": "19.7",
+    "density": "0.9353",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Amenam Blend Crude",
+    "api": "39.4",
+    "density": "0.8276",
+    "heated": "0",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Amna Crude",
+    "api": "38.0",
+    "density": "0.8344",
+    "heated": "1",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Anaco Wax",
+    "api": "41.2",
+    "density": "0.8189",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Anoa Crude",
+    "api": "45.0",
+    "density": "0.8017",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Antan Blend",
+    "api": "26.5",
+    "density": "0.8951",
+    "heated": "0",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Arabian Extra Light Crude",
+    "api": "38.6",
+    "density": "0.8315",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Arabian Heavy ",
+    "api": "27.6",
+    "density": "0.8889",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Arabian Light",
+    "api": "33.3",
+    "density": "0.8582",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Arabian Medium",
+    "api": "30.9",
+    "density": "0.8708",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Arabian Super Light",
+    "api": "51.3",
+    "density": "0.7738",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Ardjuna Crude",
+    "api": "35.3",
+    "density": "0.8483",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Ashtart Crude",
+    "api": "30.0",
+    "density": "0.8757",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Attaka Crude",
+    "api": "43.5",
+    "density": "0.8086",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Bach Ho Crude",
+    "api": "39.6",
+    "density": "0.8266",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Badak",
+    "api": "41.3",
+    "density": "0.8189",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Badin Crude",
+    "api": "43.6",
+    "density": "0.8077",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Balder Crude",
+    "api": "23.1",
+    "density": "0.9148",
+    "heated": "0",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Barrow Crude",
+    "api": "37.0",
+    "density": "0.8393",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Basrah Light Crude",
+    "api": "29.8",
+    "density": "0.8768",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "BCF 17 Crude Oil",
+    "api": "16.0",
+    "density": "0.9588",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Beatrice Crude",
+    "api": "38.2",
+    "density": "0.8334",
+    "heated": "0",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Bekapai",
+    "api": "43.0",
+    "density": "0.8105",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Belida",
+    "api": "45.7",
+    "density": "0.7985",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Benchamas Crude",
+    "api": "43.4",
+    "density": "0.8087",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Bintulu Condensate",
+    "api": "66.2",
+    "density": "0.7155",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Bintulu Crude",
+    "api": "36.0",
+    "density": "0.8448",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Bohai Crude",
+    "api": "35.7",
+    "density": "0.8459",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Bonny Light Crude",
+    "api": "35.1",
+    "density": "0.8489",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Bonny Medium Crude",
+    "api": "25.4",
+    "density": "0.9014",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Boscan Blend Crude",
+    "api": "25.8",
+    "density": "0.8991",
+    "heated": "1",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Brass River Crude",
+    "api": "43.0",
+    "density": "0.8105",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Brega Crude",
+    "api": "42.2",
+    "density": "0.8412",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Brent Crude",
+    "api": "38.8",
+    "density": "0.8305",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Buffalo Crude",
+    "api": "52.7",
+    "density": "0.7679",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Bunga Kekwa Crude",
+    "api": "36.9",
+    "density": "0.8403",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Bunyu Mixed Crude",
+    "api": "34.1",
+    "density": "0.854",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Cabinda Crude",
+    "api": "32.7",
+    "density": "0.8613",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Canedon Seco Crude",
+    "api": "24.8",
+    "density": "0.9048",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Captain Crude",
+    "api": "19.9",
+    "density": "0.9342",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Cerro Negro Blend Crude",
+    "api": "16.8",
+    "density": "0.9536",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Cerro Negro Heavy Crude",
+    "api": "14.3",
+    "density": "0.9699",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Champion Crude",
+    "api": "24.9",
+    "density": "0.9047",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Cinta Crude",
+    "api": "31.1",
+    "density": "0.8702",
+    "heated": "1",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Cold Lake Crude Oil",
+    "api": "22.1",
+    "density": "0.9207",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Cooper Basin Crude",
+    "api": "45.5",
+    "density": "0.7991",
+    "heated": "0",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Cossack Crude",
+    "api": "47.7",
+    "density": "0.7896",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "CPC Blend Crude",
+    "api": "47.4",
+    "density": "0.7906",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Cupiagua Crude",
+    "api": "43.3",
+    "density": "0.8091",
+    "heated": "1",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Cusiana Crude",
+    "api": "42.5",
+    "density": "0.8128",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Dai Hung Crude",
+    "api": "29.1",
+    "density": "0.8811",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Danish Underground Crd",
+    "api": "34.2",
+    "density": "0.8535",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Djeno Crude",
+    "api": "27.3",
+    "density": "0.8906",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Draugen Crude",
+    "api": "40.5",
+    "density": "0.8233",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Dulang Crude",
+    "api": "38.5",
+    "density": "0.8324",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Duri Crude",
+    "api": "21.0",
+    "density": "0.9279",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Ekofisk Crude",
+    "api": "37.7",
+    "density": "0.8359",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Es Sharara Crude",
+    "api": "43.0",
+    "density": "0.8105",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Es Sider Crude",
+    "api": "36.6",
+    "density": "0.8418",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Escalante Crude",
+    "api": "22.8",
+    "density": "0.9165",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Escravos Crude",
+    "api": "33.7",
+    "density": "0.8561",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Flotta Crude",
+    "api": "35.8",
+    "density": "0.8454",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Foinaven Crude",
+    "api": "27.5",
+    "density": "0.8895",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Forcados Crude",
+    "api": "30.4",
+    "density": "0.8735",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Foroozan Crude",
+    "api": "31.3",
+    "density": "0.8687",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Forties Blend",
+    "api": "45.0",
+    "density": "0.8013",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Galeota Mix",
+    "api": "37.0",
+    "density": "0.8393",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Geragai Crude",
+    "api": "48.3",
+    "density": "0.7866",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "German Mix Crude",
+    "api": "32.4",
+    "density": "0.8629",
+    "heated": "0",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Gippsland Blend",
+    "api": "45.5",
+    "density": "0.7994",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Girassol Crude",
+    "api": "30.6",
+    "density": "0.8725",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Gofinate",
+    "api": "24.5",
+    "density": "0.9065",
+    "heated": "1",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Grane Crude",
+    "api": "19.1",
+    "density": "0.939",
+    "heated": "1",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Griffin Crude",
+    "api": "53.8",
+    "density": "0.7633",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Guafita Blend",
+    "api": "28.3",
+    "density": "0.885",
+    "heated": "1",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Gulfaks Crude",
+    "api": "36.5",
+    "density": "0.8418",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Hago",
+    "api": "24.4",
+    "density": "0.9071",
+    "heated": "1",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Handil Mix Crude",
+    "api": "43.4",
+    "density": "0.8087",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Heidrun Crude",
+    "api": "27.6",
+    "density": "0.8889",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Hibernia Crude",
+    "api": "35.3",
+    "density": "0.8479",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Hout Crude",
+    "api": "32.4",
+    "density": "0.8629",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Hungo",
+    "api": "27.6",
+    "density": "0.8889",
+    "heated": "1",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Iranian Heavy Crude",
+    "api": "30.4",
+    "density": "0.8735",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Iranian Light Crude",
+    "api": "33.6",
+    "density": "0.8566",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Isis Crude",
+    "api": "35.5",
+    "density": "0.8469",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Jabiru Crude",
+    "api": "42.4",
+    "density": "0.8137",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Kaji Semoga Crude",
+    "api": "38.3",
+    "density": "0.8329",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Kakap Crude",
+    "api": "48.0",
+    "density": "0.788",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Kerapu Crude",
+    "api": "43.3",
+    "density": "0.8095",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Khafji Crude",
+    "api": "28.0",
+    "density": "0.8771",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Kirkuk Crude",
+    "api": "32.9",
+    "density": "0.8603",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Kuito Crude",
+    "api": "20.2",
+    "density": "0.9322",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Kutubu Crude",
+    "api": "44.1",
+    "density": "0.8058",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Kuwait Export",
+    "api": "30.5",
+    "density": "0.873",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Labuan Crude",
+    "api": "31.6",
+    "density": "0.8676",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Lagomedio Crude",
+    "api": "31.5",
+    "density": "0.8676",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Laguna Blend 17",
+    "api": "17.3",
+    "density": "0.9504",
+    "heated": "1",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Laguna Crude",
+    "api": "10.9",
+    "density": "0.9931",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Laminaria Crude",
+    "api": "60.4",
+    "density": "0.7371",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Langsa Crude",
+    "api": "45.6",
+    "density": "0.7986",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Legendre Crude",
+    "api": "42.9",
+    "density": "0.811",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Leona 22 Crude",
+    "api": "22.2",
+    "density": "0.9201",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Liverpool Blend Crude",
+    "api": "44.3",
+    "density": "0.8045",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Lucina Blend",
+    "api": "36.0",
+    "density": "0.8443",
+    "heated": "0",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Lufeng 22-1 Crude",
+    "api": "33.0",
+    "density": "0.8597",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Malampaya Crude",
+    "api": "30.4",
+    "density": "0.8735",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Maralago-22 Crude",
+    "api": "21.8",
+    "density": "0.9225",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Marlim Crude",
+    "api": "19.8",
+    "density": "0.9347",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Masa Crude",
+    "api": "44.2",
+    "density": "0.805",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Masila Blend Crude",
+    "api": "31.2",
+    "density": "0.8692",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Maya Crude",
+    "api": "21.7",
+    "density": "0.9251",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Merey-16 Crude",
+    "api": "16.2",
+    "density": "0.9575",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Mesa 28 Crude",
+    "api": "26.0",
+    "density": "0.8979",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Mesa 30 Crude",
+    "api": "30.7",
+    "density": "0.8719",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Minas Crude",
+    "api": "34.5",
+    "density": "0.8524",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Miri Light Crude",
+    "api": "32.7",
+    "density": "0.8613",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Mudi Crude",
+    "api": "36.5",
+    "density": "0.8418",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Murban",
+    "api": "39.9",
+    "density": "0.8252",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Nanhai Crude",
+    "api": "38.6",
+    "density": "0.8315",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Napo Crude",
+    "api": "19.8",
+    "density": "0.9347",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Natural Petroleum Crude",
+    "api": "35.9",
+    "density": "0.8449",
+    "heated": "0",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Nemba Crude",
+    "api": "39.1",
+    "density": "0.829",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Nigerian Crude",
+    "api": "33.8",
+    "density": "0.8556",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Nile Blend Crude",
+    "api": "33.8",
+    "density": "0.8556",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Nkossa Crude",
+    "api": "43.2",
+    "density": "0.8096",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Norne Crude",
+    "api": "32.9",
+    "density": "0.8603",
+    "heated": "1",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Olmeca Crude",
+    "api": "39.8",
+    "density": "0.826",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Oman Crude",
+    "api": "32.8",
+    "density": "0.8608",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Onako Light Crude",
+    "api": "47.3",
+    "density": "0.791",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Oriente Crude",
+    "api": "28.1",
+    "density": "0.8866",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Oseberg Blend Crude",
+    "api": "38.7",
+    "density": "0.831",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Palanca Crude",
+    "api": "37.3",
+    "density": "0.8379",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Pattani Blend Crude",
+    "api": "41.3",
+    "density": "0.8185",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Pedernales-17 Crude",
+    "api": "16.5",
+    "density": "0.9555",
+    "heated": "1",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Pedernales Crude",
+    "api": "20.8",
+    "density": "0.9286",
+    "heated": "1",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Qatar Land Crude",
+    "api": "41.1",
+    "density": "0.8194",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Qatar Marine Crude",
+    "api": "33.3",
+    "density": "0.8582",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Qua Iboe Crude",
+    "api": "36.6",
+    "density": "0.8413",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Rabi Blend Crude",
+    "api": "14.5",
+    "density": "0.9686",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Rang Dong Crude",
+    "api": "40.0",
+    "density": "0.8247",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Ratawi",
+    "api": "24.3",
+    "density": "0.9077",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Ruby Crude",
+    "api": "35.6",
+    "density": "0.8464",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Russian Export Blend Crude",
+    "api": "30.7",
+    "density": "0.8719",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Saharan Blend Crude",
+    "api": "45.6",
+    "density": "0.7986",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Sakhalin Vityaz Crude",
+    "api": "34.0",
+    "density": "0.8545",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Santa Barbara Crude",
+    "api": "40.0",
+    "density": "0.8247",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Sarir Crude",
+    "api": "37.8",
+    "density": "0.8354",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Sepinggan Crude",
+    "api": "31.0",
+    "density": "0.8708",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Seria Light Export Blend",
+    "api": "40.2",
+    "density": "0.8241",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Siberian Light Crude",
+    "api": "35.5",
+    "density": "0.8469",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Sirtica Crude",
+    "api": "39.4",
+    "density": "0.8276",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Slurry Oil",
+    "api": "2.0",
+    "density": "1.0593",
+    "heated": "1",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Souediah Crude",
+    "api": "24.7",
+    "density": "0.9054",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Soyo Crude",
+    "api": "38.4",
+    "density": "0.8324",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Spiked Crude",
+    "api": "40.6",
+    "density": "0.8218",
+    "heated": "0",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Stag Crude",
+    "api": "18.4",
+    "density": "0.944",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Su Tu Den Crude",
+    "api": "36.2",
+    "density": "0.8433",
+    "heated": "1",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Sumatran Light Crude Oil",
+    "api": "34.6",
+    "density": "0.852",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Syrian Light Crude",
+    "api": "38.3",
+    "density": "0.8329",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Taching Crude",
+    "api": "32.3",
+    "density": "0.8639",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Tantawan Crude",
+    "api": "47.6",
+    "density": "0.7901",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Tapis Blend Crude",
+    "api": "46.2",
+    "density": "0.7959",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Tchatamba Crude",
+    "api": "44.0",
+    "density": "0.8059",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Tengiz Crude",
+    "api": "46.8",
+    "density": "0.7933",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Terra Nova Crude",
+    "api": "33.7",
+    "density": "0.8561",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Tijuana Pesado Crude",
+    "api": "11.0",
+    "density": "0.9924",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Tilaba Crude",
+    "api": "11.0",
+    "density": "0.9924",
+    "heated": "1",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Topped Crude",
+    "api": "18.6",
+    "density": "0.9422",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Troll Crude",
+    "api": "27.2",
+    "density": "0.8911",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Umm Shaif Crude",
+    "api": "37.2",
+    "density": "0.8388",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Varanus Crude",
+    "api": "50.5",
+    "density": "0.7771",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Wandoo Crude",
+    "api": "19.3",
+    "density": "0.9383",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Widuri Crude",
+    "api": "32.6",
+    "density": "0.8623",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Woollybutt Crude",
+    "api": "49.5",
+    "density": "0.7818",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Wytch Farm Crude",
+    "api": "41.5",
+    "density": "0.8175",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Xijiang Crude",
+    "api": "31.5",
+    "density": "0.8676",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Xikomba Crude",
+    "api": "34.7",
+    "density": "0.8509",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Yoho Crude",
+    "api": "39.4",
+    "density": "0.8276",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Zafiro Crude",
+    "api": "31.7",
+    "density": "0.8666",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Zakum Lower",
+    "api": "39.5",
+    "density": "0.8271",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Zakum Upper",
+    "api": "34.3",
+    "density": "0.853",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Zarzaitine Crude",
+    "api": "44.7",
+    "density": "0.8027",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Zuata 16 Crude",
+    "api": "15.9",
+    "density": "0.9594",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Zuata Light Crude",
+    "api": "94.7",
+    "density": "0.6255",
+    "heated": "0",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Zuetina Crude",
+    "api": "39.0",
+    "density": "0.8295",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Laguna Blend 22",
+    "api": "21.9",
+    "density": "0.9219",
+    "heated": "1",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Leona 24 Crude",
+    "api": "24.0",
+    "density": "0.9095",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Schiehallion Crude ",
+    "api": "25.3",
+    "density": "0.9019",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Crude",
+    "dry_or_wet": "W",
+    "cargo_grade": "Soroosh Crude Oil",
+    "api": "19.9",
+    "density": "0.9342",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "DPP",
+    "dry_or_wet": "W",
+    "cargo_grade": "Midw Bottoms",
+    "api": "31.2",
+    "density": "0.8692",
+    "heated": "1",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "DPP",
+    "dry_or_wet": "W",
+    "cargo_grade": "High Sulphur Decant",
+    "api": "10.0",
+    "density": "0.9994",
+    "heated": "1",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "DPP",
+    "dry_or_wet": "W",
+    "cargo_grade": "Carbon Black Feedstock",
+    "api": "-0.9",
+    "density": "1.0827",
+    "heated": "1",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "DPP",
+    "dry_or_wet": "W",
+    "cargo_grade": "North West Shelf Condensate",
+    "api": "60.2",
+    "density": "0.7379",
+    "heated": "0",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "DPP",
+    "dry_or_wet": "W",
+    "cargo_grade": "Clarified Slurry Oil",
+    "api": "3.6",
+    "density": "1.0475",
+    "heated": "1",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "DPP",
+    "dry_or_wet": "W",
+    "cargo_grade": "Qatar Residue",
+    "api": "19.8",
+    "density": "0.9347",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "DPP",
+    "dry_or_wet": "W",
+    "cargo_grade": "Coker Gas",
+    "api": "9.4",
+    "density": "1.0065",
+    "heated": "1",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "DPP",
+    "dry_or_wet": "W",
+    "cargo_grade": "Arab Light Long Residue",
+    "api": "33.6",
+    "density": "0.8566",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "DPP",
+    "dry_or_wet": "W",
+    "cargo_grade": "Low Sulphur No.6 Fuel Oil",
+    "api": "2.0",
+    "density": "1.0593",
+    "heated": "1",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "DPP",
+    "dry_or_wet": "W",
+    "cargo_grade": "VTBB",
+    "api": "11.4",
+    "density": "0.9896",
+    "heated": "1",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "DPP",
+    "dry_or_wet": "W",
+    "cargo_grade": "Atmospheric Residue",
+    "api": "16.3",
+    "density": "0.9568",
+    "heated": "0",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "DPP",
+    "dry_or_wet": "W",
+    "cargo_grade": "A-960 Reduced Crude",
+    "api": "17.0",
+    "density": "0.9523",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Feedstock",
+    "dry_or_wet": "W",
+    "cargo_grade": "Cutback Bitumen",
+    "api": "14.1",
+    "density": "0.9713",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Fuel Oil",
+    "dry_or_wet": "W",
+    "cargo_grade": "Premium Diesel",
+    "api": "40.6",
+    "density": "0.8218",
+    "heated": "1",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Fuel Oil",
+    "dry_or_wet": "W",
+    "cargo_grade": "Recycled Diesel Oil",
+    "api": "31.3",
+    "density": "0.8687",
+    "heated": "1",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Fuel Oil",
+    "dry_or_wet": "W",
+    "cargo_grade": "Reduced Crude F.O.",
+    "api": "14.5",
+    "density": "0.9686",
+    "heated": "1",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Fuel Oil",
+    "dry_or_wet": "W",
+    "cargo_grade": "Residual Fuel Oil",
+    "api": "9.9",
+    "density": "1.0001",
+    "heated": "1",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Fuel Oil",
+    "dry_or_wet": "W",
+    "cargo_grade": "No 6 Fuel Oil 2 Pct",
+    "api": "12.6",
+    "density": "0.9814",
+    "heated": "1",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Fuel Oil",
+    "dry_or_wet": "W",
+    "cargo_grade": "No 6 Fuel Oil 1 Pct",
+    "api": "12.0",
+    "density": "0.9855",
+    "heated": "1",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Fuel Oil",
+    "dry_or_wet": "W",
+    "cargo_grade": "Moroccan Atmospheric Residue",
+    "api": "15.7",
+    "density": "0.9607",
+    "heated": "1",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Fuel Oil",
+    "dry_or_wet": "W",
+    "cargo_grade": "MDO",
+    "api": "41.2",
+    "density": "0.8189",
+    "heated": "0",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Fuel Oil",
+    "dry_or_wet": "W",
+    "cargo_grade": "Main Column Bottoms Fuel Oil",
+    "api": "19.9",
+    "density": "0.9342",
+    "heated": "1",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Fuel Oil",
+    "dry_or_wet": "W",
+    "cargo_grade": "LSSR",
+    "api": "20.1",
+    "density": "0.9328",
+    "heated": "1",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Fuel Oil",
+    "dry_or_wet": "W",
+    "cargo_grade": "LSFO 200 Cst",
+    "api": "15.2",
+    "density": "0.964",
+    "heated": "1",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Fuel Oil",
+    "dry_or_wet": "W",
+    "cargo_grade": "LSFO 180 Cst",
+    "api": "12.4",
+    "density": "0.9827",
+    "heated": "1",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Fuel Oil",
+    "dry_or_wet": "W",
+    "cargo_grade": "Low Sulphur Diesel",
+    "api": "6.0",
+    "density": "1.0285",
+    "heated": "1",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Fuel Oil",
+    "dry_or_wet": "W",
+    "cargo_grade": "Light Cycle Oil",
+    "api": "23.5",
+    "density": "0.9124",
+    "heated": "0",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Fuel Oil",
+    "dry_or_wet": "W",
+    "cargo_grade": "HSFO 380 Cst",
+    "api": "11.5",
+    "density": "0.9889",
+    "heated": "1",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Fuel Oil",
+    "dry_or_wet": "W",
+    "cargo_grade": "HSFO 280 Cst",
+    "api": "11.9",
+    "density": "0.9862",
+    "heated": "1",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Fuel Oil",
+    "dry_or_wet": "W",
+    "cargo_grade": "HSFO 180 Cst",
+    "api": "12.4",
+    "density": "0.9827",
+    "heated": "1",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Fuel Oil",
+    "dry_or_wet": "W",
+    "cargo_grade": "HSFO",
+    "api": "10.4",
+    "density": "0.9966",
+    "heated": "1",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Fuel Oil",
+    "dry_or_wet": "W",
+    "cargo_grade": "High Pour Lsfo",
+    "api": "17.2",
+    "density": "0.951",
+    "heated": "1",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Fuel Oil",
+    "dry_or_wet": "W",
+    "cargo_grade": "Heavy Fuel Oil",
+    "api": "11.7",
+    "density": "0.9875",
+    "heated": "1",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Fuel Oil",
+    "dry_or_wet": "W",
+    "cargo_grade": "Fuel Oil Lourd",
+    "api": "24.6",
+    "density": "0.906",
+    "heated": "1",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Fuel Oil",
+    "dry_or_wet": "W",
+    "cargo_grade": "Fuel Oil Component",
+    "api": "12.3",
+    "density": "0.9834",
+    "heated": "1",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Fuel Oil",
+    "dry_or_wet": "W",
+    "cargo_grade": "Fuel Oil",
+    "api": "17.5",
+    "density": "0.9491",
+    "heated": "1",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Fuel Oil",
+    "dry_or_wet": "W",
+    "cargo_grade": "Decant Oil",
+    "api": "13.6",
+    "density": "0.9746",
+    "heated": "0",
+    "cow_recommended": "",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Fuel Oil",
+    "dry_or_wet": "W",
+    "cargo_grade": "Atmospheric Fuel Oil",
+    "api": "19.2",
+    "density": "0.9384",
+    "heated": "0",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Fuel Oil",
+    "dry_or_wet": "W",
+    "cargo_grade": "Algerian L.S.R.F.O.",
+    "api": "22.9",
+    "density": "0.9159",
+    "heated": "1",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Fuel Oil",
+    "dry_or_wet": "W",
+    "cargo_grade": "Straight Run Fuel Oil",
+    "api": "16.0",
+    "density": "0.9588",
+    "heated": "1",
+    "cow_recommended": "1",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Fuel Oil",
+    "dry_or_wet": "W",
+    "cargo_grade": "Abadan SRFO 280",
+    "api": "15.6",
+    "density": "0.9614",
+    "heated": "0",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "LSWR",
+    "dry_or_wet": "W",
+    "cargo_grade": "LSWR",
+    "api": "25.1",
+    "density": "0.9031",
+    "heated": "1",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  },
+  {
+    "cargo_type_description": "Orimulion",
+    "dry_or_wet": "W",
+    "cargo_grade": "Orimulsion 400",
+    "api": "1.0",
+    "density": "1.0673",
+    "heated": "0",
+    "cow_recommended": "0",
+    "excempted_cargo": "N"
+  }
+]
