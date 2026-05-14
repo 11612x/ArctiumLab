@@ -1726,7 +1726,7 @@
   .live-pos-table tbody tr:last-child td { border-bottom: none; }
 
   .live-pos-table--kpler tbody tr {
-    cursor: default;
+    cursor: pointer;
   }
 
   .live-pos-th-sortable {
@@ -1837,6 +1837,613 @@
     margin: 0;
     color: var(--text-dim);
     word-break: break-word;
+  }
+
+  /* Live position — vessel comments side panel */
+  .live-pos-vc-root {
+    position: fixed;
+    inset: 0;
+    z-index: 9500;
+  }
+
+  .live-pos-vc-root:not(.live-pos-vc-root--open) {
+    pointer-events: none;
+  }
+
+  .live-pos-vc-backdrop {
+    position: absolute;
+    inset: 0;
+    background: color-mix(in srgb, var(--bg) 40%, transparent);
+    opacity: 0;
+    transition: opacity 0.28s ease;
+  }
+
+  .live-pos-vc-root--open .live-pos-vc-backdrop {
+    opacity: 1;
+  }
+
+  .live-pos-vc-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 380px;
+    max-width: 100%;
+    background: var(--surface);
+    border-left: 1px solid var(--border);
+    box-shadow: -12px 0 40px rgba(0, 0, 0, 0.28);
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.28s ease;
+  }
+
+  .live-pos-vc-root--open .live-pos-vc-panel {
+    transform: translateX(0);
+  }
+
+  .live-pos-vc-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .live-pos-vc-title {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text);
+    line-height: 1.35;
+    word-break: break-word;
+    padding-right: 8px;
+  }
+
+  .live-pos-vc-close {
+    flex-shrink: 0;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    width: 32px;
+    height: 32px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    padding: 0;
+    transition: color 0.15s, border-color 0.15s;
+  }
+
+  .live-pos-vc-close:hover {
+    color: var(--text);
+    border-color: var(--border-light);
+  }
+
+  .live-pos-vc-reply-context {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 8px 16px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface2);
+    flex-shrink: 0;
+  }
+
+  .live-pos-vc-reply-context[hidden] {
+    display: none !important;
+  }
+
+  .live-pos-vc-reply-context-text {
+    font-size: 11px;
+    line-height: 1.35;
+    color: var(--text-dim);
+    min-width: 0;
+    flex: 1;
+  }
+
+  .live-pos-vc-reply-cancel {
+    flex-shrink: 0;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    border-radius: 3px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+  }
+
+  .live-pos-vc-reply-cancel:hover {
+    color: var(--text);
+    border-color: var(--border-light);
+  }
+
+  .live-pos-vc-err {
+    font-size: 11px;
+    line-height: 1.35;
+    color: var(--red);
+    padding: 0 16px 8px;
+    flex-shrink: 0;
+  }
+
+  .live-pos-vc-err[hidden] {
+    display: none !important;
+  }
+
+  .live-pos-vc-messages {
+    flex: 1 1 0;
+    min-height: 120px;
+    overflow-y: auto;
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .live-pos-vc-thread {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .live-pos-vc-thread:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .live-pos-vc-thread-replies {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .live-pos-vc-thread-replies--collapsed {
+    display: none !important;
+  }
+
+  .live-pos-vc-msg {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px;
+    cursor: pointer;
+    transition: border-color 0.12s, outline 0.12s;
+  }
+
+  .live-pos-vc-msg:hover {
+    border-color: var(--border-light);
+  }
+
+  .live-pos-vc-msg--reply-target {
+    border-color: var(--accent-dim);
+    outline: 1px solid var(--accent-dim);
+    outline-offset: 1px;
+  }
+
+  .live-pos-vc-msg--resolved {
+    opacity: 0.72;
+  }
+
+  .live-pos-vc-msg-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+
+  .live-pos-vc-msg-head-left {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 6px;
+    min-width: 0;
+  }
+
+  .live-pos-vc-msg-author {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--text);
+  }
+
+  .live-pos-vc-msg-role {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .live-pos-vc-msg-role--admin {
+    color: var(--red);
+    border-color: color-mix(in srgb, var(--red) 45%, var(--border));
+  }
+
+  .live-pos-vc-msg-role--chart {
+    color: var(--amber);
+    border-color: color-mix(in srgb, var(--amber) 45%, var(--border));
+  }
+
+  .live-pos-vc-msg-role--ops {
+    color: var(--blue);
+    border-color: color-mix(in srgb, var(--blue) 45%, var(--border));
+  }
+
+  .live-pos-vc-msg-role--other {
+    color: var(--text-muted);
+    border-color: var(--border);
+  }
+
+  .live-pos-vc-msg-time {
+    font-size: 10px;
+    letter-spacing: 0.03em;
+    color: var(--text-muted);
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .live-pos-vc-msg-body {
+    font-size: 12px;
+    line-height: 1.45;
+    color: var(--text-dim);
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .live-pos-vc-msg-actions {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .live-pos-vc-msg-del-slot {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 2px;
+    flex-shrink: 0;
+  }
+
+  .live-pos-vc-msg-del-slot .dash-snap-del,
+  .live-pos-vc-msg-del-slot .dash-snap-del-confirm {
+    padding: 1px;
+  }
+
+  .live-pos-vc-msg-del-slot .dash-snap-del svg,
+  .live-pos-vc-msg-del-slot .dash-snap-del-confirm svg {
+    width: 14.4px;
+    height: 14.4px;
+    display: block;
+  }
+
+  .live-pos-vc-msg-reply-btn {
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    line-height: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.12s, background 0.12s;
+  }
+
+  .live-pos-vc-msg-reply-btn:hover {
+    color: var(--accent);
+    background: rgba(168, 184, 168, 0.08);
+  }
+
+  .live-pos-vc-msg-reply-btn svg {
+    display: block;
+    width: 1.1em;
+    height: 1.1em;
+  }
+
+  .live-pos-vc-msg-resolve-btn {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: 4px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-muted);
+  }
+
+  .live-pos-vc-msg-resolve-btn:hover {
+    color: var(--text);
+    border-color: var(--border-light);
+  }
+
+  .live-pos-vc-msg-resolve-btn--resolved {
+    color: color-mix(in srgb, var(--accent) 75%, var(--text-dim));
+    border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+    background: rgba(168, 184, 168, 0.1);
+  }
+
+  .live-pos-vc-msg-resolve-btn--resolved:hover {
+    color: var(--text);
+    border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
+  }
+
+  .live-pos-vc-msg-resolve-btn--unresolved:hover {
+    border-color: var(--border-light);
+  }
+
+  .live-pos-vc-footer {
+    flex-shrink: 0;
+    padding: 12px 16px 16px;
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .live-pos-vc-compose.field {
+    gap: 6px;
+  }
+
+  .live-pos-vc-footer-label {
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    min-height: 0;
+    margin: 0;
+  }
+
+  .live-pos-vc-compose-caption {
+    font-size: 10px;
+    line-height: 1.4;
+    letter-spacing: 0.03em;
+    color: var(--text-muted);
+    margin: 0 0 4px;
+  }
+
+  .live-pos-vc-root-compose-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+
+  .live-pos-vc-root-compose-fields[hidden] {
+    display: none !important;
+  }
+
+  .live-pos-vc-field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .live-pos-vc-field-label {
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  .live-pos-vc-title-input,
+  .live-pos-vc-select {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--text);
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 14px;
+    padding: 6px 8px;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.15s;
+  }
+
+  .live-pos-vc-title-input:focus,
+  .live-pos-vc-select:focus {
+    border-color: var(--accent-dim);
+  }
+
+  .live-pos-vc-select {
+    cursor: pointer;
+  }
+
+  .live-pos-vc-field-err {
+    font-size: 11px;
+    line-height: 1.3;
+    color: var(--red);
+    margin: 0;
+  }
+
+  .live-pos-vc-field-err[hidden] {
+    display: none !important;
+  }
+
+  .live-pos-vc-msg-title-line {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.35;
+  }
+
+  .live-pos-vc-msg-title-line--thread-tools {
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .live-pos-vc-msg-title-line-main {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .live-pos-vc-thread-collapse-btn {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    margin: 0;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--surface);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: color 0.12s, border-color 0.12s, background 0.12s;
+  }
+
+  .live-pos-vc-thread-collapse-btn:hover {
+    color: var(--text);
+    border-color: var(--border-light);
+    background: rgba(168, 184, 168, 0.06);
+  }
+
+  .live-pos-vc-thread-collapse-btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .live-pos-vc-thread-collapse-btn svg {
+    display: block;
+    transition: transform 0.18s ease;
+  }
+
+  .live-pos-vc-thread-collapse-btn[aria-expanded='true'] svg {
+    transform: rotate(90deg);
+  }
+
+  .live-pos-vc-msg-title-text {
+    min-width: 0;
+    word-break: break-word;
+  }
+
+  .live-pos-vc-issue-icon {
+    font-size: 15px;
+    line-height: 1;
+    flex-shrink: 0;
+    font-weight: 700;
+  }
+
+  .live-pos-vc-issue-icon--info {
+    color: var(--blue);
+  }
+
+  .live-pos-vc-issue-icon--caution {
+    color: var(--amber);
+  }
+
+  .live-pos-vc-issue-icon--critical {
+    color: var(--red);
+  }
+
+  .live-pos-vc-msg-meta {
+    font-size: 11px;
+    letter-spacing: 0.03em;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  .live-pos-vc-input-row {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .live-pos-vc-textarea {
+    flex: 1;
+    min-width: 0;
+    min-height: 4.5em;
+    resize: vertical;
+    box-sizing: border-box;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--text);
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 14px;
+    padding: 6px 8px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  .live-pos-vc-textarea:focus {
+    border-color: var(--accent-dim);
+  }
+
+  .live-pos-vc-send.run-btn {
+    width: auto;
+    flex-shrink: 0;
+    align-self: stretch;
+    padding: 10px 14px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+
+  .live-pos-vessel-name-cell {
+    vertical-align: top;
+    overflow: visible;
+    line-height: 1.45;
+    /* Match KPLER td padding but add bottom room so the 1.4em status SVG is not clipped */
+    padding: 6px 7px 10px 7px;
+  }
+
+  .live-pos-vessel-name-text {
+    word-break: break-word;
+  }
+
+  .live-pos-vessel-comment-icon-slot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 12px;
+    vertical-align: middle;
+    line-height: 1;
+  }
+
+  .live-pos-vessel-comment-icon-slot svg {
+    display: block;
+    width: 1.4em;
+    height: 1.4em;
+    overflow: visible;
+    flex-shrink: 0;
   }
 
   /* RESULTS */
@@ -3194,6 +3801,7 @@
   <button class="tab-btn active" data-tab="tab-dashboard" onclick="switchTab('tab-dashboard')">Dashboard</button>
   <button class="tab-btn" data-tab="tab-tc" onclick="switchTab('tab-tc')">TC</button>
   <button class="tab-btn" data-tab="tab-voy" onclick="switchTab('tab-voy')">Spot</button>
+  <button class="tab-btn" data-tab="tab-estimate" onclick="switchTab('tab-estimate')">Estimate</button>
   <button class="tab-btn" data-tab="tab-bunkers" onclick="switchTab('tab-bunkers')">Bunkers</button>
   <button class="tab-btn" data-tab="tab-emissions" onclick="switchTab('tab-emissions')">Emissions</button>
 </div>
@@ -3441,6 +4049,15 @@
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- TAB: ESTIMATE                                                           -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-estimate">
+  <div class="empty-state">
+    <div>Estimate — content next</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
 <!-- TAB 3: BUNKERS                                                          -->
 <!-- ═══════════════════════════════════════════════════════════════════════ -->
 <div class="tab-panel" id="tab-bunkers">
@@ -3615,6 +4232,48 @@
   </div>
 </div>
 
+<div id="livePosVesselCommentsRoot" class="live-pos-vc-root" hidden aria-hidden="true">
+  <div class="live-pos-vc-backdrop" id="livePosVesselCommentsBackdrop"></div>
+  <aside class="live-pos-vc-panel" role="dialog" aria-modal="true" aria-labelledby="livePosVesselCommentsTitle">
+    <header class="live-pos-vc-head">
+      <div class="live-pos-vc-title" id="livePosVesselCommentsTitle">Vessel</div>
+      <button type="button" class="live-pos-vc-close" id="livePosVesselCommentsClose" aria-label="Close">×</button>
+    </header>
+    <div id="livePosVesselCommentsErr" class="live-pos-vc-err" hidden role="alert"></div>
+    <div id="livePosVcReplyContext" class="live-pos-vc-reply-context" hidden>
+      <div class="live-pos-vc-reply-context-text" id="livePosVcReplyContextText"></div>
+      <button type="button" class="live-pos-vc-reply-cancel" id="livePosVcCancelReply">Cancel</button>
+    </div>
+    <div class="live-pos-vc-messages" id="livePosVesselCommentsMessages"></div>
+    <footer class="live-pos-vc-footer">
+      <div class="live-pos-vc-compose field" id="livePosVcComposeWrap">
+        <label for="livePosVesselCommentsTextarea" class="live-pos-vc-footer-label" id="livePosVcComposeLabel">New thread</label>
+        <span class="live-pos-vc-compose-caption" id="livePosVcComposeCaption"></span>
+        <div id="livePosVcRootComposeFields" class="live-pos-vc-root-compose-fields">
+          <div class="live-pos-vc-field-group" data-admin-or-ops>
+            <label for="livePosVcIssueLevel" class="live-pos-vc-field-label">Issue level</label>
+            <select id="livePosVcIssueLevel" class="live-pos-vc-select" autocomplete="off">
+              <option value="">None</option>
+              <option value="info">Info</option>
+              <option value="caution">Caution</option>
+              <option value="critical">Critical</option>
+            </select>
+          </div>
+          <div class="live-pos-vc-field-group">
+            <label for="livePosVcThreadTitle" class="live-pos-vc-field-label">Title</label>
+            <input type="text" id="livePosVcThreadTitle" class="live-pos-vc-title-input" placeholder="Title" autocomplete="off">
+            <span id="livePosVcTitleErr" class="live-pos-vc-field-err" hidden>Add a title</span>
+          </div>
+        </div>
+        <div class="live-pos-vc-input-row">
+          <textarea id="livePosVesselCommentsTextarea" class="live-pos-vc-textarea" rows="3" placeholder="Comment" title="Shift+Enter for new line, Enter to send" autocomplete="off"></textarea>
+          <button type="button" class="run-btn live-pos-vc-send" id="livePosVesselCommentsSend">Send</button>
+        </div>
+      </div>
+    </footer>
+  </aside>
+</div>
+
 <div id="arcLoadingOverlay" class="arc-loading-overlay" hidden aria-hidden="true">
   <svg class="arc-loading-overlay__logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true">
     <rect x="29" y="29" width="6" height="6"></rect>
@@ -3647,6 +4306,7 @@
 // DB: table `app_data` (key text PK, value jsonb, updated_at timestamptz) — rows:
 //   vessel_positions | tc_options | voyage_chains
 // DB: table `app_settings` (key text PK, value text) — e.g. twelvedata_api_key
+// DB: table `vessel_comments` (threaded: parent_id, thread_root_id — see vessel_comments.sql + Realtime)
 // ═════════════════════════════════════════════════════════════════════════════
 const { createClient } = supabase;
 const sb = createClient('https://hxwahnackweyozhragli.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh4d2FobmFja3dleW96aHJhZ2xpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg2NjA5MTMsImV4cCI6MjA5NDIzNjkxM30.FQEt55o70i1ogRc52rI05rMbfAGzvI_RT_7B0HT-EeA');
@@ -3804,7 +4464,7 @@ async function saveVoyageChains() {
 // TAB SWITCHING
 // ═════════════════════════════════════════════════════════════════════════════
 const TAB_STORAGE_KEY = 'arctium_active_tab';
-const VALID_TABS = ['tab-dashboard', 'tab-tc', 'tab-voy', 'tab-bunkers', 'tab-emissions'];
+const VALID_TABS = ['tab-dashboard', 'tab-tc', 'tab-voy', 'tab-estimate', 'tab-bunkers', 'tab-emissions'];
 
 function switchTab(id) {
   if (!VALID_TABS.includes(id)) return;
@@ -3987,6 +4647,9 @@ function applyRoleUI() {
   document.querySelectorAll('[data-admin-only]').forEach(el => {
     el.style.display = isAdmin ? '' : 'none';
   });
+  document.querySelectorAll('[data-admin-or-ops]').forEach(el => {
+    el.style.display = isAdmin || isOps ? '' : 'none';
+  });
 }
 
 async function authOnLogin(user) {
@@ -4005,6 +4668,7 @@ async function authOnLogin(user) {
   authShowChip();
   if (needFullLoad) await loadAllData();
   applyRoleUI();
+  vesselCommentsSubscribe();
   livePosRefreshUI();
   if (typeof twelveQuotesUpdateAdminUi === 'function') twelveQuotesUpdateAdminUi();
 }
@@ -4032,6 +4696,8 @@ async function authInit() {
       currentUser = null;
       isAdmin = false;
       isOps = false;
+      vesselCommentsUnsubscribe();
+      livePosVesselCommentsClosePanel();
       authCloseUserMenu();
       applyRoleUI();
       authShowLogin();
@@ -4102,6 +4768,16 @@ function livePosNorm(s) {
 const LIVE_POS_DATE_SORT_KEYS = new Set([livePosNorm('As of'), livePosNorm('ETA/Arrived'), livePosNorm(LIVE_POS_ETA_OPEN_COLUMN)]);
 
 let livePosSortState = { key: null, dir: 'asc' };
+
+/** vessel_name → Supabase rows for comment icons + panel */
+const vesselCommentsByVessel = new Map();
+let vesselCommentsChannel = null;
+let livePosVesselCommentsOpenName = null;
+let livePosVcCloseTimer = null;
+let livePosVcReplyParentId = null;
+let livePosVcReplyThreadRootId = null;
+/** Thread root ids whose reply list is expanded (default: collapsed). */
+let livePosVcThreadRepliesExpandedSet = new Set();
 
 function livePosSortReset() {
   livePosSortState = { key: null, dir: 'asc' };
@@ -4664,6 +5340,7 @@ function livePosRender() {
   }
 
   const displayRows = livePosSortedRowsForDisplay(data.rows, cols);
+  const shipKeyForComments = livePosFindShipColumnKey(cols);
 
   const hr = document.createElement('tr');
   cols.forEach(k => {
@@ -4694,6 +5371,14 @@ function livePosRender() {
   tbody.innerHTML = '';
   displayRows.forEach(row => {
     const tr = document.createElement('tr');
+    const vesselKeyRaw = String(row[shipKeyForComments] ?? '').trim();
+    if (vesselKeyRaw) tr.setAttribute('data-live-pos-vessel', vesselKeyRaw);
+    tr.addEventListener('click', e => {
+      if (e.target.closest('.live-pos-eta-input')) return;
+      if (e.target.closest('input, textarea, button, select, a')) return;
+      if (!vesselKeyRaw || !currentUser) return;
+      livePosVesselCommentsOpenPanel(vesselKeyRaw);
+    });
     cols.forEach(k => {
       const td = document.createElement('td');
       if (k === LIVE_POS_ETA_OPEN_COLUMN) {
@@ -4720,6 +5405,19 @@ function livePosRender() {
           if (urgent) span.className = 'live-pos-eta-open--urgent';
           td.appendChild(span);
         }
+      } else if (k === shipKeyForComments) {
+        const v = row[k];
+        const disp = v === null || v === undefined || v === '' ? '—' : String(v);
+        td.className = 'live-pos-vessel-name-cell';
+        const nameSpan = document.createElement('span');
+        nameSpan.className = 'live-pos-vessel-name-text';
+        nameSpan.textContent = disp;
+        const iconSlot = document.createElement('span');
+        iconSlot.className = 'live-pos-vessel-comment-icon-slot';
+        iconSlot.setAttribute('aria-hidden', 'true');
+        td.appendChild(nameSpan);
+        td.appendChild(iconSlot);
+        td.title = disp === '—' ? '' : disp;
       } else {
         const v = row[k];
         td.textContent = v === null || v === undefined || v === '' ? '—' : String(v);
@@ -4729,6 +5427,7 @@ function livePosRender() {
     });
     tbody.appendChild(tr);
   });
+  void reloadVesselComments();
 }
 
 function livePosRefreshUI() {
@@ -4767,8 +5466,818 @@ function livePosInit() {
   }
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && ov && !ov.hidden) livePosCloseDetail();
+    if (e.key === 'Escape') livePosVesselCommentsClosePanel();
   });
+
+  const vcRoot = document.getElementById('livePosVesselCommentsRoot');
+  const vcBackdrop = document.getElementById('livePosVesselCommentsBackdrop');
+  const vcClose = document.getElementById('livePosVesselCommentsClose');
+  const vcSend = document.getElementById('livePosVesselCommentsSend');
+  const vcTa = document.getElementById('livePosVesselCommentsTextarea');
+  if (vcClose) vcClose.addEventListener('click', () => livePosVesselCommentsClosePanel());
+  if (vcBackdrop) vcBackdrop.addEventListener('click', () => livePosVesselCommentsClosePanel());
+  if (vcSend) vcSend.addEventListener('click', () => void livePosVesselCommentsSend());
+  if (vcTa) {
+    vcTa.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        void livePosVesselCommentsSend();
+      }
+    });
+  }
+  const vcTitle = document.getElementById('livePosVcThreadTitle');
+  if (vcTitle) {
+    vcTitle.addEventListener('input', () => livePosVcHideTitleErr());
+  }
+  const vcCancelReply = document.getElementById('livePosVcCancelReply');
+  if (vcCancelReply) {
+    vcCancelReply.addEventListener('click', () => {
+      livePosVcReplyParentId = null;
+      livePosVcReplyThreadRootId = null;
+      livePosVcHideTitleErr();
+      livePosVcCloseAllDeleteConfirms();
+      livePosVesselCommentsRenderMessages();
+    });
+  }
+  if (vcRoot) {
+    vcRoot.querySelector('.live-pos-vc-panel')?.addEventListener('click', e => e.stopPropagation());
+  }
+
+  const vcMsgBox = document.getElementById('livePosVesselCommentsMessages');
+  if (vcMsgBox) {
+    vcMsgBox.addEventListener('click', async e => {
+      const collapseBtn = e.target.closest('.live-pos-vc-thread-collapse-btn');
+      if (collapseBtn) {
+        e.stopPropagation();
+        e.preventDefault();
+        const tr = collapseBtn.getAttribute('data-thread-root');
+        if (!tr) return;
+        const threadRoot = collapseBtn.closest('.live-pos-vc-thread');
+        const repliesWrap = threadRoot?.querySelector('.live-pos-vc-thread-replies');
+        if (!repliesWrap) return;
+        const id = String(tr);
+        const isExpanded = collapseBtn.getAttribute('aria-expanded') === 'true';
+        if (isExpanded) {
+          livePosVcThreadRepliesExpandedSet.delete(id);
+          repliesWrap.classList.add('live-pos-vc-thread-replies--collapsed');
+          collapseBtn.setAttribute('aria-expanded', 'false');
+          collapseBtn.setAttribute('aria-label', 'Show replies');
+          collapseBtn.setAttribute('title', 'Show replies');
+        } else {
+          livePosVcThreadRepliesExpandedSet.add(id);
+          repliesWrap.classList.remove('live-pos-vc-thread-replies--collapsed');
+          collapseBtn.setAttribute('aria-expanded', 'true');
+          collapseBtn.setAttribute('aria-label', 'Hide replies');
+          collapseBtn.setAttribute('title', 'Hide replies');
+        }
+        return;
+      }
+      const resolveBtn = e.target.closest('.live-pos-vc-msg-resolve-btn');
+      if (resolveBtn && currentUser) {
+        e.stopPropagation();
+        const id = resolveBtn.getAttribute('data-comment-id');
+        if (!id) return;
+        const currentResolved = resolveBtn.getAttribute('data-current-resolved') === 'true';
+        const wantResolved = !currentResolved;
+        livePosVcClearErr();
+        const { error } = await sb.from('vessel_comments').update({ resolved: wantResolved }).eq('id', id);
+        if (error) {
+          console.warn('vessel_comments update row', error);
+          livePosVcShowErr(error.message || 'Could not update this message.');
+          return;
+        }
+        await reloadVesselComments();
+        livePosVesselCommentsRenderMessages();
+        return;
+      }
+      if (e.target.closest('.live-pos-vc-msg-del-slot')) return;
+      if (e.target.closest('.live-pos-vc-thread-collapse-btn')) return;
+      const msgEl = e.target.closest('.live-pos-vc-msg');
+      if (!msgEl || !currentUser) return;
+      if (e.target.closest('.live-pos-vc-msg-resolve-btn')) return;
+      e.stopPropagation();
+      const cid = msgEl.getAttribute('data-comment-id');
+      const tr = msgEl.getAttribute('data-thread-root');
+      if (!cid) return;
+      livePosVcReplyParentId = cid;
+      livePosVcReplyThreadRootId = tr || cid;
+      livePosVesselCommentsRenderMessages();
+    });
+  }
+
   livePosRefreshUI();
+}
+
+const VC_ICON1_HTML = '<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 26 26"><path d="M0 0h26v26H0z" fill="none"/><g fill="currentColor"><path fill-rule="evenodd" d="M13 5a2 2 0 0 1 2 2v7a2 2 0 1 1-4 0V7a2 2 0 0 1 2-2" clip-rule="evenodd"/><path d="M15 19a2 2 0 1 1-4 0a2 2 0 0 1 4 0"/><path fill-rule="evenodd" d="M13 24c6.075 0 11-4.925 11-11S19.075 2 13 2S2 6.925 2 13s4.925 11 11 11m0 2c7.18 0 13-5.82 13-13S20.18 0 13 0S0 5.82 0 13s5.82 13 13 13" clip-rule="evenodd"/></g></svg>';
+
+const VC_ICON2_TEMPLATE = '<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 26 26"><path d="M0 0h26v26H0z" fill="none"/><g fill="none"><defs><mask id="SVGJu0qYdYj"><path fill="#fff" d="M0 0h26v26H0z"/><g fill="#000"><path fill-rule="evenodd" d="M13 5a2 2 0 0 1 2 2v7a2 2 0 1 1-4 0V7a2 2 0 0 1 2-2" clip-rule="evenodd"/><path d="M15 19a2 2 0 1 1-4 0a2 2 0 0 1 4 0"/></g></mask></defs><circle cx="13" cy="13" r="13" fill="currentColor" mask="url(#SVGJu0qYdYj)"/></g></svg>';
+
+const VC_REPLY_ICON_SVG =
+  '<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M20 18v-2a4 4 0 0 0-4-4H4"/><path d="m9 17l-5-5l5-5"/></g></svg>';
+
+const VC_DELETE_TRASH_SVG =
+  '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="#a8b8a8" stroke-linecap="round" stroke-linejoin="round" d="M14 11v6m-4-6v6M6 7v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7M4 7h16M7 7l2-4h6l2 4" stroke-width="1"/></svg>';
+
+const VC_DELETE_CONFIRM_SVG =
+  '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path fill="#a8b8a8" d="M21 7L9 19l-5.5-5.5l1.41-1.41L9 16.17L19.59 5.59z"/></svg>';
+
+const VC_THREAD_COLLAPSE_SVG =
+  '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6"/></svg>';
+
+function vesselCommentIcon2Html(maskSuffix) {
+  const id = 'SVGJu0qYdYj' + maskSuffix;
+  return VC_ICON2_TEMPLATE.replace(/SVGJu0qYdYj/g, id);
+}
+
+function vesselCommentMaskSuffix(vesselName) {
+  return '_' + btoa(unescape(encodeURIComponent(vesselName))).replace(/\+/g, '_').replace(/\//g, '-').replace(/=/g, '');
+}
+
+function vesselCommentNormalizeName(s) {
+  return String(s ?? '').trim();
+}
+
+function vesselCommentRowIsResolved(r) {
+  if (!r) return false;
+  const v = r.resolved;
+  if (v === true || v === 1) return true;
+  if (v === false || v === 0 || v == null) return false;
+  return String(v).toLowerCase() === 'true';
+}
+
+function vesselCommentEffectiveThreadRootId(c) {
+  if (!c) return '';
+  return String(c.thread_root_id || c.id || '');
+}
+
+function vesselCommentDepthForRow(c, byId) {
+  let d = 0;
+  let cur = c;
+  const seen = new Set();
+  while (cur && cur.parent_id) {
+    const sid = String(cur.id);
+    if (seen.has(sid)) break;
+    seen.add(sid);
+    d++;
+    cur = byId.get(String(cur.parent_id));
+    if (d > 48) break;
+  }
+  return d;
+}
+
+function vesselCommentThreadsGrouped(list) {
+  const threadsMap = new Map();
+  for (const c of list) {
+    const tk = vesselCommentEffectiveThreadRootId(c);
+    if (!tk) continue;
+    if (!threadsMap.has(tk)) threadsMap.set(tk, []);
+    threadsMap.get(tk).push(c);
+  }
+  for (const arr of threadsMap.values()) {
+    arr.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+  }
+  const order = [...threadsMap.keys()].sort((ka, kb) => {
+    const a0 = threadsMap.get(ka)[0];
+    const b0 = threadsMap.get(kb)[0];
+    return new Date(a0.created_at) - new Date(b0.created_at);
+  });
+  const byId = new Map(list.map(x => [String(x.id), x]));
+  return { threadsMap, order, byId };
+}
+
+function livePosVcUpdateReplyChrome() {
+  const ctx = document.getElementById('livePosVcReplyContext');
+  const txt = document.getElementById('livePosVcReplyContextText');
+  const lbl = document.getElementById('livePosVcComposeLabel');
+  const cap = document.getElementById('livePosVcComposeCaption');
+  if (!lbl) return;
+  if (livePosVcReplyParentId && livePosVesselCommentsOpenName) {
+    const name = vesselCommentNormalizeName(livePosVesselCommentsOpenName);
+    const list = name ? vesselCommentsByVessel.get(name) || [] : [];
+    const row = list.find(r => String(r.id) === String(livePosVcReplyParentId));
+    const who = row ? vesselCommentEmailLocal(row.author_email).toUpperCase() : '';
+    const pv = row && row.message != null ? String(row.message).trim().replace(/\s+/g, ' ') : '';
+    const snip = pv.length > 72 ? `${pv.slice(0, 72)}...` : pv;
+    if (ctx) ctx.hidden = false;
+    if (txt) txt.textContent = snip ? `Replying to ${who}: ${snip}` : `Replying to ${who}`;
+    lbl.textContent = 'Reply in thread';
+    if (cap) cap.textContent = 'Your send follows the selected message in this thread. Cancel to start a new thread instead.';
+  } else {
+    if (ctx) ctx.hidden = true;
+    if (txt) txt.textContent = '';
+    lbl.textContent = 'New thread';
+    if (cap) cap.textContent = 'Each send without a selected message starts a new thread. Click a message or its reply icon to answer in that thread.';
+  }
+  livePosVcSyncRootComposeVisibility();
+}
+
+function livePosVcSyncRootComposeVisibility() {
+  const blk = document.getElementById('livePosVcRootComposeFields');
+  if (!blk) return;
+  blk.hidden = !!livePosVcReplyParentId;
+}
+
+function livePosVcCloseAllDeleteConfirms() {
+  const box = document.getElementById('livePosVesselCommentsMessages');
+  if (!box) return;
+  box.querySelectorAll('.live-pos-vc-msg-actions.is-pending-delete').forEach(el => {
+    el.classList.remove('is-pending-delete');
+    const wrap = el.querySelector('.dash-snap-del-confirm-wrap');
+    if (wrap) wrap.hidden = true;
+    const trash = el.querySelector('.dash-snap-del');
+    if (trash) {
+      trash.setAttribute('aria-expanded', 'false');
+      const isRoot = trash.getAttribute('data-vc-delete-root') === '1';
+      trash.setAttribute('aria-label', isRoot ? 'Delete thread' : 'Delete comment');
+    }
+  });
+}
+
+function livePosVcPruneReplyIfStale() {
+  const name = vesselCommentNormalizeName(livePosVesselCommentsOpenName);
+  if (!name || !livePosVcReplyParentId) return;
+  const list = vesselCommentsByVessel.get(name) || [];
+  const ok = list.some(r => String(r.id) === String(livePosVcReplyParentId));
+  if (!ok) {
+    livePosVcReplyParentId = null;
+    livePosVcReplyThreadRootId = null;
+  }
+}
+
+function livePosVcHideTitleErr() {
+  const e = document.getElementById('livePosVcTitleErr');
+  if (e) e.hidden = true;
+}
+
+function livePosVcShowTitleErr() {
+  const e = document.getElementById('livePosVcTitleErr');
+  if (e) e.hidden = false;
+}
+
+function vesselCommentIssueLevelNorm(v) {
+  const s = String(v ?? '')
+    .toLowerCase()
+    .trim();
+  if (s === 'info' || s === 'caution' || s === 'critical') return s;
+  return null;
+}
+
+function vesselCommentIssueIconEl(level) {
+  const n = vesselCommentIssueLevelNorm(level);
+  if (!n) return null;
+  const span = document.createElement('span');
+  span.className = 'live-pos-vc-issue-icon live-pos-vc-issue-icon--' + n;
+  span.setAttribute('aria-label', n);
+  span.textContent = n === 'info' ? '\u2139' : n === 'caution' ? '\u26A0' : '\u2715';
+  return span;
+}
+
+function livePosVcShowErr(msg) {
+  const el = document.getElementById('livePosVesselCommentsErr');
+  if (!el) return;
+  el.textContent = msg;
+  el.hidden = false;
+}
+
+function livePosVcClearErr() {
+  const el = document.getElementById('livePosVesselCommentsErr');
+  if (!el) return;
+  el.textContent = '';
+  el.hidden = true;
+}
+
+function vesselCommentRoleBucket(role) {
+  const r = String(role ?? '').toLowerCase();
+  if (r === 'admin') return 'admin';
+  if (r === 'chart') return 'chart';
+  if (r === 'ops') return 'ops';
+  return 'other';
+}
+
+function vesselCommentIconColorVar(bucket) {
+  if (bucket === 'admin') return 'var(--red)';
+  if (bucket === 'chart') return 'var(--amber)';
+  if (bucket === 'ops') return 'var(--blue)';
+  return 'var(--text-muted)';
+}
+
+function vesselCommentIconSummary(rows) {
+  const unresolved = (rows || []).filter(r => !vesselCommentRowIsResolved(r));
+  if (!unresolved.length) return null;
+  const roleBuckets = new Set(unresolved.map(r => vesselCommentRoleBucket(r.author_role)));
+  const sorted = unresolved.slice().sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+  const newest = sorted[sorted.length - 1];
+  const newestBucket = vesselCommentRoleBucket(newest.author_role);
+  if (roleBuckets.size <= 1) {
+    const only = [...roleBuckets][0] || vesselCommentRoleBucket(unresolved[0].author_role);
+    return { icon: 1, color: vesselCommentIconColorVar(only) };
+  }
+  return { icon: 2, color: vesselCommentIconColorVar(newestBucket), maskSuffix: vesselCommentMaskSuffix(vesselCommentNormalizeName(newest.vessel_name)) };
+}
+
+function vesselCommentCollectDisplayedVesselNames(data) {
+  if (!data || !Array.isArray(data.rows) || !data.rows.length) return [];
+  const cols = livePosColsWithEtaOpenLast(
+    data.format === 'kpler' && Array.isArray(data.headers) && data.headers.length
+      ? data.headers.slice()
+      : livePosHomeColumnKeys(Object.keys(data.rows[0]))
+  );
+  const shipKey = livePosFindShipColumnKey(cols.length ? cols : Object.keys(data.rows[0]));
+  if (!shipKey) return [];
+  const set = new Set();
+  data.rows.forEach(row => {
+    const nm = vesselCommentNormalizeName(row[shipKey]);
+    if (nm) set.add(nm);
+  });
+  return [...set];
+}
+
+function livePosInjectVesselCommentIcons() {
+  document.querySelectorAll('#livePosTbody tr[data-live-pos-vessel]').forEach(tr => {
+    const name = vesselCommentNormalizeName(tr.getAttribute('data-live-pos-vessel') || '');
+    const slot = tr.querySelector('.live-pos-vessel-comment-icon-slot');
+    if (!slot) return;
+    const list = vesselCommentsByVessel.get(name) || [];
+    const sum = vesselCommentIconSummary(list);
+    if (!sum) {
+      slot.innerHTML = '';
+      slot.removeAttribute('style');
+      return;
+    }
+    slot.style.color = sum.color;
+    slot.innerHTML = sum.icon === 1 ? VC_ICON1_HTML : vesselCommentIcon2Html(sum.maskSuffix);
+  });
+}
+
+async function reloadVesselComments() {
+  const data = livePosLoad();
+  if (!currentUser) {
+    vesselCommentsByVessel.clear();
+    livePosInjectVesselCommentIcons();
+    if (livePosVesselCommentsOpenName) livePosVesselCommentsRenderMessages();
+    return { ok: true };
+  }
+  let names = vesselCommentCollectDisplayedVesselNames(data);
+  const open = vesselCommentNormalizeName(livePosVesselCommentsOpenName);
+  if (open && !names.includes(open)) names = [...names, open];
+  if (!names.length) {
+    vesselCommentsByVessel.clear();
+    livePosInjectVesselCommentIcons();
+    if (livePosVesselCommentsOpenName) livePosVesselCommentsRenderMessages();
+    return { ok: true };
+  }
+  const { data: rows, error } = await sb.from('vessel_comments').select('*').in('vessel_name', names);
+  if (error) {
+    console.warn('vessel_comments', error);
+    livePosVcShowErr(
+      'Could not load comments: ' +
+        (error.message || 'unknown error') +
+        '. Create table vessel_comments in Supabase (see vessel_comments.sql), enable RLS policies, and add the table to the Realtime publication if you use live sync.'
+    );
+    return { ok: false };
+  }
+  livePosVcClearErr();
+  vesselCommentsByVessel.clear();
+  (rows || []).forEach(r => {
+    const k = vesselCommentNormalizeName(r.vessel_name);
+    if (!k) return;
+    if (!vesselCommentsByVessel.has(k)) vesselCommentsByVessel.set(k, []);
+    vesselCommentsByVessel.get(k).push(r);
+  });
+  livePosInjectVesselCommentIcons();
+  if (livePosVesselCommentsOpenName) livePosVesselCommentsRenderMessages();
+  return { ok: true };
+}
+
+function vesselCommentsSubscribe() {
+  if (!currentUser || vesselCommentsChannel) return;
+  vesselCommentsChannel = sb
+    .channel('vessel_comments')
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'vessel_comments' }, () => {
+      void reloadVesselComments();
+    })
+    .subscribe();
+}
+
+function vesselCommentsUnsubscribe() {
+  if (vesselCommentsChannel) {
+    void sb.removeChannel(vesselCommentsChannel);
+    vesselCommentsChannel = null;
+  }
+  vesselCommentsByVessel.clear();
+}
+
+function vesselCommentFmtTs(iso) {
+  try {
+    const d = new Date(iso);
+    if (Number.isNaN(d.getTime())) return '';
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const day = String(d.getDate()).padStart(2, '0');
+    const mon = months[d.getMonth()];
+    const hh = String(d.getHours()).padStart(2, '0');
+    const mm = String(d.getMinutes()).padStart(2, '0');
+    return `${day} ${mon} ${hh}:${mm}`;
+  } catch {
+    return '';
+  }
+}
+
+function vesselCommentEmailLocal(email) {
+  return String(email ?? '').split('@')[0] || '';
+}
+
+function vesselCommentBadgeLabel(role) {
+  const r = String(role ?? '').toLowerCase();
+  if (r === 'admin') return 'ADMIN';
+  if (r === 'chart') return 'CHART';
+  if (r === 'ops') return 'OPS';
+  return String(role ?? '').toUpperCase();
+}
+
+function vesselCommentRoleBadgeClass(role) {
+  const r = String(role ?? '').toLowerCase();
+  if (r === 'admin') return 'live-pos-vc-msg-role--admin';
+  if (r === 'chart') return 'live-pos-vc-msg-role--chart';
+  if (r === 'ops') return 'live-pos-vc-msg-role--ops';
+  return 'live-pos-vc-msg-role--other';
+}
+
+function livePosVesselCommentsAuthorRole() {
+  if (!currentUser) return 'ops';
+  if (isAdmin) return 'admin';
+  return (currentUser.email.split('@')[0] || '').toLowerCase();
+}
+
+async function postVesselComment(vesselName, message, opts) {
+  opts = opts || {};
+  if (!currentUser || !String(message || '').trim()) return { ok: false, message: 'Not signed in or empty message.' };
+  const vn = vesselCommentNormalizeName(vesselName);
+  if (!vn) return { ok: false, message: 'Missing vessel name.' };
+  const author_role = livePosVesselCommentsAuthorRole();
+  const msg = String(message).trim();
+  const parentId = opts.parentId ? String(opts.parentId) : null;
+  const threadRootId = opts.threadRootId ? String(opts.threadRootId) : null;
+
+  if (!parentId) {
+    const titleTrim = String(opts.title || '').trim();
+    const insertRow = {
+      vessel_name: vn,
+      message: msg,
+      author_email: currentUser.email,
+      author_role,
+      parent_id: null,
+      thread_root_id: null,
+      title: titleTrim,
+      issue_level: null,
+    };
+    const il = vesselCommentIssueLevelNorm(opts.issueLevel);
+    if ((isAdmin || isOps) && il) insertRow.issue_level = il;
+    const { data, error } = await sb.from('vessel_comments').insert(insertRow).select('id').maybeSingle();
+    if (error) {
+      console.warn('vessel_comments insert', error);
+      return {
+        ok: false,
+        message:
+          (error.message || String(error)) +
+          ' — add columns title, issue_level, parent_id, thread_root_id (see vessel_comments.sql) if this insert failed.',
+      };
+    }
+    const newId = data?.id;
+    if (newId) {
+      const { error: e2 } = await sb.from('vessel_comments').update({ thread_root_id: newId }).eq('id', newId);
+      if (e2) {
+        console.warn('vessel_comments thread_root update', e2);
+        return { ok: false, message: e2.message || String(e2) };
+      }
+    }
+    return { ok: true };
+  }
+
+  const tr = threadRootId || parentId;
+  const { error } = await sb.from('vessel_comments').insert({
+    vessel_name: vn,
+    message: msg,
+    author_email: currentUser.email,
+    author_role,
+    parent_id: parentId,
+    thread_root_id: tr,
+  });
+  if (error) {
+    console.warn('vessel_comments insert reply', error);
+    return {
+      ok: false,
+      message:
+        (error.message || String(error)) +
+        ' — add columns title, issue_level, parent_id, thread_root_id (see vessel_comments.sql) if this insert failed.',
+    };
+  }
+  return { ok: true };
+}
+
+function livePosVesselCommentsRenderMessages() {
+  const box = document.getElementById('livePosVesselCommentsMessages');
+  if (!box) return;
+  const name = vesselCommentNormalizeName(livePosVesselCommentsOpenName);
+  if (!name) {
+    box.innerHTML = '';
+    livePosVcUpdateReplyChrome();
+    return;
+  }
+  const list = [...(vesselCommentsByVessel.get(name) || [])];
+  const { threadsMap, order, byId } = vesselCommentThreadsGrouped(list);
+  box.innerHTML = '';
+
+  function renderOneMsg(c, byId, threadUi) {
+    const depth = vesselCommentDepthForRow(c, byId);
+    const isRoot = !c.parent_id;
+    const wrap = document.createElement('div');
+    wrap.className = 'live-pos-vc-msg' + (vesselCommentRowIsResolved(c) ? ' live-pos-vc-msg--resolved' : '');
+    if (livePosVcReplyParentId && String(c.id) === String(livePosVcReplyParentId)) {
+      wrap.classList.add('live-pos-vc-msg--reply-target');
+    }
+    wrap.setAttribute('data-comment-id', String(c.id));
+    wrap.setAttribute('data-thread-root', vesselCommentEffectiveThreadRootId(c));
+    if (depth > 0) wrap.style.marginLeft = `${Math.min(depth, 10) * 12}px`;
+
+    if (isRoot) {
+      const titleText = c.title != null ? String(c.title).trim() : '';
+      const issueIcon = vesselCommentIssueIconEl(c.issue_level);
+      const hasTitleBits = !!(titleText || issueIcon);
+      const showCollapse =
+        threadUi && Number(threadUi.replyCount) > 0 && threadUi.threadRootId != null && String(threadUi.threadRootId) !== '';
+
+      if (showCollapse) {
+        const expanded = livePosVcThreadRepliesExpandedSet.has(String(threadUi.threadRootId));
+        const titleRow = document.createElement('div');
+        titleRow.className = 'live-pos-vc-msg-title-line live-pos-vc-msg-title-line--thread-tools';
+        const main = document.createElement('div');
+        main.className = 'live-pos-vc-msg-title-line-main';
+        if (issueIcon) main.appendChild(issueIcon);
+        if (titleText) {
+          const tspan = document.createElement('span');
+          tspan.className = 'live-pos-vc-msg-title-text';
+          tspan.textContent = titleText;
+          main.appendChild(tspan);
+        }
+        titleRow.appendChild(main);
+        const collapseBtn = document.createElement('button');
+        collapseBtn.type = 'button';
+        collapseBtn.className = 'live-pos-vc-thread-collapse-btn';
+        collapseBtn.setAttribute('data-thread-root', String(threadUi.threadRootId));
+        collapseBtn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+        collapseBtn.setAttribute('aria-label', expanded ? 'Hide replies' : 'Show replies');
+        collapseBtn.setAttribute('title', expanded ? 'Hide replies' : 'Show replies');
+        collapseBtn.innerHTML = VC_THREAD_COLLAPSE_SVG;
+        titleRow.appendChild(collapseBtn);
+        wrap.appendChild(titleRow);
+      } else if (hasTitleBits) {
+        const titleRow = document.createElement('div');
+        titleRow.className = 'live-pos-vc-msg-title-line';
+        if (issueIcon) titleRow.appendChild(issueIcon);
+        if (titleText) {
+          const tspan = document.createElement('span');
+          tspan.className = 'live-pos-vc-msg-title-text';
+          tspan.textContent = titleText;
+          titleRow.appendChild(tspan);
+        }
+        wrap.appendChild(titleRow);
+      }
+    }
+
+    const meta = document.createElement('div');
+    meta.className = 'live-pos-vc-msg-meta';
+    meta.textContent = `${vesselCommentEmailLocal(c.author_email).toLowerCase()} · ${vesselCommentFmtTs(c.created_at)}`;
+    wrap.appendChild(meta);
+
+    const body = document.createElement('div');
+    body.className = 'live-pos-vc-msg-body';
+    body.textContent = c.message != null ? String(c.message) : '';
+    wrap.appendChild(body);
+
+    if (currentUser) {
+      const isRes = vesselCommentRowIsResolved(c);
+      const actions = document.createElement('div');
+      actions.className = 'live-pos-vc-msg-actions';
+      const replyBtn = document.createElement('button');
+      replyBtn.type = 'button';
+      replyBtn.className = 'live-pos-vc-msg-reply-btn';
+      replyBtn.setAttribute('aria-label', 'Reply in this thread');
+      replyBtn.setAttribute('title', 'Reply in this thread');
+      replyBtn.innerHTML = VC_REPLY_ICON_SVG;
+      const resBtn = document.createElement('button');
+      resBtn.type = 'button';
+      resBtn.className =
+        'live-pos-vc-msg-resolve-btn' +
+        (isRes ? ' live-pos-vc-msg-resolve-btn--resolved' : ' live-pos-vc-msg-resolve-btn--unresolved');
+      resBtn.dataset.commentId = String(c.id);
+      resBtn.dataset.currentResolved = isRes ? 'true' : 'false';
+      resBtn.textContent = isRes ? 'Resolved' : 'Unresolved';
+      resBtn.setAttribute('aria-label', isRes ? 'Mark as unresolved' : 'Mark as resolved');
+      actions.appendChild(replyBtn);
+      actions.appendChild(resBtn);
+
+      const delSlot = document.createElement('div');
+      delSlot.className = 'live-pos-vc-msg-del-slot';
+      const delBtn = document.createElement('button');
+      delBtn.type = 'button';
+      delBtn.className = 'dash-snap-del';
+      delBtn.dataset.commentId = String(c.id);
+      delBtn.setAttribute('data-vc-delete-root', isRoot ? '1' : '0');
+      delBtn.setAttribute('aria-label', isRoot ? 'Delete thread' : 'Delete comment');
+      delBtn.setAttribute('aria-expanded', 'false');
+      delBtn.innerHTML = VC_DELETE_TRASH_SVG;
+      const confirmWrap = document.createElement('div');
+      confirmWrap.className = 'dash-snap-del-confirm-wrap';
+      confirmWrap.hidden = true;
+      const confirmBtn = document.createElement('button');
+      confirmBtn.type = 'button';
+      confirmBtn.className = 'dash-snap-del-confirm';
+      confirmBtn.setAttribute(
+        'aria-label',
+        isRoot ? 'Confirm delete entire thread' : 'Confirm delete this comment',
+      );
+      confirmBtn.innerHTML = VC_DELETE_CONFIRM_SVG;
+      const commentId = String(c.id);
+      confirmBtn.addEventListener('click', async ev => {
+        ev.stopPropagation();
+        ev.preventDefault();
+        livePosVcClearErr();
+        livePosVcCloseAllDeleteConfirms();
+        const { error } = await sb.from('vessel_comments').delete().eq('id', commentId);
+        if (error) {
+          console.warn('vessel_comments delete', error);
+          livePosVcShowErr(
+            (error.message || String(error)) +
+              ' — add policy "authenticated delete" on vessel_comments (see vessel_comments.sql) if delete is denied.',
+          );
+          return;
+        }
+        await reloadVesselComments();
+        livePosVcPruneReplyIfStale();
+        livePosVesselCommentsRenderMessages();
+      });
+      delBtn.addEventListener('click', ev => {
+        ev.stopPropagation();
+        ev.preventDefault();
+        const open = !confirmWrap.hidden;
+        if (open) {
+          confirmWrap.hidden = true;
+          actions.classList.remove('is-pending-delete');
+          delBtn.setAttribute('aria-label', isRoot ? 'Delete thread' : 'Delete comment');
+          delBtn.setAttribute('aria-expanded', 'false');
+        } else {
+          livePosVcCloseAllDeleteConfirms();
+          confirmWrap.hidden = false;
+          actions.classList.add('is-pending-delete');
+          delBtn.setAttribute('aria-label', 'Cancel delete');
+          delBtn.setAttribute('aria-expanded', 'true');
+        }
+      });
+      confirmWrap.appendChild(confirmBtn);
+      delSlot.appendChild(delBtn);
+      delSlot.appendChild(confirmWrap);
+      actions.appendChild(delSlot);
+
+      wrap.appendChild(actions);
+    }
+    return wrap;
+  }
+
+  for (const tk of order) {
+    const threadEl = document.createElement('div');
+    threadEl.className = 'live-pos-vc-thread';
+    const msgs = threadsMap.get(tk) || [];
+    const root = msgs.find(m => !m.parent_id) || msgs[0];
+    if (!root) continue;
+    const replies = msgs.filter(m => m.parent_id);
+    const replyCount = replies.length;
+    const replyTargetHere =
+      replyCount > 0 &&
+      livePosVcReplyParentId &&
+      replies.some(r => String(r.id) === String(livePosVcReplyParentId));
+    if (replyTargetHere) livePosVcThreadRepliesExpandedSet.add(String(tk));
+    const rootUi = replyCount > 0 ? { threadRootId: tk, replyCount } : null;
+    threadEl.appendChild(renderOneMsg(root, byId, rootUi));
+    if (replyCount > 0) {
+      const repliesWrap = document.createElement('div');
+      repliesWrap.className = 'live-pos-vc-thread-replies';
+      if (!livePosVcThreadRepliesExpandedSet.has(String(tk))) {
+        repliesWrap.classList.add('live-pos-vc-thread-replies--collapsed');
+      }
+      for (const c of replies) {
+        repliesWrap.appendChild(renderOneMsg(c, byId, null));
+      }
+      threadEl.appendChild(repliesWrap);
+    }
+    box.appendChild(threadEl);
+  }
+
+  livePosVcUpdateReplyChrome();
+  box.scrollTop = box.scrollHeight;
+}
+
+async function livePosVesselCommentsSend() {
+  const ta = document.getElementById('livePosVesselCommentsTextarea');
+  if (!ta || !livePosVesselCommentsOpenName || !currentUser) return;
+  const msg = ta.value;
+  if (!String(msg).trim()) return;
+  const vn = vesselCommentNormalizeName(livePosVesselCommentsOpenName);
+  const isReply = !!livePosVcReplyParentId;
+  let titleForPost = null;
+  let issueForPost = null;
+  if (!isReply) {
+    const ti = (document.getElementById('livePosVcThreadTitle')?.value || '').trim();
+    if (!ti) {
+      livePosVcShowTitleErr();
+      document.getElementById('livePosVcThreadTitle')?.focus();
+      return;
+    }
+    livePosVcHideTitleErr();
+    titleForPost = ti;
+    if (isAdmin || isOps) {
+      const ilRaw = String(document.getElementById('livePosVcIssueLevel')?.value || '').trim();
+      issueForPost = vesselCommentIssueLevelNorm(ilRaw) || null;
+    }
+  }
+  const res = await postVesselComment(vn, msg, {
+    parentId: livePosVcReplyParentId,
+    threadRootId: livePosVcReplyThreadRootId,
+    title: titleForPost,
+    issueLevel: issueForPost,
+  });
+  if (!res.ok) {
+    livePosVcShowErr(res.message || 'Could not save comment.');
+    return;
+  }
+  ta.value = '';
+  const titleInp = document.getElementById('livePosVcThreadTitle');
+  if (titleInp) titleInp.value = '';
+  const issueSel = document.getElementById('livePosVcIssueLevel');
+  if (issueSel) issueSel.value = '';
+  livePosVcHideTitleErr();
+  livePosVcReplyParentId = null;
+  livePosVcReplyThreadRootId = null;
+  await reloadVesselComments();
+  livePosVesselCommentsRenderMessages();
+}
+
+function livePosVesselCommentsOpenPanel(vesselName) {
+  if (!currentUser) return;
+  const v0 = vesselCommentNormalizeName(vesselName);
+  if (!v0) return;
+  if (livePosVcCloseTimer) {
+    clearTimeout(livePosVcCloseTimer);
+    livePosVcCloseTimer = null;
+  }
+  const root = document.getElementById('livePosVesselCommentsRoot');
+  const title = document.getElementById('livePosVesselCommentsTitle');
+  const ta = document.getElementById('livePosVesselCommentsTextarea');
+  if (!root) return;
+  livePosVcClearErr();
+  livePosVcReplyParentId = null;
+  livePosVcReplyThreadRootId = null;
+  livePosVcThreadRepliesExpandedSet.clear();
+  livePosVesselCommentsOpenName = v0;
+  if (title) title.textContent = livePosVesselCommentsOpenName.toUpperCase();
+  if (ta) ta.value = '';
+  const titleInp = document.getElementById('livePosVcThreadTitle');
+  if (titleInp) titleInp.value = '';
+  const issueSel = document.getElementById('livePosVcIssueLevel');
+  if (issueSel) issueSel.value = '';
+  livePosVcHideTitleErr();
+  livePosVcCloseAllDeleteConfirms();
+  root.removeAttribute('hidden');
+  root.setAttribute('aria-hidden', 'false');
+  void root.offsetWidth;
+  requestAnimationFrame(() => root.classList.add('live-pos-vc-root--open'));
+  applyRoleUI();
+  livePosVcUpdateReplyChrome();
+  void reloadVesselComments().then(() => livePosVesselCommentsRenderMessages());
+}
+
+function livePosVesselCommentsClosePanel() {
+  const root = document.getElementById('livePosVesselCommentsRoot');
+  if (!root) return;
+  livePosVcClearErr();
+  livePosVcReplyParentId = null;
+  livePosVcReplyThreadRootId = null;
+  root.classList.remove('live-pos-vc-root--open');
+  livePosVesselCommentsOpenName = null;
+  const ta = document.getElementById('livePosVesselCommentsTextarea');
+  if (ta) ta.value = '';
+  const titleInp = document.getElementById('livePosVcThreadTitle');
+  if (titleInp) titleInp.value = '';
+  const issueSel = document.getElementById('livePosVcIssueLevel');
+  if (issueSel) issueSel.value = '';
+  livePosVcHideTitleErr();
+  livePosVcCloseAllDeleteConfirms();
+  if (livePosVcCloseTimer) clearTimeout(livePosVcCloseTimer);
+  livePosVcCloseTimer = setTimeout(() => {
+    livePosVcCloseTimer = null;
+    if (root.classList.contains('live-pos-vc-root--open')) return;
+    root.setAttribute('hidden', '');
+    root.setAttribute('aria-hidden', 'true');
+  }, 300);
 }
 
 // ═════════════════════════════════════════════════════════════════════════════
