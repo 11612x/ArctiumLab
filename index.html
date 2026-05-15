@@ -4348,7 +4348,6 @@
   <button class="tab-btn active" data-tab="tab-dashboard" onclick="switchTab('tab-dashboard')">Dashboard</button>
   <button class="tab-btn" data-tab="tab-tc" onclick="switchTab('tab-tc')">TC</button>
   <button class="tab-btn" data-tab="tab-voy" onclick="switchTab('tab-voy')">Spot</button>
-  <button class="tab-btn" data-tab="tab-estimate" onclick="switchTab('tab-estimate')">Estimate</button>
   <button class="tab-btn" data-tab="tab-bunkers" onclick="switchTab('tab-bunkers')">Bunkers</button>
   <button class="tab-btn" data-tab="tab-emissions" onclick="switchTab('tab-emissions')">Emissions</button>
 </div>
@@ -4624,15 +4623,6 @@
         <div>Build voyage arcs and compare</div>
       </div>
     </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- TAB: ESTIMATE                                                           -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<div class="tab-panel" id="tab-estimate">
-  <div class="empty-state">
-    <div>Estimate — Coming soon</div>
   </div>
 </div>
 
@@ -5061,7 +5051,7 @@ async function saveVoyageChains() {
 // TAB SWITCHING
 // ═════════════════════════════════════════════════════════════════════════════
 const TAB_STORAGE_KEY = 'arctium_active_tab';
-const VALID_TABS = ['tab-dashboard', 'tab-tc', 'tab-voy', 'tab-estimate', 'tab-bunkers', 'tab-emissions'];
+const VALID_TABS = ['tab-dashboard', 'tab-tc', 'tab-voy', 'tab-bunkers', 'tab-emissions'];
 
 function switchTab(id) {
   if (!VALID_TABS.includes(id)) return;
