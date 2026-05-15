@@ -1321,6 +1321,118 @@
     border-color: var(--text-dim);
   }
 
+  .db-widget--e1-quotes .db-widget-body,
+  .db-widget--e2-unresolved .db-widget-body {
+    padding-top: 1%;
+    box-sizing: border-box;
+  }
+
+  .db-widget--e2-unresolved .db-widget-body {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+  }
+
+  .db-widget--e2-unresolved .e2q-scroll {
+    --e2-visible-rows: 4;
+    --e2-row-h: 1.75rem;
+    max-height: calc(var(--e2-visible-rows) * var(--e2-row-h) + 1.35rem);
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .db-widget--e2-unresolved .e2q-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    font-family: 'Consolas', 'Courier New', monospace;
+  }
+
+  .db-widget--e2-unresolved .e2q-table th {
+    text-align: left;
+    font-weight: 600;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding: 0 0 6px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--surface);
+    z-index: 1;
+  }
+
+  .db-widget--e2-unresolved .e2q-table td {
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border);
+    vertical-align: baseline;
+    max-width: 0;
+  }
+
+  .db-widget--e2-unresolved .e2q-table tbody tr {
+    cursor: pointer;
+  }
+
+  .db-widget--e2-unresolved .e2q-table tbody tr:hover td {
+    color: var(--text);
+  }
+
+  .db-widget--e2-unresolved .e2q-table tbody tr.e2q-row--selected td {
+    color: var(--text);
+    background: color-mix(in srgb, var(--accent-dim) 12%, transparent);
+  }
+
+  .db-widget--e2-unresolved .e2q-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .db-widget--e2-unresolved .e2q-vessel {
+    color: var(--text);
+    font-weight: 600;
+    padding-right: 8px;
+    width: 28%;
+  }
+
+  .db-widget--e2-unresolved .e2q-title {
+    color: var(--text-muted);
+    padding-right: 8px;
+    width: 44%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .db-widget--e2-unresolved .e2q-table th:nth-child(3) {
+    text-align: center;
+  }
+
+  .db-widget--e2-unresolved .e2q-last {
+    color: var(--text-dim);
+    text-align: center;
+    width: 28%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .db-widget--e2-unresolved .e2q-empty {
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 8px 0 !important;
+  }
+
+  .db-widget--e2-unresolved .e2q-err {
+    font-size: 11px;
+    color: var(--red);
+    margin: 4px 0 0;
+  }
+
   .db-widget-stat {
     font-size: 22px;
     font-weight: 700;
@@ -2087,6 +2199,22 @@
 
   .live-pos-vc-msg--resolved {
     opacity: 0.72;
+  }
+
+  .live-pos-vc-msg--admin {
+    background: color-mix(in srgb, var(--red) 14%, var(--surface2));
+    border-color: color-mix(in srgb, var(--red) 42%, var(--border));
+  }
+
+  .live-pos-vc-msg--chart {
+    background: color-mix(in srgb, var(--amber) 14%, var(--surface2));
+    border-color: color-mix(in srgb, var(--amber) 42%, var(--border));
+  }
+
+  .live-pos-vc-msg--ops,
+  .live-pos-vc-msg--other {
+    background: color-mix(in srgb, var(--blue) 14%, var(--surface2));
+    border-color: color-mix(in srgb, var(--blue) 42%, var(--border));
   }
 
   .live-pos-vc-msg-head {
@@ -3913,9 +4041,23 @@
           <p class="e1q-err" id="e1qErr" hidden role="alert"></p>
         </div>
       </article>
-      <article class="db-widget db-widget--dash-slot">
-        <div class="db-widget-head">Element 2</div>
-        <div class="db-widget-body">—</div>
+      <article class="db-widget db-widget--dash-slot db-widget--e2-unresolved">
+        <div class="db-widget-head">Issues</div>
+        <div class="db-widget-body">
+          <div class="e2q-scroll">
+            <table class="e2q-table" aria-label="Unresolved vessel comment threads">
+              <thead>
+                <tr>
+                  <th scope="col" data-e2-sort="vessel">Vessel</th>
+                  <th scope="col" data-e2-sort="title">Title</th>
+                  <th scope="col" data-e2-sort="lastBy">Last by</th>
+                </tr>
+              </thead>
+              <tbody id="dashE2UnresolvedTbody"></tbody>
+            </table>
+          </div>
+          <p class="e2q-err" id="dashE2UnresolvedErr" hidden role="alert"></p>
+        </div>
       </article>
       <article class="db-widget db-widget--dash-slot">
         <div class="db-widget-head">Element 3</div>
@@ -4305,7 +4447,7 @@
         <label for="livePosVesselCommentsTextarea" class="live-pos-vc-footer-label" id="livePosVcComposeLabel">New thread</label>
         <span class="live-pos-vc-compose-caption" id="livePosVcComposeCaption"></span>
         <div id="livePosVcRootComposeFields" class="live-pos-vc-root-compose-fields">
-          <div class="live-pos-vc-field-group" data-admin-or-ops>
+          <div class="live-pos-vc-field-group">
             <label for="livePosVcIssueLevel" class="live-pos-vc-field-label">Issue level</label>
             <select id="livePosVcIssueLevel" class="live-pos-vc-select" autocomplete="off">
               <option value="">None</option>
@@ -4368,6 +4510,7 @@ const sb = createClient('https://hxwahnackweyozhragli.supabase.co', 'eyJhbGciOiJ
 let currentUser = null;
 let isAdmin = false;
 let isOps = false;
+let userProfileRole = '';
 let hydratedUserId = null;
 let livePosStored = null;
 let livePosTableEditMode = false;
@@ -4717,8 +4860,9 @@ async function authOnLogin(user) {
     .select('role')
     .eq('id', user.id)
     .maybeSingle();
-  isAdmin = String(profile?.role ?? '').toLowerCase() === 'admin';
-  isOps = String(profile?.role ?? '').toLowerCase() === 'ops';
+  userProfileRole = String(profile?.role ?? '').toLowerCase();
+  isAdmin = userProfileRole === 'admin';
+  isOps = userProfileRole === 'ops';
   const needFullLoad = hydratedUserId !== user.id;
   hydratedUserId = user.id;
   authHideLogin();
@@ -4727,6 +4871,8 @@ async function authOnLogin(user) {
   applyRoleUI();
   vesselCommentsSubscribe();
   livePosRefreshUI();
+  dashE2UnresolvedInit();
+  void reloadDashE2UnresolvedComments();
   if (typeof twelveQuotesUpdateAdminUi === 'function') twelveQuotesUpdateAdminUi();
 }
 
@@ -4740,6 +4886,7 @@ async function authInit() {
     currentUser = null;
     isAdmin = false;
     isOps = false;
+    userProfileRole = '';
     authShowLogin();
     applyRoleUI();
     livePosRefreshUI();
@@ -4753,8 +4900,12 @@ async function authInit() {
       currentUser = null;
       isAdmin = false;
       isOps = false;
+      userProfileRole = '';
+      dashE2UnresolvedRows = [];
+      dashE2SelectedThreadRootId = null;
       vesselCommentsUnsubscribe();
       livePosVesselCommentsClosePanel();
+      dashE2UnresolvedRender();
       authCloseUserMenu();
       applyRoleUI();
       authShowLogin();
@@ -4833,8 +4984,15 @@ let livePosVesselCommentsOpenName = null;
 let livePosVcCloseTimer = null;
 let livePosVcReplyParentId = null;
 let livePosVcReplyThreadRootId = null;
-/** Thread root ids whose reply list is expanded (default: collapsed). */
-let livePosVcThreadRepliesExpandedSet = new Set();
+/** When set, side panel shows only this thread (dashboard row selection). */
+let livePosVcViewThreadRootId = null;
+/** Thread root ids whose reply list is collapsed (default: all expanded). */
+let livePosVcThreadRepliesCollapsedSet = new Set();
+/** Dashboard Element 2 — unresolved thread rows for table. */
+let dashE2UnresolvedRows = [];
+let dashE2SelectedThreadRootId = null;
+let dashE2UnresolvedInitDone = false;
+let dashE2SortState = { key: 'lastAt', dir: 'desc' };
 
 function livePosSortReset() {
   livePosSortState = { key: null, dir: 'asc' };
@@ -5666,13 +5824,13 @@ function livePosInit() {
         const id = String(tr);
         const isExpanded = collapseBtn.getAttribute('aria-expanded') === 'true';
         if (isExpanded) {
-          livePosVcThreadRepliesExpandedSet.delete(id);
+          livePosVcThreadRepliesCollapsedSet.add(id);
           repliesWrap.classList.add('live-pos-vc-thread-replies--collapsed');
           collapseBtn.setAttribute('aria-expanded', 'false');
           collapseBtn.setAttribute('aria-label', 'Show replies');
           collapseBtn.setAttribute('title', 'Show replies');
         } else {
-          livePosVcThreadRepliesExpandedSet.add(id);
+          livePosVcThreadRepliesCollapsedSet.delete(id);
           repliesWrap.classList.remove('live-pos-vc-thread-replies--collapsed');
           collapseBtn.setAttribute('aria-expanded', 'true');
           collapseBtn.setAttribute('aria-label', 'Hide replies');
@@ -5791,6 +5949,183 @@ function vesselCommentThreadsGrouped(list) {
   });
   const byId = new Map(list.map(x => [String(x.id), x]));
   return { threadsMap, order, byId };
+}
+
+/** Unresolved threads for dashboard Element 2 (root not resolved). */
+function vesselCommentUnresolvedThreadRows(allRows) {
+  const list = Array.isArray(allRows) ? allRows : [];
+  if (!list.length) return [];
+  const { threadsMap, order } = vesselCommentThreadsGrouped(list);
+  const out = [];
+  for (const tk of order) {
+    const msgs = threadsMap.get(tk) || [];
+    const root = msgs.find(m => !m.parent_id) || msgs[0];
+    if (!root || vesselCommentRowIsResolved(root)) continue;
+    const newest = msgs[msgs.length - 1];
+    const titleRaw = root.title != null ? String(root.title).trim() : '';
+    out.push({
+      threadRootId: tk,
+      vesselName: vesselCommentNormalizeName(root.vessel_name),
+      title: titleRaw || '—',
+      lastBy: vesselCommentEmailLocal(newest?.author_email).toLowerCase() || '—',
+      lastAt: newest?.created_at || root.created_at,
+    });
+  }
+  out.sort((a, b) => new Date(b.lastAt) - new Date(a.lastAt));
+  return out;
+}
+
+function dashE2ShowErr(msg) {
+  const el = document.getElementById('dashE2UnresolvedErr');
+  if (!el) return;
+  el.textContent = msg;
+  el.hidden = false;
+}
+
+function dashE2ClearErr() {
+  const el = document.getElementById('dashE2UnresolvedErr');
+  if (!el) return;
+  el.textContent = '';
+  el.hidden = true;
+}
+
+function dashE2ApplySortedRows(rows) {
+  const list = rows.slice();
+  const key = dashE2SortState.key || 'lastAt';
+  const mul = dashE2SortState.dir === 'desc' ? -1 : 1;
+  list.sort((a, b) => {
+    if (key === 'lastAt') {
+      return (new Date(a.lastAt) - new Date(b.lastAt)) * mul;
+    }
+    const field = key === 'vessel' ? 'vesselName' : key === 'title' ? 'title' : 'lastBy';
+    return String(a[field] ?? '').localeCompare(String(b[field] ?? ''), undefined, { sensitivity: 'base' }) * mul;
+  });
+  return list;
+}
+
+function dashE2SyncSortAria() {
+  const table = document.querySelector('.db-widget--e2-unresolved .e2q-table');
+  if (!table) return;
+  table.querySelectorAll('thead th[data-e2-sort]').forEach(th => {
+    const k = th.getAttribute('data-e2-sort');
+    if (k === dashE2SortState.key) {
+      th.setAttribute('aria-sort', dashE2SortState.dir === 'asc' ? 'ascending' : 'descending');
+    } else {
+      th.setAttribute('aria-sort', 'none');
+    }
+  });
+}
+
+function dashE2OnSortHeaderClick(sortKey) {
+  if (dashE2SortState.key === sortKey) {
+    dashE2SortState.dir = dashE2SortState.dir === 'asc' ? 'desc' : 'asc';
+  } else {
+    dashE2SortState.key = sortKey;
+    dashE2SortState.dir = 'asc';
+  }
+  dashE2SyncSortAria();
+  dashE2UnresolvedRender();
+}
+
+function dashE2UnresolvedRender() {
+  const tbody = document.getElementById('dashE2UnresolvedTbody');
+  if (!tbody) return;
+  tbody.textContent = '';
+  if (!currentUser) {
+    const tr = document.createElement('tr');
+    const td = document.createElement('td');
+    td.colSpan = 3;
+    td.className = 'e2q-empty';
+    td.textContent = 'Sign in to view unresolved comments.';
+    tr.appendChild(td);
+    tbody.appendChild(tr);
+    return;
+  }
+  dashE2SyncSortAria();
+  const rows = dashE2ApplySortedRows(dashE2UnresolvedRows);
+  if (!rows.length) {
+    const tr = document.createElement('tr');
+    const td = document.createElement('td');
+    td.colSpan = 3;
+    td.className = 'e2q-empty';
+    td.textContent = 'No Issues';
+    tr.appendChild(td);
+    tbody.appendChild(tr);
+    return;
+  }
+  rows.forEach(row => {
+    const tr = document.createElement('tr');
+    tr.setAttribute('data-thread-root', String(row.threadRootId));
+    tr.setAttribute('data-vessel-name', row.vesselName);
+    if (dashE2SelectedThreadRootId && String(dashE2SelectedThreadRootId) === String(row.threadRootId)) {
+      tr.classList.add('e2q-row--selected');
+    }
+    const tdV = document.createElement('td');
+    tdV.className = 'e2q-vessel';
+    tdV.textContent = row.vesselName;
+    tdV.title = row.vesselName;
+    const tdT = document.createElement('td');
+    tdT.className = 'e2q-title';
+    tdT.textContent = row.title;
+    tdT.title = row.title;
+    const tdL = document.createElement('td');
+    tdL.className = 'e2q-last';
+    tdL.textContent = row.lastBy;
+    tdL.title = row.lastBy;
+    tr.appendChild(tdV);
+    tr.appendChild(tdT);
+    tr.appendChild(tdL);
+    tr.addEventListener('click', () => {
+      dashE2SelectedThreadRootId = String(row.threadRootId);
+      dashE2UnresolvedRender();
+      livePosVesselCommentsOpenPanel(row.vesselName, { threadRootId: row.threadRootId });
+    });
+    tbody.appendChild(tr);
+  });
+}
+
+async function reloadDashE2UnresolvedComments() {
+  if (!document.getElementById('dashE2UnresolvedTbody')) return { ok: true };
+  if (!currentUser) {
+    dashE2UnresolvedRows = [];
+    dashE2SelectedThreadRootId = null;
+    dashE2ClearErr();
+    dashE2UnresolvedRender();
+    return { ok: true };
+  }
+  const { data: rows, error } = await sb.from('vessel_comments').select('*');
+  if (error) {
+    console.warn('dash e2 vessel_comments', error);
+    dashE2ShowErr(error.message || 'Could not load unresolved comments.');
+    return { ok: false };
+  }
+  dashE2ClearErr();
+  dashE2UnresolvedRows = vesselCommentUnresolvedThreadRows(rows || []);
+  if (
+    dashE2SelectedThreadRootId &&
+    !dashE2UnresolvedRows.some(r => String(r.threadRootId) === String(dashE2SelectedThreadRootId))
+  ) {
+    dashE2SelectedThreadRootId = null;
+  }
+  dashE2UnresolvedRender();
+  return { ok: true };
+}
+
+function dashE2UnresolvedInit() {
+  if (dashE2UnresolvedInitDone || !document.getElementById('dashE2UnresolvedTbody')) return;
+  dashE2UnresolvedInitDone = true;
+  const table = document.querySelector('.db-widget--e2-unresolved .e2q-table');
+  if (table) {
+    table.querySelectorAll('thead th[data-e2-sort]').forEach(th => {
+      th.addEventListener('click', e => {
+        e.stopPropagation();
+        const k = th.getAttribute('data-e2-sort');
+        if (k) dashE2OnSortHeaderClick(k);
+      });
+    });
+    dashE2SyncSortAria();
+  }
+  void reloadDashE2UnresolvedComments();
 }
 
 function livePosVcUpdateReplyChrome() {
@@ -6003,6 +6338,7 @@ function vesselCommentsSubscribe() {
     .channel('vessel_comments')
     .on('postgres_changes', { event: '*', schema: 'public', table: 'vessel_comments' }, () => {
       void reloadVesselComments();
+      void reloadDashE2UnresolvedComments();
     })
     .subscribe();
 }
@@ -6050,9 +6386,19 @@ function vesselCommentRoleBadgeClass(role) {
   return 'live-pos-vc-msg-role--other';
 }
 
+function vesselCommentMsgBubbleClass(role) {
+  const b = vesselCommentRoleBucket(role);
+  if (b === 'admin') return 'live-pos-vc-msg--admin';
+  if (b === 'chart') return 'live-pos-vc-msg--chart';
+  if (b === 'ops') return 'live-pos-vc-msg--ops';
+  return 'live-pos-vc-msg--other';
+}
+
 function livePosVesselCommentsAuthorRole() {
   if (!currentUser) return 'ops';
   if (isAdmin) return 'admin';
+  if (isOps) return 'ops';
+  if (userProfileRole === 'chart') return 'chart';
   return (currentUser.email.split('@')[0] || '').toLowerCase();
 }
 
@@ -6079,7 +6425,7 @@ async function postVesselComment(vesselName, message, opts) {
       issue_level: null,
     };
     const il = vesselCommentIssueLevelNorm(opts.issueLevel);
-    if ((isAdmin || isOps) && il) insertRow.issue_level = il;
+    if (il) insertRow.issue_level = il;
     const { data, error } = await sb.from('vessel_comments').insert(insertRow).select('id').maybeSingle();
     if (error) {
       console.warn('vessel_comments insert', error);
@@ -6131,7 +6477,11 @@ function livePosVesselCommentsRenderMessages() {
     livePosVcUpdateReplyChrome();
     return;
   }
-  const list = [...(vesselCommentsByVessel.get(name) || [])];
+  let list = [...(vesselCommentsByVessel.get(name) || [])];
+  if (livePosVcViewThreadRootId) {
+    const focus = String(livePosVcViewThreadRootId);
+    list = list.filter(c => vesselCommentEffectiveThreadRootId(c) === focus);
+  }
   const { threadsMap, order, byId } = vesselCommentThreadsGrouped(list);
   box.innerHTML = '';
 
@@ -6139,7 +6489,10 @@ function livePosVesselCommentsRenderMessages() {
     const depth = vesselCommentDepthForRow(c, byId);
     const isRoot = !c.parent_id;
     const wrap = document.createElement('div');
-    wrap.className = 'live-pos-vc-msg' + (vesselCommentRowIsResolved(c) ? ' live-pos-vc-msg--resolved' : '');
+    wrap.className =
+      'live-pos-vc-msg ' +
+      vesselCommentMsgBubbleClass(c.author_role) +
+      (vesselCommentRowIsResolved(c) ? ' live-pos-vc-msg--resolved' : '');
     if (livePosVcReplyParentId && String(c.id) === String(livePosVcReplyParentId)) {
       wrap.classList.add('live-pos-vc-msg--reply-target');
     }
@@ -6155,7 +6508,7 @@ function livePosVesselCommentsRenderMessages() {
         threadUi && Number(threadUi.replyCount) > 0 && threadUi.threadRootId != null && String(threadUi.threadRootId) !== '';
 
       if (showCollapse) {
-        const expanded = livePosVcThreadRepliesExpandedSet.has(String(threadUi.threadRootId));
+        const expanded = !livePosVcThreadRepliesCollapsedSet.has(String(threadUi.threadRootId));
         const titleRow = document.createElement('div');
         titleRow.className = 'live-pos-vc-msg-title-line live-pos-vc-msg-title-line--thread-tools';
         const main = document.createElement('div');
@@ -6212,17 +6565,19 @@ function livePosVesselCommentsRenderMessages() {
       replyBtn.setAttribute('aria-label', 'Reply in this thread');
       replyBtn.setAttribute('title', 'Reply in this thread');
       replyBtn.innerHTML = VC_REPLY_ICON_SVG;
-      const resBtn = document.createElement('button');
-      resBtn.type = 'button';
-      resBtn.className =
-        'live-pos-vc-msg-resolve-btn' +
-        (isRes ? ' live-pos-vc-msg-resolve-btn--resolved' : ' live-pos-vc-msg-resolve-btn--unresolved');
-      resBtn.dataset.commentId = String(c.id);
-      resBtn.dataset.currentResolved = isRes ? 'true' : 'false';
-      resBtn.textContent = isRes ? 'Resolved' : 'Unresolved';
-      resBtn.setAttribute('aria-label', isRes ? 'Mark as unresolved' : 'Mark as resolved');
       actions.appendChild(replyBtn);
-      actions.appendChild(resBtn);
+      if (isRoot) {
+        const resBtn = document.createElement('button');
+        resBtn.type = 'button';
+        resBtn.className =
+          'live-pos-vc-msg-resolve-btn' +
+          (isRes ? ' live-pos-vc-msg-resolve-btn--resolved' : ' live-pos-vc-msg-resolve-btn--unresolved');
+        resBtn.dataset.commentId = String(c.id);
+        resBtn.dataset.currentResolved = isRes ? 'true' : 'false';
+        resBtn.textContent = isRes ? 'Resolved' : 'Unresolved';
+        resBtn.setAttribute('aria-label', isRes ? 'Mark as unresolved' : 'Mark as resolved');
+        actions.appendChild(resBtn);
+      }
 
       const delSlot = document.createElement('div');
       delSlot.className = 'live-pos-vc-msg-del-slot';
@@ -6303,13 +6658,13 @@ function livePosVesselCommentsRenderMessages() {
       replyCount > 0 &&
       livePosVcReplyParentId &&
       replies.some(r => String(r.id) === String(livePosVcReplyParentId));
-    if (replyTargetHere) livePosVcThreadRepliesExpandedSet.add(String(tk));
+    if (replyTargetHere) livePosVcThreadRepliesCollapsedSet.delete(String(tk));
     const rootUi = replyCount > 0 ? { threadRootId: tk, replyCount } : null;
     threadEl.appendChild(renderOneMsg(root, byId, rootUi));
     if (replyCount > 0) {
       const repliesWrap = document.createElement('div');
       repliesWrap.className = 'live-pos-vc-thread-replies';
-      if (!livePosVcThreadRepliesExpandedSet.has(String(tk))) {
+      if (livePosVcThreadRepliesCollapsedSet.has(String(tk))) {
         repliesWrap.classList.add('live-pos-vc-thread-replies--collapsed');
       }
       for (const c of replies) {
@@ -6342,10 +6697,8 @@ async function livePosVesselCommentsSend() {
     }
     livePosVcHideTitleErr();
     titleForPost = ti;
-    if (isAdmin || isOps) {
-      const ilRaw = String(document.getElementById('livePosVcIssueLevel')?.value || '').trim();
-      issueForPost = vesselCommentIssueLevelNorm(ilRaw) || null;
-    }
+    const ilRaw = String(document.getElementById('livePosVcIssueLevel')?.value || '').trim();
+    issueForPost = vesselCommentIssueLevelNorm(ilRaw) || null;
   }
   const res = await postVesselComment(vn, msg, {
     parentId: livePosVcReplyParentId,
@@ -6369,7 +6722,8 @@ async function livePosVesselCommentsSend() {
   livePosVesselCommentsRenderMessages();
 }
 
-function livePosVesselCommentsOpenPanel(vesselName) {
+function livePosVesselCommentsOpenPanel(vesselName, opts) {
+  opts = opts || {};
   if (!currentUser) return;
   const v0 = vesselCommentNormalizeName(vesselName);
   if (!v0) return;
@@ -6384,7 +6738,10 @@ function livePosVesselCommentsOpenPanel(vesselName) {
   livePosVcClearErr();
   livePosVcReplyParentId = null;
   livePosVcReplyThreadRootId = null;
-  livePosVcThreadRepliesExpandedSet.clear();
+  livePosVcViewThreadRootId = opts.threadRootId ? String(opts.threadRootId) : null;
+  if (livePosVcViewThreadRootId) {
+    livePosVcThreadRepliesCollapsedSet.delete(livePosVcViewThreadRootId);
+  }
   livePosVesselCommentsOpenName = v0;
   if (title) title.textContent = livePosVesselCommentsOpenName.toUpperCase();
   if (ta) ta.value = '';
@@ -6409,6 +6766,9 @@ function livePosVesselCommentsClosePanel() {
   livePosVcClearErr();
   livePosVcReplyParentId = null;
   livePosVcReplyThreadRootId = null;
+  livePosVcViewThreadRootId = null;
+  dashE2SelectedThreadRootId = null;
+  dashE2UnresolvedRender();
   root.classList.remove('live-pos-vc-root--open');
   livePosVesselCommentsOpenName = null;
   const ta = document.getElementById('livePosVesselCommentsTextarea');
@@ -6439,6 +6799,7 @@ window.onload = async () => {
   await authInit();
   livePosInit();
   dashElement1QuotesInit();
+  dashE2UnresolvedInit();
   dashListRender();
   if (!bunkSuppliers.length) {
     bunkAddSupplier();
