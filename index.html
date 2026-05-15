@@ -3257,9 +3257,15 @@
   }
 
   #tab-bunkers .port-ac-wrap,
-  #tab-emissions .port-ac-wrap {
+  #tab-emissions .port-ac-wrap,
+  #tab-voy .port-ac-wrap {
     position: relative;
     width: 100%;
+  }
+
+  #tab-voy .port-ac-wrap input {
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .port-ac-list {
@@ -4551,6 +4557,13 @@
             <input type="text" id="vesVessel" autocomplete="off" oninput="clearVesselNameError()">
             <div class="field-error" id="vesVesselError" hidden>Please name the vessel</div>
           </div>
+          <div class="field port-ac-field">
+            <label>Cargo</label>
+            <div class="port-ac-wrap">
+              <input type="text" id="vesCargo" autocomplete="off" placeholder="Grade">
+              <div class="port-ac-list" role="listbox" hidden aria-hidden="true"></div>
+            </div>
+          </div>
           <div class="field">
             <label>Broker commission %</label>
             <input type="text" inputmode="decimal" class="num-fmt" id="vesCommission" data-decimals="2" value="2.5">
@@ -5002,6 +5015,7 @@ function applyVesselDefaultsPayload(vd) {
   if (!vd || typeof vd !== 'object') return;
   const pairs = [
     ['vesVessel', vd.vessel],
+    ['vesCargo', vd.cargo],
     ['vesSpdLaden', vd.spdLaden],
     ['vesSpdBallast', vd.spdBallast],
     ['vesOpex', vd.opex],
@@ -8778,6 +8792,82 @@ function portAutocompleteCanonical(p) {
   return (p.port_name_full || p.value || p.name || '').trim();
 }
 
+// ─── Cargo autocomplete — all_cargo_grades.json + wet_cargo_grades.json ─────
+let cargoCatalog = null;
+let cargoCatalogPromise = null;
+
+function getArctiumJsonUrl(filename) {
+  try {
+    return new URL(filename, document.baseURI || window.location.href).href;
+  } catch {
+    return filename;
+  }
+}
+
+function mergeCargoCatalogRows(rows) {
+  const byKey = new Map();
+  for (const raw of rows) {
+    if (!raw || typeof raw !== 'object') continue;
+    const grade = String(raw.cargo_grade || raw.grade_description || '').trim();
+    if (!grade) continue;
+    const entry = {
+      cargo_grade: grade,
+      cargo_type_description: String(raw.cargo_type_description || '').trim(),
+      dry_or_wet: String(raw.dry_or_wet || '').trim(),
+      grade_description: String(raw.grade_description || '').trim(),
+    };
+    const key = `${entry.cargo_grade.toLowerCase()}|${entry.cargo_type_description.toLowerCase()}`;
+    if (!byKey.has(key)) byKey.set(key, entry);
+  }
+  const arr = Array.from(byKey.values());
+  for (let i = 0; i < arr.length; i++) {
+    const c = arr[i];
+    c._hay = `${c.cargo_grade} ${c.grade_description} ${c.cargo_type_description} ${c.dry_or_wet}`.toLowerCase();
+  }
+  return arr;
+}
+
+function loadCargoCatalog() {
+  if (cargoCatalogPromise) return cargoCatalogPromise;
+  const files = ['all_cargo_grades.json', 'wet_cargo_grades.json'];
+  cargoCatalogPromise = Promise.all(
+    files.map(name =>
+      fetch(getArctiumJsonUrl(name), { credentials: 'same-origin' })
+        .then(r => (r.ok ? r.json() : []))
+        .catch(() => [])
+    )
+  ).then(parts => {
+    const combined = parts.flatMap(p => (Array.isArray(p) ? p : []));
+    cargoCatalog = mergeCargoCatalogRows(combined);
+    return cargoCatalog;
+  });
+  return cargoCatalogPromise;
+}
+
+function filterCargosByQuery(q) {
+  if (!cargoCatalog || !cargoCatalog.length) return [];
+  const qq = (q || '').trim().toLowerCase();
+  if (!qq) return [];
+  const out = [];
+  for (let i = 0; i < cargoCatalog.length && out.length < 40; i++) {
+    const c = cargoCatalog[i];
+    if ((c._hay || '').includes(qq)) out.push(c);
+  }
+  return out;
+}
+
+function cargoAutocompleteRowLabel(c) {
+  const name = (c.cargo_grade || '').trim();
+  const type = (c.cargo_type_description || '').trim();
+  const dw = c.dry_or_wet === 'W' ? 'Wet' : c.dry_or_wet === 'D' ? 'Dry' : '';
+  const country = [type, dw].filter(Boolean).join(' · ');
+  return { name, country };
+}
+
+function cargoAutocompleteCanonical(c) {
+  return (c.cargo_grade || '').trim();
+}
+
 function closeAllPortAutocompleteLists() {
   document.querySelectorAll('.port-ac-list').forEach(list => {
     restorePortListIfFloating(list);
@@ -8825,12 +8915,13 @@ if (!window._portAcScrollBound) {
   window.addEventListener('resize', () => closeAllPortAutocompleteLists());
 }
 
-function bindPortAutocomplete(input) {
-  if (!input || input.dataset.portAcBound === '1') return;
+function bindAcDropdown(input, opts) {
+  const boundKey = opts.boundKey;
+  if (!input || input.dataset[boundKey] === '1') return;
   const wrap = input.closest('.port-ac-wrap');
   const list = wrap && wrap.querySelector('.port-ac-list');
   if (!wrap || !list) return;
-  input.dataset.portAcBound = '1';
+  input.dataset[boundKey] = '1';
 
   let activeIdx = -1;
   let lastMatches = [];
@@ -8860,9 +8951,9 @@ function bindPortAutocomplete(input) {
   }
 
   function applyIndex(i) {
-    const p = lastMatches[i];
-    if (!p) return;
-    input.value = portAutocompleteCanonical(p);
+    const item = lastMatches[i];
+    if (!item) return;
+    input.value = opts.canonical(item);
     closeList();
     input.dispatchEvent(new Event('input', { bubbles: true }));
     input.dispatchEvent(new Event('change', { bubbles: true }));
@@ -8872,12 +8963,12 @@ function bindPortAutocomplete(input) {
     lastMatches = matches;
     activeIdx = matches.length ? 0 : -1;
     list.innerHTML = '';
-    matches.forEach((p, i) => {
+    matches.forEach((item, i) => {
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'port-ac-item' + (i === 0 ? ' active' : '');
       btn.setAttribute('role', 'option');
-      const { name, country } = portAutocompleteRowLabel(p);
+      const { name, country } = opts.rowLabel(item);
       const nEl = document.createElement('div');
       nEl.className = 'port-ac-item-name';
       nEl.textContent = name;
@@ -8905,12 +8996,12 @@ function bindPortAutocomplete(input) {
       return;
     }
     try {
-      await loadPortsCatalog();
+      await opts.loadCatalog();
     } catch {
       closeList();
       return;
     }
-    const matches = filterPortsByQuery(q);
+    const matches = opts.filterByQuery(q);
     if (!matches.length) {
       closeList();
       return;
@@ -8929,9 +9020,8 @@ function bindPortAutocomplete(input) {
 
   function scheduleRefresh(e) {
     if (e && e.type === 'input' && e.isTrusted === false) return;
-    
-    clearTimeout(input._portAcDebounce);
-    input._portAcDebounce = setTimeout(() => { void refreshList(); }, 100);
+    clearTimeout(input._acDebounce);
+    input._acDebounce = setTimeout(() => { void refreshList(); }, 100);
   }
 
   input.addEventListener('input', scheduleRefresh);
@@ -8956,6 +9046,26 @@ function bindPortAutocomplete(input) {
   });
 }
 
+function bindPortAutocomplete(input) {
+  bindAcDropdown(input, {
+    boundKey: 'portAcBound',
+    loadCatalog: loadPortsCatalog,
+    filterByQuery: filterPortsByQuery,
+    rowLabel: portAutocompleteRowLabel,
+    canonical: portAutocompleteCanonical,
+  });
+}
+
+function bindCargoAutocomplete(input) {
+  bindAcDropdown(input, {
+    boundKey: 'cargoAcBound',
+    loadCatalog: loadCargoCatalog,
+    filterByQuery: filterCargosByQuery,
+    rowLabel: cargoAutocompleteRowLabel,
+    canonical: cargoAutocompleteCanonical,
+  });
+}
+
 function initLegPortAutocompleteIn(root) {
   if (!root) return;
   root.querySelectorAll('.leg-port-input').forEach(inp => bindPortAutocomplete(inp));
@@ -8975,10 +9085,17 @@ function initEmissionsPortAutocomplete() {
   });
 }
 
+function initVesCargoAutocomplete() {
+  const inp = document.getElementById('vesCargo');
+  if (!inp) return;
+  bindCargoAutocomplete(inp);
+}
+
 function wirePortAutocompleteForApp() {
   initBunkPortAutocomplete();
   initLegPortAutocompleteIn(document.getElementById('chainsContainer'));
   initEmissionsPortAutocomplete();
+  initVesCargoAutocomplete();
 }
 
 function renderChains() {
@@ -9163,6 +9280,7 @@ function voyDayDelta(fromDate, toDate) {
 function getVesselDefaults() {
   return {
     vessel: document.getElementById('vesVessel').value.trim(),
+    cargo: document.getElementById('vesCargo').value.trim(),
     spdLaden: parseNum(document.getElementById('vesSpdLaden').value),
     spdBallast: parseNum(document.getElementById('vesSpdBallast').value),
     opex: parseNum(document.getElementById('vesOpex').value) || 0,
@@ -9425,6 +9543,7 @@ function resetChainComparison() {
   renderChains();
   applyVesselFieldDefaults();
   document.getElementById('vesVessel').value = '';
+  document.getElementById('vesCargo').value = '';
   document.getElementById('vesStartDate').value = '';
   document.getElementById('vesMaxDate').value = '';
   document.getElementById('vesOpex').value = '';
@@ -9461,6 +9580,7 @@ function vesselDefaultsExportHtml(vd) {
     ['Speed Laden (kn)', showNum(vd.spdLaden, 1)],
     ['Speed Ballast (kn)', showNum(vd.spdBallast, 1)],
     ['Vessel', showText(vd.vessel)],
+    ['Cargo', showText(vd.cargo)],
     ['Broker commission %', showNum(vd.commission, 2)],
     ['VLSFO mt/d (sea)', showNum(vd.vlsfo, 1)],
     ['LSMGO mt/d (port)', showNum(vd.lsmgo, 1)],
