@@ -9409,12 +9409,10 @@ function computeChain(chain, vd, options = {}) {
   const profitBase = totalIncomeBase - totalCost;
   const profitBull = totalIncomeBull - totalCost;
 
-  // TCE $/day = (income - voyage costs ex-opex) / total days
-  // We treat opex as a cost the owner bears either way, so TCE = (income - bunkers - port - canal) / totalDays
-  const voyageCostsExOpex = legs.reduce((a, l) => a + l.bunkerCost + l.portCost + l.extrasCost, 0);
-  const tceBear = (totalIncomeBear - voyageCostsExOpex) / totalDays;
-  const tceBase = (totalIncomeBase - voyageCostsExOpex) / totalDays;
-  const tceBull = (totalIncomeBull - voyageCostsExOpex) / totalDays;
+  // Net TCE $/day = P/L ÷ total voyage days (all costs incl. opex)
+  const tceBear = totalDays > 0 ? profitBear / totalDays : 0;
+  const tceBase = totalDays > 0 ? profitBase / totalDays : 0;
+  const tceBull = totalDays > 0 ? profitBull / totalDays : 0;
 
   const endPort = legs.length > 0 ? legs[legs.length - 1].to : '—';
   const startDate = parseVoyDate(vd.startDate);
@@ -9429,7 +9427,6 @@ function computeChain(chain, vd, options = {}) {
     profitBear, profitBase, profitBull,
     tceBear, tceBase, tceBull,
     endPort,
-    voyageCostsExOpex,
     arrivalDate,
     arrivalLabel: arrivalDate ? formatVoyDate(arrivalDate) : null,
     deadlineDelta
