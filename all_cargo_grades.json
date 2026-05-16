@@ -1,0 +1,2410 @@
+[
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "1",
+    "cargo_type_description": "Blending Component",
+    "cargo_grade": "Catfeed",
+    "grain_or_bale": "",
+    "grade_description": "Catfeed"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "13",
+    "cargo_type_description": "Gasoline",
+    "cargo_grade": "Corn Argentina",
+    "grain_or_bale": "G",
+    "grade_description": "Corn Argentina"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "13",
+    "cargo_type_description": "Gasoline",
+    "cargo_grade": "UMS",
+    "grain_or_bale": "",
+    "grade_description": ""
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "14",
+    "cargo_type_description": "Distillate",
+    "cargo_grade": "Soyabeans Argentina",
+    "grain_or_bale": "G",
+    "grade_description": "Soyabeans Argentina"
+  },
+  {
+    "dry_or_wet": "D",
+    "cargo_type": "15",
+    "cargo_type_description": "HMS 51",
+    "cargo_grade": "SBM Argentina",
+    "grain_or_bale": "G",
+    "grade_description": "SBM Argentina"
+  },
+  {
+    "dry_or_wet": "D",
+    "cargo_type": "15",
+    "cargo_type_description": "HMS 51",
+    "cargo_grade": "SBM Brazil",
+    "grain_or_bale": "G",
+    "grade_description": "SBM Brazil"
+  },
+  {
+    "dry_or_wet": "D",
+    "cargo_type": "16",
+    "cargo_type_description": "HMS 1 & 2 - 52",
+    "cargo_grade": "SBM Pellets Argentina",
+    "grain_or_bale": "G",
+    "grade_description": "SBM Pellets Argentina"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "197",
+    "cargo_type_description": "CLEAN",
+    "cargo_grade": "NAPHTHA",
+    "grain_or_bale": "",
+    "grade_description": ""
+  },
+  {
+    "dry_or_wet": "D",
+    "cargo_type": "198",
+    "cargo_type_description": "Steel",
+    "cargo_grade": "Steel scrap",
+    "grain_or_bale": "G",
+    "grade_description": ""
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "2",
+    "cargo_type_description": "Condensate",
+    "cargo_grade": "Brunei Condensate",
+    "grain_or_bale": "",
+    "grade_description": "Brunei Condensate"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "2",
+    "cargo_type_description": "Condensate",
+    "cargo_grade": "Bayu Undan",
+    "grain_or_bale": "",
+    "grade_description": "Bayu Undan"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "2",
+    "cargo_type_description": "Condensate",
+    "cargo_grade": "Arun Condensate",
+    "grain_or_bale": "",
+    "grade_description": "Arun Condensate"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "2",
+    "cargo_type_description": "Condensate",
+    "cargo_grade": "Algerian Condensate",
+    "grain_or_bale": "",
+    "grade_description": "Algerian Condensate"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "2",
+    "cargo_type_description": "Condensate",
+    "cargo_grade": "Comingled Condensate",
+    "grain_or_bale": "",
+    "grade_description": "Comingled Condensate"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "2",
+    "cargo_type_description": "Condensate",
+    "cargo_grade": "Yetagun Condensate",
+    "grain_or_bale": "",
+    "grade_description": "Yetagun Condensate"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "2",
+    "cargo_type_description": "Condensate",
+    "cargo_grade": "Uweinat Condensate",
+    "grain_or_bale": "",
+    "grade_description": "Uweinat Condensate"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "2",
+    "cargo_type_description": "Condensate",
+    "cargo_grade": "Sliepner Condensate",
+    "grain_or_bale": "",
+    "grade_description": "Sliepner Condensate"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "2",
+    "cargo_type_description": "Condensate",
+    "cargo_grade": "Senipah Condensate",
+    "grain_or_bale": "",
+    "grade_description": "Senipah Condensate"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "2",
+    "cargo_type_description": "Condensate",
+    "cargo_grade": "Ras Gas Condensate",
+    "grain_or_bale": "",
+    "grade_description": "Ras Gas Condensate"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "2",
+    "cargo_type_description": "Condensate",
+    "cargo_grade": "Oso Condensate",
+    "grain_or_bale": "",
+    "grade_description": "Oso Condensate"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "2",
+    "cargo_type_description": "Condensate",
+    "cargo_grade": "NFC 2",
+    "grain_or_bale": "",
+    "grade_description": "NFC 2"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "2",
+    "cargo_type_description": "Condensate",
+    "cargo_grade": "Elang Condensate",
+    "grain_or_bale": "",
+    "grade_description": "Elang Condensate"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "2",
+    "cargo_type_description": "Condensate",
+    "cargo_grade": "Dukhan Condensate",
+    "grain_or_bale": "",
+    "grade_description": "Dukhan Condensate"
+  },
+  {
+    "dry_or_wet": "D",
+    "cargo_type": "20",
+    "cargo_type_description": "Limestone",
+    "cargo_grade": "Limestone",
+    "grain_or_bale": "G",
+    "grade_description": "Limestone"
+  },
+  {
+    "dry_or_wet": "D",
+    "cargo_type": "21",
+    "cargo_type_description": "Aggregates",
+    "cargo_grade": "Aggregates",
+    "grain_or_bale": "G",
+    "grade_description": "Aggregates"
+  },
+  {
+    "dry_or_wet": "D",
+    "cargo_type": "22",
+    "cargo_type_description": "Iron Ore",
+    "cargo_grade": "Iron Ore",
+    "grain_or_bale": "G",
+    "grade_description": "Iron Ore"
+  },
+  {
+    "dry_or_wet": "D",
+    "cargo_type": "22",
+    "cargo_type_description": "Iron Ore",
+    "cargo_grade": "Ponta Da Maderia",
+    "grain_or_bale": "G",
+    "grade_description": "Ponta Da Maderia"
+  },
+  {
+    "dry_or_wet": "D",
+    "cargo_type": "22",
+    "cargo_type_description": "Iron Ore",
+    "cargo_grade": "Tubarao",
+    "grain_or_bale": "G",
+    "grade_description": "Tubarao"
+  },
+  {
+    "dry_or_wet": "D",
+    "cargo_type": "22",
+    "cargo_type_description": "Iron Ore",
+    "cargo_grade": "Guaiba Island Terminal",
+    "grain_or_bale": "G",
+    "grade_description": "Guaiba Island Terminal"
+  },
+  {
+    "dry_or_wet": "D",
+    "cargo_type": "23",
+    "cargo_type_description": "Iron Ore Pellets",
+    "cargo_grade": "Iron Ore Pellets",
+    "grain_or_bale": "G",
+    "grade_description": "Iron Ore Pellets"
+  },
+  {
+    "dry_or_wet": "D",
+    "cargo_type": "25",
+    "cargo_type_description": "Cement",
+    "cargo_grade": "Bulk Cement",
+    "grain_or_bale": "G",
+    "grade_description": "Bulk Cement"
+  },
+  {
+    "dry_or_wet": "D",
+    "cargo_type": "26",
+    "cargo_type_description": "Cement Clinker",
+    "cargo_grade": "Cement Clinker",
+    "grain_or_bale": "G",
+    "grade_description": "Cement Clinker"
+  },
+  {
+    "dry_or_wet": "D",
+    "cargo_type": "28",
+    "cargo_type_description": "Bagged Alumina",
+    "cargo_grade": "asa",
+    "grain_or_bale": "B",
+    "grade_description": "sasas"
+  },
+  {
+    "dry_or_wet": "D",
+    "cargo_type": "29",
+    "cargo_type_description": "Coal",
+    "cargo_grade": "Coal Indonesia",
+    "grain_or_bale": "G",
+    "grade_description": "Coal Indonesia"
+  },
+  {
+    "dry_or_wet": "D",
+    "cargo_type": "29",
+    "cargo_type_description": "Coal",
+    "cargo_grade": "Coal Australia",
+    "grain_or_bale": "G",
+    "grade_description": "Coal Australia"
+  },
+  {
+    "dry_or_wet": "D",
+    "cargo_type": "29",
+    "cargo_type_description": "Coal",
+    "cargo_grade": "Coal Lyttleton",
+    "grain_or_bale": "G",
+    "grade_description": "Coal Lyttleton"
+  },
+  {
+    "dry_or_wet": "D",
+    "cargo_type": "29",
+    "cargo_type_description": "Coal",
+    "cargo_grade": "Coal NOLA US",
+    "grain_or_bale": "G",
+    "grade_description": "Coal NOLA US"
+  },
+  {
+    "dry_or_wet": "D",
+    "cargo_type": "29",
+    "cargo_type_description": "Coal",
+    "cargo_grade": "Coal Richards Bay",
+    "grain_or_bale": "G",
+    "grade_description": "Coal Richards Bay"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "3",
+    "cargo_type_description": "CPP",
+    "cargo_grade": "DIESEL",
+    "grain_or_bale": "",
+    "grade_description": ""
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "3",
+    "cargo_type_description": "CPP",
+    "cargo_grade": "Recycled Base Oil",
+    "grain_or_bale": "",
+    "grade_description": "RBO"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "3",
+    "cargo_type_description": "CPP",
+    "cargo_grade": "Naphtha",
+    "grain_or_bale": "",
+    "grade_description": "Naphtha"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "3",
+    "cargo_type_description": "CPP",
+    "cargo_grade": "VGO",
+    "grain_or_bale": "",
+    "grade_description": "VGO"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "3",
+    "cargo_type_description": "CPP",
+    "cargo_grade": "Low Sulphur Gasoil",
+    "grain_or_bale": "",
+    "grade_description": "Low Sulphur Gasoil"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "3",
+    "cargo_type_description": "CPP",
+    "cargo_grade": "Low Sulphur Decant",
+    "grain_or_bale": "",
+    "grade_description": "Low Sulphur Decant"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "3",
+    "cargo_type_description": "CPP",
+    "cargo_grade": "Clairified Oil",
+    "grain_or_bale": "",
+    "grade_description": "CLO"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "3",
+    "cargo_type_description": "CPP",
+    "cargo_grade": "Chemical Feed Naphtha",
+    "grain_or_bale": "",
+    "grade_description": "Chemical Feed Naphtha"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "3",
+    "cargo_type_description": "CPP",
+    "cargo_grade": "LCGO (Cutter)",
+    "grain_or_bale": "",
+    "grade_description": "LCGO (Cutter)"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "3",
+    "cargo_type_description": "CPP",
+    "cargo_grade": "Kerosene",
+    "grain_or_bale": "",
+    "grade_description": "Kerosene"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "3",
+    "cargo_type_description": "CPP",
+    "cargo_grade": "gasoil",
+    "grain_or_bale": "",
+    "grade_description": ""
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "3",
+    "cargo_type_description": "CPP",
+    "cargo_grade": "Jet Oil",
+    "grain_or_bale": "",
+    "grade_description": "Jet Oil"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "3",
+    "cargo_type_description": "CPP",
+    "cargo_grade": "Splitter Naphtha",
+    "grain_or_bale": "",
+    "grade_description": "Splitter Naphtha"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "3",
+    "cargo_type_description": "CPP",
+    "cargo_grade": "High Sulphur Gas Oil",
+    "grain_or_bale": "",
+    "grade_description": "High Sulphur Gas Oil"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "3",
+    "cargo_type_description": "CPP",
+    "cargo_grade": "Eocene",
+    "grain_or_bale": "",
+    "grade_description": "Eocene"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "3",
+    "cargo_type_description": "CPP",
+    "cargo_grade": "Low Sulphur Naphtha",
+    "grain_or_bale": "",
+    "grade_description": "Low Sulphur Naphtha"
+  },
+  {
+    "dry_or_wet": "D",
+    "cargo_type": "31",
+    "cargo_type_description": "Green Coke",
+    "cargo_grade": "Green Pet Coke",
+    "grain_or_bale": "G",
+    "grade_description": "Green Pet Coke"
+  },
+  {
+    "dry_or_wet": "D",
+    "cargo_type": "32",
+    "cargo_type_description": "Bagged Urea",
+    "cargo_grade": "Bagged Urea",
+    "grain_or_bale": "B",
+    "grade_description": "Bagged Urea"
+  },
+  {
+    "dry_or_wet": "D",
+    "cargo_type": "33",
+    "cargo_type_description": "Sulphur",
+    "cargo_grade": "Sulphur",
+    "grain_or_bale": "G",
+    "grade_description": "Sulphur"
+  },
+  {
+    "dry_or_wet": "D",
+    "cargo_type": "34",
+    "cargo_type_description": "Iron Slag",
+    "cargo_grade": "Slag - Iron",
+    "grain_or_bale": "G",
+    "grade_description": "Slag - Iron"
+  },
+  {
+    "dry_or_wet": "D",
+    "cargo_type": "36",
+    "cargo_type_description": "Magnetite",
+    "cargo_grade": "Magnetite",
+    "grain_or_bale": "G",
+    "grade_description": "Magnetite"
+  },
+  {
+    "dry_or_wet": "D",
+    "cargo_type": "37",
+    "cargo_type_description": "Gypsum",
+    "cargo_grade": "Gypsum",
+    "grain_or_bale": "G",
+    "grade_description": "Gypsum"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Abu Safah Crude",
+    "grain_or_bale": "",
+    "grade_description": "Abu Safah Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Alba Crude",
+    "grain_or_bale": "",
+    "grade_description": "Alba Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Amenam Blend Crude",
+    "grain_or_bale": "",
+    "grade_description": "Amenam Blend Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Amna Crude",
+    "grain_or_bale": "",
+    "grade_description": "Amna Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Anaco Wax",
+    "grain_or_bale": "",
+    "grade_description": "Anaco Wax"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Anoa Crude",
+    "grain_or_bale": "",
+    "grade_description": "Anoa Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Antan Blend",
+    "grain_or_bale": "",
+    "grade_description": "Antan Blend"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Arabian Extra Light Crude",
+    "grain_or_bale": "",
+    "grade_description": "Arabian Extra Light Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Arabian Heavy ",
+    "grain_or_bale": "",
+    "grade_description": "Arabian Heavy "
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Arabian Light",
+    "grain_or_bale": "",
+    "grade_description": "Arabian Light"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Arabian Medium",
+    "grain_or_bale": "",
+    "grade_description": "Arabian Medium"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Arabian Super Light",
+    "grain_or_bale": "",
+    "grade_description": "ASLC"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Ardjuna Crude",
+    "grain_or_bale": "",
+    "grade_description": "Ardjuna Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Ashtart Crude",
+    "grain_or_bale": "",
+    "grade_description": "Ashtart Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Attaka Crude",
+    "grain_or_bale": "",
+    "grade_description": "Attaka Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Bach Ho Crude",
+    "grain_or_bale": "",
+    "grade_description": "Bach Ho Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Badak",
+    "grain_or_bale": "",
+    "grade_description": "Badak"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Badin Crude",
+    "grain_or_bale": "",
+    "grade_description": "Badin Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Balder Crude",
+    "grain_or_bale": "",
+    "grade_description": "Balder Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Barrow Crude",
+    "grain_or_bale": "",
+    "grade_description": "Barrow Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Basrah Light Crude",
+    "grain_or_bale": "",
+    "grade_description": "Basrah Light Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "BCF 17 Crude Oil",
+    "grain_or_bale": "",
+    "grade_description": "La Salina BCF 17 Crude Oil"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Beatrice Crude",
+    "grain_or_bale": "",
+    "grade_description": "Beatrice Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Bekapai",
+    "grain_or_bale": "",
+    "grade_description": "Bekapai"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Belida",
+    "grain_or_bale": "",
+    "grade_description": "Belida"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Benchamas Crude",
+    "grain_or_bale": "",
+    "grade_description": "Benchamas Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Bintulu Condensate",
+    "grain_or_bale": "",
+    "grade_description": "Bintulu Condensate"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Bintulu Crude",
+    "grain_or_bale": "",
+    "grade_description": "Bintulu Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Bohai Crude",
+    "grain_or_bale": "",
+    "grade_description": "Bohai Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Bonny Light Crude",
+    "grain_or_bale": "",
+    "grade_description": "Bonny Light Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Bonny Medium Crude",
+    "grain_or_bale": "",
+    "grade_description": "Bonny Medium Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Boscan Blend Crude",
+    "grain_or_bale": "",
+    "grade_description": "Boscan Blend Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Brass River Crude",
+    "grain_or_bale": "",
+    "grade_description": "Brass River Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Brega Crude",
+    "grain_or_bale": "",
+    "grade_description": "Brega Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Brent Crude",
+    "grain_or_bale": "",
+    "grade_description": "Brent Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Buffalo Crude",
+    "grain_or_bale": "",
+    "grade_description": "Buffalo Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Bunga Kekwa Crude",
+    "grain_or_bale": "",
+    "grade_description": "Bunga Kekwa Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Bunyu Mixed Crude",
+    "grain_or_bale": "",
+    "grade_description": "Bunyu Mixed Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Cabinda Crude",
+    "grain_or_bale": "",
+    "grade_description": "Cabinda Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Canedon Seco Crude",
+    "grain_or_bale": "",
+    "grade_description": "Canedon Seco Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Captain Crude",
+    "grain_or_bale": "",
+    "grade_description": "Captain Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Cerro Negro Blend Crude",
+    "grain_or_bale": "",
+    "grade_description": "Cerro Negro Blend Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Cerro Negro Heavy Crude",
+    "grain_or_bale": "",
+    "grade_description": "Cerro Negro Heavy Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Champion Crude",
+    "grain_or_bale": "",
+    "grade_description": "Champion Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Cinta Crude",
+    "grain_or_bale": "",
+    "grade_description": "Cinta Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Cold Lake Crude Oil",
+    "grain_or_bale": "",
+    "grade_description": "Cold Lake Crude Oil"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Cooper Basin Crude",
+    "grain_or_bale": "",
+    "grade_description": "Cooper Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Cossack Crude",
+    "grain_or_bale": "",
+    "grade_description": "Cossack Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "CPC Blend Crude",
+    "grain_or_bale": "",
+    "grade_description": "CPC Blend Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Cupiagua Crude",
+    "grain_or_bale": "",
+    "grade_description": "Cupiagua Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Cusiana Crude",
+    "grain_or_bale": "",
+    "grade_description": "Cusiana Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Dai Hung Crude",
+    "grain_or_bale": "",
+    "grade_description": "Dai Hung Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Danish Underground Crd",
+    "grain_or_bale": "",
+    "grade_description": "DUC"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Djeno Crude",
+    "grain_or_bale": "",
+    "grade_description": "Djeno Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Draugen Crude",
+    "grain_or_bale": "",
+    "grade_description": "Draugen Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Dulang Crude",
+    "grain_or_bale": "",
+    "grade_description": "Dulang Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Duri Crude",
+    "grain_or_bale": "",
+    "grade_description": "Duri Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Ekofisk Crude",
+    "grain_or_bale": "",
+    "grade_description": "Ekofisk Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Es Sharara Crude",
+    "grain_or_bale": "",
+    "grade_description": "Es Sharara Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Es Sider Crude",
+    "grain_or_bale": "",
+    "grade_description": "Es Sider Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Escalante Crude",
+    "grain_or_bale": "",
+    "grade_description": "Escalante Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Escravos Crude",
+    "grain_or_bale": "",
+    "grade_description": "Escravos Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Flotta Crude",
+    "grain_or_bale": "",
+    "grade_description": "Flotta Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Foinaven Crude",
+    "grain_or_bale": "",
+    "grade_description": "Foinaven Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Forcados Crude",
+    "grain_or_bale": "",
+    "grade_description": "Forcados Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Foroozan Crude",
+    "grain_or_bale": "",
+    "grade_description": "Foroozan Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Forties Blend",
+    "grain_or_bale": "",
+    "grade_description": "Forties Blend"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Galeota Mix",
+    "grain_or_bale": "",
+    "grade_description": "Galeota Mix"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Geragai Crude",
+    "grain_or_bale": "",
+    "grade_description": "Geragai Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "German Mix Crude",
+    "grain_or_bale": "",
+    "grade_description": "German Mix Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Gippsland Blend",
+    "grain_or_bale": "",
+    "grade_description": "Gippsland Blend"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Girassol Crude",
+    "grain_or_bale": "",
+    "grade_description": "Girassol Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Gofinate",
+    "grain_or_bale": "",
+    "grade_description": "Gofinate"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Grane Crude",
+    "grain_or_bale": "",
+    "grade_description": "Grane Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Griffin Crude",
+    "grain_or_bale": "",
+    "grade_description": "Griffin Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Guafita Blend",
+    "grain_or_bale": "",
+    "grade_description": "Guafita Blend"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Gulfaks Crude",
+    "grain_or_bale": "",
+    "grade_description": "Gulfaks Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Hago",
+    "grain_or_bale": "",
+    "grade_description": "Hago"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Handil Mix Crude",
+    "grain_or_bale": "",
+    "grade_description": "Handil Mix Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Heidrun Crude",
+    "grain_or_bale": "",
+    "grade_description": "Heidrun Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Hibernia Crude",
+    "grain_or_bale": "",
+    "grade_description": "Hibernia Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Hout Crude",
+    "grain_or_bale": "",
+    "grade_description": "Hout Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Hungo",
+    "grain_or_bale": "",
+    "grade_description": "Hungo"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Iranian Heavy Crude",
+    "grain_or_bale": "",
+    "grade_description": "Iranian Heavy Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Iranian Light Crude",
+    "grain_or_bale": "",
+    "grade_description": "Iranian Light Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Isis Crude",
+    "grain_or_bale": "",
+    "grade_description": "Isis Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Jabiru Crude",
+    "grain_or_bale": "",
+    "grade_description": "Jabiru Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Kaji Semoga Crude",
+    "grain_or_bale": "",
+    "grade_description": "Kaji Semoga Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Kakap Crude",
+    "grain_or_bale": "",
+    "grade_description": "Kakap Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Kerapu Crude",
+    "grain_or_bale": "",
+    "grade_description": "Kerapu Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Khafji Crude",
+    "grain_or_bale": "",
+    "grade_description": "Khafji Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Kirkuk Crude",
+    "grain_or_bale": "",
+    "grade_description": "Kirkuk Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Kuito Crude",
+    "grain_or_bale": "",
+    "grade_description": "Kuito Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Kutubu Crude",
+    "grain_or_bale": "",
+    "grade_description": "Kutubu Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Kuwait Export",
+    "grain_or_bale": "",
+    "grade_description": "Kuwait Export"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Labuan Crude",
+    "grain_or_bale": "",
+    "grade_description": "Labuan Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Lagomedio Crude",
+    "grain_or_bale": "",
+    "grade_description": "Lagomedio Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Laguna Blend 17",
+    "grain_or_bale": "",
+    "grade_description": "Laguna Blend 17"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Laguna Crude",
+    "grain_or_bale": "",
+    "grade_description": "Laguna Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Laminaria Crude",
+    "grain_or_bale": "",
+    "grade_description": "Laminaria Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Langsa Crude",
+    "grain_or_bale": "",
+    "grade_description": "Langsa Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Legendre Crude",
+    "grain_or_bale": "",
+    "grade_description": "Legendre Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Leona 22 Crude",
+    "grain_or_bale": "",
+    "grade_description": "Leona 22 Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Liverpool Blend Crude",
+    "grain_or_bale": "",
+    "grade_description": "Liverpool Blend Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Lucina Blend",
+    "grain_or_bale": "",
+    "grade_description": "Lucina Blend"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Lufeng 22-1 Crude",
+    "grain_or_bale": "",
+    "grade_description": "Lufeng 22-1 Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Malampaya Crude",
+    "grain_or_bale": "",
+    "grade_description": "Malampaya Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Maralago-22 Crude",
+    "grain_or_bale": "",
+    "grade_description": "Maralago-22 Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Marlim Crude",
+    "grain_or_bale": "",
+    "grade_description": "Marlim Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Masa Crude",
+    "grain_or_bale": "",
+    "grade_description": "Masa Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Masila Blend Crude",
+    "grain_or_bale": "",
+    "grade_description": "Masila Blend Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Maya Crude",
+    "grain_or_bale": "",
+    "grade_description": "Maya Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Merey-16 Crude",
+    "grain_or_bale": "",
+    "grade_description": "Merey-16 Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Mesa 28 Crude",
+    "grain_or_bale": "",
+    "grade_description": "Mesa 28 Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Mesa 30 Crude",
+    "grain_or_bale": "",
+    "grade_description": "Mesa 30 Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Minas Crude",
+    "grain_or_bale": "",
+    "grade_description": "Minas Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Miri Light Crude",
+    "grain_or_bale": "",
+    "grade_description": "MLC"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Mudi Crude",
+    "grain_or_bale": "",
+    "grade_description": "Mudi Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Murban",
+    "grain_or_bale": "",
+    "grade_description": "Murban"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Nanhai Crude",
+    "grain_or_bale": "",
+    "grade_description": "Nanhai Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Napo Crude",
+    "grain_or_bale": "",
+    "grade_description": "Napo Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Natural Petroleum Crude",
+    "grain_or_bale": "",
+    "grade_description": "Natural Petroleum Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Nemba Crude",
+    "grain_or_bale": "",
+    "grade_description": "Nemba Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Nigerian Crude",
+    "grain_or_bale": "",
+    "grade_description": "Nigerian Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Nile Blend Crude",
+    "grain_or_bale": "",
+    "grade_description": "Nile Blend Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Nkossa Crude",
+    "grain_or_bale": "",
+    "grade_description": "Nkossa Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Norne Crude",
+    "grain_or_bale": "",
+    "grade_description": "Norne Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Olmeca Crude",
+    "grain_or_bale": "",
+    "grade_description": "Olmeca Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Oman Crude",
+    "grain_or_bale": "",
+    "grade_description": "Oman Export Blend Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Onako Light Crude",
+    "grain_or_bale": "",
+    "grade_description": "Onako Light Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Oriente Crude",
+    "grain_or_bale": "",
+    "grade_description": "Oriente Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Oseberg Blend Crude",
+    "grain_or_bale": "",
+    "grade_description": "Oseberg Blend Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Palanca Crude",
+    "grain_or_bale": "",
+    "grade_description": "Palanca Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Pattani Blend Crude",
+    "grain_or_bale": "",
+    "grade_description": "Pattani Blend Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Pedernales-17 Crude",
+    "grain_or_bale": "",
+    "grade_description": "Pedernales-17 Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Pedernales Crude",
+    "grain_or_bale": "",
+    "grade_description": "Pedernales Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Qatar Land Crude",
+    "grain_or_bale": "",
+    "grade_description": "Qatar Land Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Qatar Marine Crude",
+    "grain_or_bale": "",
+    "grade_description": "Qatar Marine Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Qua Iboe Crude",
+    "grain_or_bale": "",
+    "grade_description": "Qua Iboe Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Rabi Blend Crude",
+    "grain_or_bale": "",
+    "grade_description": "Rabi Blend Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Rang Dong Crude",
+    "grain_or_bale": "",
+    "grade_description": "Rang Dong Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Ratawi",
+    "grain_or_bale": "",
+    "grade_description": "Ratawi"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Ruby Crude",
+    "grain_or_bale": "",
+    "grade_description": "Ruby Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Russian Export Blend Crude",
+    "grain_or_bale": "",
+    "grade_description": "REBCO, Urals"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Saharan Blend Crude",
+    "grain_or_bale": "",
+    "grade_description": "Saharan Blend Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Sakhalin Vityaz Crude",
+    "grain_or_bale": "",
+    "grade_description": "Sakhalin Vityaz Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Santa Barbara Crude",
+    "grain_or_bale": "",
+    "grade_description": "Santa Barbara Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Sarir Crude",
+    "grain_or_bale": "",
+    "grade_description": "Sarir Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Sepinggan Crude",
+    "grain_or_bale": "",
+    "grade_description": "Sepinggan Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Seria Light Export Blend",
+    "grain_or_bale": "",
+    "grade_description": "SLEB"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Siberian Light Crude",
+    "grain_or_bale": "",
+    "grade_description": "Siberian Light Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Sirtica Crude",
+    "grain_or_bale": "",
+    "grade_description": "Sirtica Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Slurry Oil",
+    "grain_or_bale": "",
+    "grade_description": "Slurry Oil"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Souediah Crude",
+    "grain_or_bale": "",
+    "grade_description": "Souediah Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Soyo Crude",
+    "grain_or_bale": "",
+    "grade_description": "Soyo Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Spiked Crude",
+    "grain_or_bale": "",
+    "grade_description": "Spiked Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Stag Crude",
+    "grain_or_bale": "",
+    "grade_description": "Stag Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Su Tu Den Crude",
+    "grain_or_bale": "",
+    "grade_description": "Su Tu Den Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Sumatran Light Crude Oil",
+    "grain_or_bale": "",
+    "grade_description": "SLCO"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Syrian Light Crude",
+    "grain_or_bale": "",
+    "grade_description": "SLC"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Taching Crude",
+    "grain_or_bale": "",
+    "grade_description": "Taching Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Tantawan Crude",
+    "grain_or_bale": "",
+    "grade_description": "Tantawan Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Tapis Blend Crude",
+    "grain_or_bale": "",
+    "grade_description": "Tapis Blend Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Tchatamba Crude",
+    "grain_or_bale": "",
+    "grade_description": "Tchatamba Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Tengiz Crude",
+    "grain_or_bale": "",
+    "grade_description": "Tengiz Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Terra Nova Crude",
+    "grain_or_bale": "",
+    "grade_description": "Terra Nova Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Tijuana Pesado Crude",
+    "grain_or_bale": "",
+    "grade_description": "Tijuana Pesado Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Tilaba Crude",
+    "grain_or_bale": "",
+    "grade_description": "Tilaba Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Topped Crude",
+    "grain_or_bale": "",
+    "grade_description": "Topped Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Troll Crude",
+    "grain_or_bale": "",
+    "grade_description": "Troll Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Umm Shaif Crude",
+    "grain_or_bale": "",
+    "grade_description": "Umm Shaif Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Varanus Crude",
+    "grain_or_bale": "",
+    "grade_description": "Varanus Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Wandoo Crude",
+    "grain_or_bale": "",
+    "grade_description": "Wandoo Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Widuri Crude",
+    "grain_or_bale": "",
+    "grade_description": "Widuri Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Woollybutt Crude",
+    "grain_or_bale": "",
+    "grade_description": "Woollybutt Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Wytch Farm Crude",
+    "grain_or_bale": "",
+    "grade_description": "Wytch Farm Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Xijiang Crude",
+    "grain_or_bale": "",
+    "grade_description": "Xijiang Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Xikomba Crude",
+    "grain_or_bale": "",
+    "grade_description": "Xikomba Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Yoho Crude",
+    "grain_or_bale": "",
+    "grade_description": "Yoho Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Zafiro Crude",
+    "grain_or_bale": "",
+    "grade_description": "Zafiro Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Zakum Lower",
+    "grain_or_bale": "",
+    "grade_description": "Zakum Lower"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Zakum Upper",
+    "grain_or_bale": "",
+    "grade_description": "Zakum Upper"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Zarzaitine Crude",
+    "grain_or_bale": "",
+    "grade_description": "Zarzaitine Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Zuata 16 Crude",
+    "grain_or_bale": "",
+    "grade_description": "Zuata 16 Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Zuata Light Crude",
+    "grain_or_bale": "",
+    "grade_description": "Zuata Light Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Zuetina Crude",
+    "grain_or_bale": "",
+    "grade_description": "Zuetina Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Laguna Blend 22",
+    "grain_or_bale": "",
+    "grade_description": "Laguna Blend 22"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Leona 24 Crude",
+    "grain_or_bale": "",
+    "grade_description": "Leona 24 Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Schiehallion Crude ",
+    "grain_or_bale": "",
+    "grade_description": "Schiehallion Crude "
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "4",
+    "cargo_type_description": "Crude",
+    "cargo_grade": "Soroosh Crude Oil",
+    "grain_or_bale": "",
+    "grade_description": "Soroosh Crude Oil"
+  },
+  {
+    "dry_or_wet": "D",
+    "cargo_type": "40",
+    "cargo_type_description": "Barley",
+    "cargo_grade": "Barley Australia",
+    "grain_or_bale": "G",
+    "grade_description": "Barley Australia"
+  },
+  {
+    "dry_or_wet": "D",
+    "cargo_type": "41",
+    "cargo_type_description": "Wheat",
+    "cargo_grade": "Wheat Australia",
+    "grain_or_bale": "G",
+    "grade_description": "Wheat Australia"
+  },
+  {
+    "dry_or_wet": "D",
+    "cargo_type": "41",
+    "cargo_type_description": "Wheat",
+    "cargo_grade": "Canadian Wheat",
+    "grain_or_bale": "G",
+    "grade_description": "Canadian Wheat"
+  },
+  {
+    "dry_or_wet": "D",
+    "cargo_type": "41",
+    "cargo_type_description": "Wheat",
+    "cargo_grade": "Wheat Argentina",
+    "grain_or_bale": "G",
+    "grade_description": "Wheat Argentina"
+  },
+  {
+    "dry_or_wet": "D",
+    "cargo_type": "42",
+    "cargo_type_description": "Feldspar Lumps",
+    "cargo_grade": "Feldspar Lumps",
+    "grain_or_bale": "G",
+    "grade_description": "Feldspar Lumps"
+  },
+  {
+    "dry_or_wet": "D",
+    "cargo_type": "44",
+    "cargo_type_description": "Urea",
+    "cargo_grade": "Urea in Bulk - Sur",
+    "grain_or_bale": "G",
+    "grade_description": "Urea in Bulk - Sur"
+  },
+  {
+    "dry_or_wet": "D",
+    "cargo_type": "45",
+    "cargo_type_description": "Canola",
+    "cargo_grade": "Canola",
+    "grain_or_bale": "G",
+    "grade_description": "Canola"
+  },
+  {
+    "dry_or_wet": "D",
+    "cargo_type": "46",
+    "cargo_type_description": "Sugar",
+    "cargo_grade": "Sugar Brazil",
+    "grain_or_bale": "G",
+    "grade_description": "Sugar Brazil"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "5",
+    "cargo_type_description": "DPP",
+    "cargo_grade": "Midw Bottoms",
+    "grain_or_bale": "",
+    "grade_description": "Midw Bottoms"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "5",
+    "cargo_type_description": "DPP",
+    "cargo_grade": "High Sulphur Decant",
+    "grain_or_bale": "",
+    "grade_description": "High Sulphur Decant"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "5",
+    "cargo_type_description": "DPP",
+    "cargo_grade": "Carbon Black Feedstock",
+    "grain_or_bale": "",
+    "grade_description": "CBFS, CBO"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "5",
+    "cargo_type_description": "DPP",
+    "cargo_grade": "North West Shelf Condensate",
+    "grain_or_bale": "",
+    "grade_description": "NWSC"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "5",
+    "cargo_type_description": "DPP",
+    "cargo_grade": "Clarified Slurry Oil",
+    "grain_or_bale": "",
+    "grade_description": "CSO"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "5",
+    "cargo_type_description": "DPP",
+    "cargo_grade": "Qatar Residue",
+    "grain_or_bale": "",
+    "grade_description": "Qatar Residue"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "5",
+    "cargo_type_description": "DPP",
+    "cargo_grade": "Coker Gas",
+    "grain_or_bale": "",
+    "grade_description": "Coker Gas"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "5",
+    "cargo_type_description": "DPP",
+    "cargo_grade": "Arab Light Long Residue",
+    "grain_or_bale": "",
+    "grade_description": "Arab Light Long Residue"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "5",
+    "cargo_type_description": "DPP",
+    "cargo_grade": "Low Sulphur No.6 Fuel Oil",
+    "grain_or_bale": "",
+    "grade_description": "Low Sulphur No.6 Fuel Oil"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "5",
+    "cargo_type_description": "DPP",
+    "cargo_grade": "VTBB",
+    "grain_or_bale": "",
+    "grade_description": "VTBB"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "5",
+    "cargo_type_description": "DPP",
+    "cargo_grade": "Atmospheric Residue",
+    "grain_or_bale": "",
+    "grade_description": "Atmospheric Residue"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "5",
+    "cargo_type_description": "DPP",
+    "cargo_grade": "A-960 Reduced Crude",
+    "grain_or_bale": "",
+    "grade_description": "A-960 Reduced Crude"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "6",
+    "cargo_type_description": "Feedstock",
+    "cargo_grade": "Cutback Bitumen",
+    "grain_or_bale": "",
+    "grade_description": "Cutback Bitumen"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "7",
+    "cargo_type_description": "Fuel Oil",
+    "cargo_grade": "Premium Diesel",
+    "grain_or_bale": "",
+    "grade_description": "Premium Diesel"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "7",
+    "cargo_type_description": "Fuel Oil",
+    "cargo_grade": "Recycled Diesel Oil",
+    "grain_or_bale": "",
+    "grade_description": "RDO"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "7",
+    "cargo_type_description": "Fuel Oil",
+    "cargo_grade": "Reduced Crude F.O.",
+    "grain_or_bale": "",
+    "grade_description": "Reduced Crude F.O."
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "7",
+    "cargo_type_description": "Fuel Oil",
+    "cargo_grade": "Residual Fuel Oil",
+    "grain_or_bale": "",
+    "grade_description": "Residual Fuel Oil"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "7",
+    "cargo_type_description": "Fuel Oil",
+    "cargo_grade": "No 6 Fuel Oil 2 Pct",
+    "grain_or_bale": "",
+    "grade_description": "No 6 Fuel Oil 2 Pct"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "7",
+    "cargo_type_description": "Fuel Oil",
+    "cargo_grade": "No 6 Fuel Oil 1 Pct",
+    "grain_or_bale": "",
+    "grade_description": "No 6 Fuel Oil 1 Pct"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "7",
+    "cargo_type_description": "Fuel Oil",
+    "cargo_grade": "Moroccan Atmospheric Residue",
+    "grain_or_bale": "",
+    "grade_description": "Moroccan Atmospheric Residue"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "7",
+    "cargo_type_description": "Fuel Oil",
+    "cargo_grade": "MDO",
+    "grain_or_bale": "",
+    "grade_description": "Marine Diesel Oil"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "7",
+    "cargo_type_description": "Fuel Oil",
+    "cargo_grade": "Main Column Bottoms Fuel Oil",
+    "grain_or_bale": "",
+    "grade_description": "Main Column Bottoms Fuel Oil"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "7",
+    "cargo_type_description": "Fuel Oil",
+    "cargo_grade": "LSSR",
+    "grain_or_bale": "",
+    "grade_description": "LSSR"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "7",
+    "cargo_type_description": "Fuel Oil",
+    "cargo_grade": "LSFO 200 Cst",
+    "grain_or_bale": "",
+    "grade_description": "LSFO 200 Cst"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "7",
+    "cargo_type_description": "Fuel Oil",
+    "cargo_grade": "LSFO 180 Cst",
+    "grain_or_bale": "",
+    "grade_description": "LSFO 180 Cst"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "7",
+    "cargo_type_description": "Fuel Oil",
+    "cargo_grade": "Low Sulphur Diesel",
+    "grain_or_bale": "",
+    "grade_description": "Low Sulphur Diesel"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "7",
+    "cargo_type_description": "Fuel Oil",
+    "cargo_grade": "Light Cycle Oil",
+    "grain_or_bale": "",
+    "grade_description": "Light Cycle Oil"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "7",
+    "cargo_type_description": "Fuel Oil",
+    "cargo_grade": "HSFO 380 Cst",
+    "grain_or_bale": "",
+    "grade_description": "HSFO 380 Cst"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "7",
+    "cargo_type_description": "Fuel Oil",
+    "cargo_grade": "HSFO 280 Cst",
+    "grain_or_bale": "",
+    "grade_description": "HSFO 280 Cst"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "7",
+    "cargo_type_description": "Fuel Oil",
+    "cargo_grade": "HSFO 180 Cst",
+    "grain_or_bale": "",
+    "grade_description": "HSFO 180 Cst"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "7",
+    "cargo_type_description": "Fuel Oil",
+    "cargo_grade": "HSFO",
+    "grain_or_bale": "",
+    "grade_description": "HSFO"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "7",
+    "cargo_type_description": "Fuel Oil",
+    "cargo_grade": "High Pour Lsfo",
+    "grain_or_bale": "",
+    "grade_description": "High Pour Lsfo"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "7",
+    "cargo_type_description": "Fuel Oil",
+    "cargo_grade": "Heavy Fuel Oil",
+    "grain_or_bale": "",
+    "grade_description": "Heavy Fuel Oil"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "7",
+    "cargo_type_description": "Fuel Oil",
+    "cargo_grade": "Fuel Oil Lourd",
+    "grain_or_bale": "",
+    "grade_description": "Fuel Oil Lourd"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "7",
+    "cargo_type_description": "Fuel Oil",
+    "cargo_grade": "Fuel Oil Component",
+    "grain_or_bale": "",
+    "grade_description": "Fuel Oil Component"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "7",
+    "cargo_type_description": "Fuel Oil",
+    "cargo_grade": "Fuel Oil",
+    "grain_or_bale": "",
+    "grade_description": "Fuel Oil"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "7",
+    "cargo_type_description": "Fuel Oil",
+    "cargo_grade": "Decant Oil",
+    "grain_or_bale": "",
+    "grade_description": "DCO"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "7",
+    "cargo_type_description": "Fuel Oil",
+    "cargo_grade": "Atmospheric Fuel Oil",
+    "grain_or_bale": "",
+    "grade_description": "Atmospheric Fuel Oil"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "7",
+    "cargo_type_description": "Fuel Oil",
+    "cargo_grade": "Algerian L.S.R.F.O.",
+    "grain_or_bale": "",
+    "grade_description": "Algerian L.S.R.F.O."
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "7",
+    "cargo_type_description": "Fuel Oil",
+    "cargo_grade": "Straight Run Fuel Oil",
+    "grain_or_bale": "",
+    "grade_description": "Straight Run Fuel Oil"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "7",
+    "cargo_type_description": "Fuel Oil",
+    "cargo_grade": "Abadan SRFO 280",
+    "grain_or_bale": "",
+    "grade_description": "Abadan SRFO 280"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "8",
+    "cargo_type_description": "LSWR",
+    "cargo_grade": "LSWR",
+    "grain_or_bale": "",
+    "grade_description": "Low Sulphur Waxy Residue"
+  },
+  {
+    "dry_or_wet": "W",
+    "cargo_type": "9",
+    "cargo_type_description": "Orimulion",
+    "cargo_grade": "Orimulsion 400",
+    "grain_or_bale": "",
+    "grade_description": "Orimulsion 400"
+  }
+]

@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Route Calculator — Arctium Lab</title>
+<script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+<script type="module">
+  import searoute from 'https://esm.sh/searoute-ts@2.0.0';
+  window.searoute = searoute;
+  window.dispatchEvent(new Event('searoute-ready'));
+</script>
+<style>
+:root {
+  --bg: #0d0f0e;
+  --surface: #141714;
+  --surface2: #1a1d1a;
+  --border: #252825;
+  --text: #e8ede8;
+  --text-dim: #b8beb8;
+  --text-muted: #949a94;
+  --accent: #a8b8a8;
+  --accent-dim: #5a6a5a;
+  --accent-glow: rgba(168,184,168,0.07);
+  --red: #b87878;
+  --amber: #b89858;
+  --blue: #7898b8;
+  --teal: #78b8a8;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Consolas', 'Courier New', monospace;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.5;
+}
+.banner {
+  display: none;
+  background: rgba(184,152,88,0.15);
+  border-bottom: 1px solid var(--amber);
+  color: var(--amber);
+  padding: 0.6rem 1.5rem;
+  font-size: 0.85rem;
+  text-align: center;
+}
+.banner.visible { display: block; }
+.layout {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 0;
+  min-height: 100vh;
+}
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+}
+.panel-left {
+  border-right: 1px solid var(--border);
+  padding: 1rem;
+  overflow-y: auto;
+}
+.panel-right {
+  padding: 1rem 1.5rem;
+  overflow-y: auto;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+}
+.card-title {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.field { margin-bottom: 0.65rem; position: relative; }
+.field label {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  margin-bottom: 0.25rem;
+}
+.field input[type="text"],
+.field input[type="number"] {
+  width: 100%;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.45rem 0.6rem;
+  font-family: inherit;
+  font-size: 0.8rem;
+  border-radius: 3px;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+.field input[type="number"]::-webkit-outer-spin-button,
+.field input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.field input:focus {
+  outline: none;
+  border-color: var(--accent-dim);
+  box-shadow: 0 0 0 2px var(--accent-glow);
+}
+.field input.port-valid {
+  border-color: var(--accent-dim);
+}
+.port-meta {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  margin-top: 0.2rem;
+  min-height: 1em;
+}
+.autocomplete-list {
+  position: absolute;
+  left: 0; right: 0;
+  top: 100%;
+  z-index: 100;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-top: none;
+  max-height: 220px;
+  overflow-y: auto;
+  display: none;
+}
+.autocomplete-list.open { display: block; }
+.autocomplete-item {
+  padding: 0.4rem 0.6rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border);
+}
+.autocomplete-item:hover,
+.autocomplete-item.active { background: var(--accent-glow); color: var(--accent); }
+.autocomplete-empty {
+  padding: 0.5rem 0.6rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+.toggle-group {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.toggle-btn {
+  flex: 1;
+  padding: 0.4rem;
+  background: var(--surface2);
+  border: none;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 400;
+  cursor: pointer;
+}
+.toggle-btn.active {
+  background: var(--accent-glow);
+  color: var(--accent);
+  font-weight: 700;
+}
+.toggle-btn + .toggle-btn { border-left: 1px solid var(--border); }
+.run-btn {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.65rem;
+  background: var(--surface2);
+  border: 1px solid var(--accent-dim);
+  color: var(--accent);
+  font-family: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background 0.15s;
+}
+.run-btn:hover { background: var(--accent-glow); }
+.run-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.inline-error {
+  color: var(--red);
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+  display: none;
+}
+.inline-error.visible { display: block; }
+.verdict-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 1rem 1.25rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  border-left: 3px solid var(--accent-dim);
+}
+.verdict-box strong { color: var(--text); }
+.section-title {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin: 0.5rem 0 0.4rem;
+}
+.summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+.summary-table td {
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.summary-table td:first-child { color: var(--text-dim); width: 55%; }
+.summary-table td:last-child { text-align: right; color: var(--text); }
+.summary-table tr:last-child td { border-bottom: none; }
+.summary-table tr.total td { font-weight: bold; border-top: 1px solid var(--border); padding-top: 0.5rem; }
+.val-pos { color: var(--accent); }
+.val-neg { color: var(--red); }
+.val-neu { color: var(--text); }
+.eca-low { color: var(--accent); }
+.eca-mid { color: var(--amber); }
+.eca-high { color: var(--red); }
+.empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+}
+.mrv-warning {
+  color: var(--amber);
+  font-size: 0.8rem;
+  padding: 0.75rem;
+  background: rgba(184,152,88,0.08);
+  border: 1px solid var(--amber);
+  border-radius: 3px;
+  margin-bottom: 0.75rem;
+}
+.estimate-note {
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  line-height: 1.45;
+  margin-top: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px dashed var(--border);
+  border-radius: 3px;
+}
+</style>
+</head>
+<body>
+<div id="port-banner" class="banner">Port database unavailable — refresh page</div>
+<div class="layout">
+  <aside class="panel-left">
+    <div class="card">
+      <div class="card-title">Route</div>
+      <div class="field" id="pol-field">
+        <label for="pol-input">Port of Loading (POL)</label>
+        <input type="text" id="pol-input" autocomplete="off" placeholder="Search port…">
+        <div class="port-meta" id="pol-meta"></div>
+        <div class="autocomplete-list" id="pol-list"></div>
+      </div>
+      <div class="field" id="pod-field">
+        <label for="pod-input">Port of Discharge (POD)</label>
+        <input type="text" id="pod-input" autocomplete="off" placeholder="Search port…">
+        <div class="port-meta" id="pod-meta"></div>
+        <div class="autocomplete-list" id="pod-list"></div>
+      </div>
+      <div class="field">
+        <label>Suez Canal</label>
+        <div class="toggle-group" id="suez-toggle">
+          <button type="button" class="toggle-btn active" data-value="use">Use</button>
+          <button type="button" class="toggle-btn" data-value="avoid">Avoid</button>
+        </div>
+      </div>
+      <div class="field">
+        <label>Panama Canal</label>
+        <div class="toggle-group" id="panama-toggle">
+          <button type="button" class="toggle-btn active" data-value="use">Use</button>
+          <button type="button" class="toggle-btn" data-value="avoid">Avoid</button>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Vessel</div>
+      <div class="field"><label for="speed">Speed (kn)</label><input type="number" id="speed" value="12.5" step="0.5" min="5" max="20"></div>
+      <div class="field"><label for="vlsfo-rate">VLSFO mt/day (sea, non-ECA)</label><input type="number" id="vlsfo-rate" value="25" step="0.5"></div>
+      <div class="field"><label for="lsmgo-rate">LSMGO mt/day (sea, ECA)</label><input type="number" id="lsmgo-rate" value="25" step="0.5"></div>
+      <div class="field"><label for="vlsfo-price">VLSFO $/mt</label><input type="number" id="vlsfo-price" value="500" step="10"></div>
+      <div class="field"><label for="lsmgo-price">LSMGO $/mt</label><input type="number" id="lsmgo-price" value="650" step="10"></div>
+      <div class="field"><label for="port-days">Port days</label><input type="number" id="port-days" value="1.5" step="0.5"></div>
+    </div>
+    <button type="button" class="run-btn" id="run-btn">▶ Calculate Route</button>
+    <div class="inline-error" id="input-error"></div>
+  </aside>
+  <main class="panel-right" id="results-panel">
+    <div class="empty-state" id="empty-state">Select ports and run calculation</div>
+    <div id="results-content" style="display:none"></div>
+  </main>
+</div>
+<script src="ports.js"></script>
+<script type="module">
+const ROUTE_ENGINE_PKG = 'searoute-ts@2.0.0';
+let routeEngineReady = false;
+
+function waitForRouteEngine() {
+  if (typeof window.searoute === 'function') {
+    routeEngineReady = true;
+    return Promise.resolve(true);
+  }
+  return new Promise((resolve) => {
+    const finish = () => {
+      routeEngineReady = typeof window.searoute === 'function';
+      resolve(routeEngineReady);
+    };
+    window.addEventListener('searoute-ready', finish, { once: true });
+    setTimeout(finish, 60000);
+  });
+}
+
+await waitForRouteEngine();
+if (routeEngineReady) {
+  console.log(`[route-engine] ${ROUTE_ENGINE_PKG} ready (esm.sh CDN)`);
+} else {
+  console.error(`[route-engine] FAILED — ${ROUTE_ENGINE_PKG} did not load from CDN`);
+}
+
+function portCoords(p) {
+  return [Number(p.lon), Number(p.lat)];
+}
+
+function isValidCoordinatePair(coord) {
+  if (!Array.isArray(coord) || coord.length < 2) return false;
+  const lon = Number(coord[0]);
+  const lat = Number(coord[1]);
+  if (!Number.isFinite(lon) || !Number.isFinite(lat)) return false;
+  if (lat < -90 || lat > 90 || lon < -180 || lon > 180) return false;
+  return true;
+}
+
+function validateWaypoints(coords) {
+  if (!Array.isArray(coords) || coords.length < 2) {
+    return { valid: false, message: 'searoute returned no valid route geometry (path has fewer than 2 points).' };
+  }
+  for (let i = 0; i < coords.length; i++) {
+    if (!isValidCoordinatePair(coords[i])) {
+      return { valid: false, message: `searoute returned invalid coordinates at waypoint ${i + 1}.` };
+    }
+  }
+  return { valid: true };
+}
+
+function greatCircleNM(lat1, lon1, lat2, lon2) {
+  const R = 3440.065;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = Math.sin(dLat / 2) ** 2 +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+const PASSAGE_LABELS = {
+  suez: 'Suez',
+  panama: 'Panama',
+  gibraltar: 'Gibraltar',
+  babelmandeb: 'Bab-el-Mandeb',
+  babalmandab: 'Bab-el-Mandeb',
+  malacca: 'Malacca',
+  dover: 'Dover',
+  kiel: 'Kiel',
+  corinth: 'Corinth',
+  bering: 'Bering',
+  magellan: 'Magellan',
+  northwest: 'Northwest Passage',
+  northeast: 'Northeast Passage',
+  bosporus: 'Bosporus',
+  ormuz: 'Hormuz',
+  sunda: 'Sunda',
+  cape_horn: 'Cape Horn',
+};
+
+function formatPassages(passages) {
+  if (!passages?.length) return 'None';
+  return passages.map(p => PASSAGE_LABELS[p] || p).join(' / ');
+}
+
+function buildRoute(from, to, { suez, panama }) {
+  if (!routeEngineReady || typeof window.searoute !== 'function') {
+    return { error: 'Routing engine not loaded.' };
+  }
+
+  const restrictions = [];
+  if (!suez) restrictions.push('suez');
+  if (!panama) restrictions.push('panama');
+
+  const options = {
+    units: 'nauticalmiles',
+    returnPassages: true,
+  };
+  if (restrictions.length) options.restrictions = restrictions;
+
+  try {
+    const result = window.searoute(from, to, options);
+    const coords = result?.geometry?.coordinates;
+    const check = validateWaypoints(coords);
+    if (!check.valid) {
+      return { error: check.message };
+    }
+    const routeNM = result.properties?.length;
+    if (!Number.isFinite(routeNM) || routeNM < 1) {
+      return { error: 'searoute returned invalid route length — verify port coordinates.' };
+    }
+    return {
+      waypoints: coords,
+      routeNM,
+      passages: result.properties.passages || [],
+      properties: result.properties,
+    };
+  } catch (e) {
+    console.warn('searoute failed', from, to, e);
+    return { error: e.message || 'Route calculation failed.' };
+  }
+}
+
+const ECA_SUBDIVIDE_NM = 25;
+
+function isValidPort(p) {
+  if (!p) return false;
+  const lat = Number(p.lat);
+  const lon = Number(p.lon);
+  if (!Number.isFinite(lat) || !Number.isFinite(lon)) return false;
+  if (Math.abs(lat) < 0.01 && Math.abs(lon) < 0.01) return false;
+  if (lat < -90 || lat > 90 || lon < -180 || lon > 180) return false;
+  return true;
+}
+
+function portLabel(p) {
+  return `${(p.name || p.port_name_full).toUpperCase()} — ${p.port_country || ''}`;
+}
+
+function portSearchKeys(p) {
+  const keys = new Set();
+  if (p.name) keys.add(p.name.toLowerCase().trim());
+  if (p.port_name_full) keys.add(p.port_name_full.toLowerCase().trim());
+  keys.add(portLabel(p).toLowerCase());
+  return keys;
+}
+
+function dedupePorts(ports) {
+  const byName = new Map();
+  for (const p of ports) {
+    if (!isValidPort(p)) continue;
+    const key = (p.name || p.port_name_full || '').toLowerCase().trim();
+    if (!key) continue;
+    const existing = byName.get(key);
+    if (!existing || (Math.abs(p.lat) + Math.abs(p.lon) > Math.abs(existing.lat) + Math.abs(existing.lon))) {
+      byName.set(key, p);
+    }
+  }
+  return [...byName.values()].sort((a, b) =>
+    (a.name || '').localeCompare(b.name || '', undefined, { sensitivity: 'base' })
+  );
+}
+
+function findExactPort(inputVal) {
+  const v = inputVal.trim().toLowerCase();
+  if (!v) return null;
+  const matches = PORTS.filter(p => portSearchKeys(p).has(v));
+  if (matches.length === 1) return matches[0];
+  return null;
+}
+
+function portMatchesSelection(p, inputVal) {
+  if (!p || !isValidPort(p)) return false;
+  return portSearchKeys(p).has(inputVal.trim().toLowerCase());
+}
+
+const ECA_ZONES = [{"name":"Baltic Sea ECA","polygon":[[9.0,57.747],[12.0,57.747],[13.0,56.0],[14.5,55.3],[16.0,55.0],[22.0,55.0],[30.5,60.0],[30.5,66.0],[16.0,66.0],[10.0,58.5],[9.0,57.747]]},{"name":"North Sea ECA","polygon":[[-5.0,48.5],[-5.0,62.0],[4.0,62.0],[4.0,57.747],[9.0,57.747],[9.0,53.5],[4.0,51.0],[1.5,51.0],[-5.0,48.5]]},{"name":"Mediterranean Sea ECA","polygon":[[-5.6,35.95],[-5.6,36.15],[-2.0,37.5],[3.0,39.0],[9.0,41.5],[12.5,38.0],[15.0,38.2],[18.5,40.0],[20.0,39.5],[23.0,36.0],[26.2,35.5],[26.18,40.05],[26.2,40.05],[27.0,40.5],[29.0,41.0],[36.0,36.5],[35.5,33.5],[32.5,31.5],[32.55,31.25],[25.0,31.5],[11.0,33.0],[3.0,36.5],[-2.0,35.5],[-5.6,35.95]]},{"name":"US Caribbean ECA","polygon":[[-67.5372,17.3103],[-67.4458,19.1872],[-65.28,19.5078],[-65.1022,19.2069],[-65.0061,18.7536],[-64.9925,18.6872],[-64.8975,18.4894],[-64.8894,18.4597],[-64.8775,18.4225],[-64.8719,18.4083],[-64.8639,18.3975],[-64.8564,18.395],[-64.8381,18.3933],[-64.8281,18.3967],[-64.8167,18.4031],[-64.7992,18.4078],[-64.7836,18.405],[-64.7769,18.3869],[-64.7556,18.3769],[-64.745,18.3775],[-64.7433,18.3783],[-64.74,18.3769],[-64.7283,18.3775],[-64.7267,18.375],[-64.7161,18.3736],[-64.7078,18.3739],[-64.7008,18.3708],[-64.6833,18.3728],[-64.6708,18.3717],[-64.6692,18.3617],[-64.6378,18.3492],[-64.6378,18.3475],[-64.6433,18.3439],[-64.6378,18.3208],[-64.6378,18.3186],[-64.6606,18.2897],[-64.6614,18.2886],[-64.6606,18.2853],[-64.6494,18.1925],[-64.4931,18.0506],[-64.4506,18.0489],[-64.3522,18.0475],[-64.3097,18.0419],[-64.2522,18.0086],[-64.2522,17.9994],[-64.0136,17.955],[-63.9511,17.9794],[-63.9156,17.9658],[-63.8983,17.9442],[-63.8983,17.93],[-63.9136,17.9258],[-63.9189,17.6611],[-63.9669,17.1933],[-63.9883,17.0833],[-63.9883,16.9969],[-67.5372,17.3103]]},{"name":"North America Pacific ECA","polygon":[[-117.1031,32.5361],[-117.1247,32.5344],[-117.2389,32.5275],[-117.2639,32.5536],[-117.3669,32.5725],[-117.4647,32.5897],[-117.8261,32.6272],[-118.6058,31.1331],[-121.7914,30.5569],[-123.2894,31.7697],[-123.8456,32.3661],[-124.1964,32.9442],[-124.4542,33.67],[-125.2811,34.5244],[-125.7231,35.2439],[-126.3147,35.7333],[-126.7583,36.2736],[-127.1217,37.0264],[-127.6339,37.7608],[-127.8833,38.4189],[-128.5231,39.4181],[-128.7628,40.3131],[-128.6728,41.2275],[-129.0106,42.2136],[-129.095,42.7928],[-129.0239,43.4394],[-128.6897,44.4119],[-128.6672,45.5119],[-128.8167,46.1836],[-129.0747,46.5653],[-131.2614,47.6653],[-132.6833,48.5422],[-133.2464,48.9631],[-134.2642,49.3775],[-135.3169,50.0311],[-136.7625,51.055],[-137.6983,51.9011],[-138.3372,52.7533],[-138.6767,53.4889],[-138.8147,53.6775],[-139.5439,54.2292],[-139.9386,54.6569],[-140.9292,55.3383],[-141.605,56.12],[-142.2886,56.4756],[-142.8158,56.6219],[-153.2508,58.8511],[-117.1031,32.5361]]},{"name":"North America Atlantic/Gulf ECA","polygon":[[-64.16,60.0],[-56.7167,60.0],[-55.6347,58.9003],[-55.0631,57.8478],[-54.0164,57.5869],[-53.1328,57.2389],[-52.3914,56.8025],[-51.8283,56.3036],[-50.2956,54.3892],[-50.1214,53.7483],[-50.1681,53.0831],[-49.9525,52.335],[-48.8792,51.5722],[-48.2678,50.6708],[-48.1175,50.0411],[-48.1597,49.4008],[-47.9214,48.6561],[-47.7822,47.4069],[-48.015,46.5867],[-48.7244,45.3292],[-49.2806,44.7272],[-49.8564,44.2772],[-50.5669,43.8875],[-51.3447,43.6017],[-52.2894,43.3997],[-53.3372,43.3306],[-54.1556,43.3539],[-55.1281,43.4947],[-55.53,42.67],[-56.1594,41.9719],[-57.0867,41.3392],[-58.0486,40.9261],[-59.0883,40.6939],[-60.2056,40.6428],[-61.2342,40.7628],[-62.2969,41.0811],[-63.1803,40.6153],[-64.1436,40.2922],[-64.9919,40.1294],[-65.8853,40.0956],[-65.9975,39.9681],[-66.3539,39.4733],[-66.8092,39.0317],[-67.3497,38.6544],[-68.0336,38.3222],[-68.7819,38.0914],[-69.5686,37.9706],[-70.4025,37.9622],[-70.6306,37.8794],[-71.1425,37.3103],[-71.5664,36.5403],[-71.4339,35.5828],[-71.6178,34.5528],[-71.8764,33.9136],[-72.2867,33.3231],[-72.9014,32.7586],[-74.2006,31.9203],[-75.2556,31.4539],[-75.855,31.0544],[-76.5272,30.7617],[-77.3081,30.2133],[-76.945,29.4214],[-76.8,28.6164],[-76.6694,28.2869],[-79.1897,28.2867],[-79.4764,27.8822],[-79.5272,27.4336],[-79.5717,27.2703],[-79.5822,27.1983],[-79.5881,27.0997],[-79.5881,27.0078],[-79.5775,26.9211],[-79.5742,26.8994],[-79.5447,26.7628],[-79.5397,26.7458],[-79.5397,26.7278],[-79.5336,26.6867],[-79.5336,26.6736],[-79.5336,26.6453],[-79.5294,26.6217],[-79.5172,26.6033],[-79.5181,26.5919],[-79.5142,26.5808],[-79.5128,26.5778],[-79.5106,26.5697],[-79.5042,26.52],[-79.4981,26.4847],[-79.4994,26.4253],[-79.4986,26.3914],[-79.4983,26.3892],[-79.5319,26.3158],[-79.5547,26.2572],[-79.5564,26.2536],[-79.5981,26.1356],[-79.6025,26.1297],[-79.6097,26.1164],[-79.6394,26.0478],[-79.6675,25.9917],[-79.6689,25.9878],[-79.6772,25.9667],[-79.6839,25.95],[-79.6961,25.9011],[-79.7008,25.8917],[-79.7128,25.8511],[-79.7183,25.84],[-79.7264,25.8233],[-79.7289,25.8067],[-79.7331,25.7894],[-79.7378,25.7647],[-79.7397,25.7484],[-79.74,25.7375],[-79.7064,25.6975],[-79.6919,25.6817],[-79.6919,25.6739],[-79.6925,25.6275],[-79.7022,25.575],[-79.7033,25.5453],[-79.7039,25.4767],[-79.7053,25.4011],[-79.7058,25.3733],[-79.7058,25.3578],[-79.7058,25.3492],[-79.705,25.3208],[-79.7042,25.2667],[-79.7053,25.2367],[-79.7106,25.1611],[-79.7156,25.1075],[-79.7194,25.0764],[-79.7297,24.9994],[-79.7344,24.9583],[-79.735,24.9242],[-79.7344,24.84],[-79.7344,24.7378],[-79.7344,24.7178],[-79.735,24.71],[-79.7375,24.6772],[-79.7375,24.6717],[-79.7372,24.65],[-79.7392,24.6336],[-79.7406,24.6225],[-79.7458,24.5572],[-79.7503,24.5083],[-79.77,24.4625],[-79.7972,24.4253],[-79.8167,24.4017],[-79.8528,24.3597],[-79.8975,24.3158],[-79.9408,24.2922],[-80.0042,24.2461],[-80.0367,24.2278],[-80.0625,24.2122],[-80.0644,24.1492],[-80.0758,24.0708],[-80.0792,24.0464],[-80.085,23.9994],[-80.0936,23.9333],[-80.0944,23.9006],[-80.0814,23.8478],[-80.0492,23.85],[-80.0467,23.8167],[-80.05,23.76],[-80.05,23.7064],[-80.05,23.6347],[-80.05,23.5825],[-80.0508,23.5253],[-80.0331,23.4983],[-80.0306,23.4853],[-80.0214,23.4731],[-80.0078,23.4422],[-79.9778,23.3933],[-79.9456,23.3567],[-79.9056,23.3242],[-79.8814,23.3017],[-79.8519,23.2906],[-79.7997,23.2664],[-79.7456,23.2358],[-79.7708,23.1733],[-79.7858,23.1325],[-79.7944,23.1156],[-79.8175,23.0997],[-79.8311,23.0908],[-79.8347,23.0875],[-79.8389,23.0833],[-79.8389,23.0792],[-79.85,23.0683],[-79.8514,23.0667],[-79.8533,23.0639],[-79.8533,23.0608],[-79.8503,23.0539],[-79.8344,23.0392],[-79.8242,23.0303],[-79.8225,23.0289],[-79.8222,23.0228],[-79.8211,23.0136],[-79.8208,23.005],[-79.8211,22.9986],[-79.8222,22.9889],[-79.8211,22.9722],[-79.8181,22.9603],[-79.8128,22.9528],[-79.8081,22.9483],[-79.8067,22.9469],[-79.8061,22.9447],[-79.805,22.9319],[-79.8064,22.9261],[-79.8094,22.9183],[-79.8108,22.9183],[-79.8125,22.9183],[-79.8147,22.9192],[-79.8164,22.9197],[-79.8181,22.9203],[-79.8203,22.9214],[-79.8228,22.9239],[-79.8253,22.9272],[-79.8278,22.9303],[-79.8294,22.9319],[-79.8308,22.9342],[-79.8322,22.9361],[-79.8333,22.9389],[-79.8358,22.9425],[-79.8367,22.9472],[-79.8378,22.9489],[-79.84,22.9522],[-79.8403,22.953],[-79.8419,22.955],[-79.8489,22.9606],[-79.8517,22.9633],[-79.855,22.9667],[-79.8636,22.9783],[-79.8869,22.9928],[-79.9489,23.0353],[-79.9583,23.0411],[-79.9656,23.0464],[-79.9683,23.0481],[-79.9889,23.0644],[-79.9892,23.0647],[-79.9914,23.0653],[-79.9967,23.07],[-80.005,23.0747],[-80.0153,23.0786],[-80.0214,23.0822],[-80.0244,23.0833],[-80.0339,23.0867],[-80.05,23.0931],[-80.0578,23.0967],[-80.0656,23.0992],[-80.0683,23.1006],[-80.07,23.1006],[-80.0792,23.1019],[-80.0792,23.1042],[-80.0792,23.1069],[-80.0792,23.1083],[-80.0844,23.1117],[-80.0875,23.1147],[-80.0875,23.1183],[-80.0875,23.1217],[-80.0908,23.1283],[-80.0911,23.1289],[-80.0894,23.1369],[-80.0892,23.1417],[-80.0875,23.1531],[-80.0853,23.1672],[-80.0833,23.1817],[-80.0825,23.1864],[-80.0742,23.2317],[-80.0742,23.2378],[-80.0758,23.2469],[-80.0772,23.2536],[-80.0792,23.2581],[-80.0825,23.2625],[-80.0833,23.2647],[-80.0958,23.2772],[-80.1064,23.2856],[-80.1267,23.3094],[-80.1342,23.3231],[-80.1383,23.3294],[-80.1467,23.3392],[-80.1492,23.3431],[-80.1517,23.3461],[-80.15,23.35],[-80.1503,23.3525],[-80.1533,23.3539],[-80.1553,23.355],[-80.1583,23.3578],[-80.1647,23.3625],[-80.1814,23.3717],[-80.1944,23.3792],[-80.2153,23.395],[-80.2147,23.3956],[-80.2086,23.4011],[-80.205,23.4042],[-80.2008,23.4083],[-80.1986,23.4111],[-80.1972,23.4133],[-80.185,23.4244],[-80.1769,23.4317],[-80.1742,23.4367],[-80.1742,23.4458],[-80.1761,23.4569],[-80.1789,23.4644],[-80.1817,23.4683],[-80.1853,23.4711],[-80.1881,23.4756],[-80.1903,23.4825],[-80.1925,23.4881],[-80.1972,23.4953],[-80.2014,23.5028],[-80.2078,23.5106],[-80.2147,23.5172],[-80.2217,23.5239],[-80.2289,23.5303],[-80.235,23.5378],[-80.2406,23.5478],[-80.2456,23.5575],[-80.2517,23.5683],[-80.2575,23.5817],[-80.2625,23.6044],[-80.2606,23.6172],[-80.2533,23.6275],[-80.2447,23.6469],[-80.2433,23.6492],[-80.215,23.7158],[-80.19,23.7717],[-80.1764,23.7958],[-85.9931,24.8992],[-86.5019,25.1744],[-86.3528,25.7192],[-86.1125,26.2189],[-86.2186,26.4547],[-85.6186,26.5578],[-87.4897,26.0207],[-88.55,25.7042],[-90.4906,25.7761],[-90.7847,25.7397],[-91.8806,25.8581],[-93.0664,26.2944],[-93.5589,25.9986],[-95.6575,26.0089],[-96.805,26.0058],[-96.9208,25.9733],[-96.9778,25.9694],[-97.0258,25.9594],[-97.085,25.9569],[-97.1464,25.9567]]},{"name":"North America Hawaii ECA","polygon":[[-153.0092,22.5483],[-153.4767,23.1014],[-154.0367,23.5364],[-154.6133,23.8631],[-155.8536,24.3636],[-156.4575,24.6964],[-157.3714,24.9592],[-157.9036,25.2281],[-158.51,25.4253],[-159.1631,25.5219],[-159.9058,25.5086],[-160.6647,25.3647],[-161.6425,25.0017],[-162.2203,24.6803],[-162.7189,24.2647],[-163.2167,23.6806],[-163.5494,23.0556],[-163.7447,22.3358],[-163.7675,21.6125],[-163.6289,20.9239],[-163.3211,20.2261],[-162.8967,19.6508],[-162.3431,19.1619],[-161.3211,18.6544],[-160.6417,18.5086],[-159.9381,18.4919],[-159.2369,18.1781],[-158.9486,17.5217],[-158.5083,16.9017],[-157.9903,16.4303],[-157.2903,15.9992],[-156.3517,15.6769],[-155.3711,15.6267],[-154.7769,15.7294],[-154.2181,15.9256],[-152.8197,16.7742],[-152.0089,17.5617],[-151.5067,18.5044],[-151.3714,19.0464],[-151.3294,19.5794],[-151.3825,20.1283],[-151.5267,20.645],[-151.9972,21.4858],[-152.5236,22.1161],[-153.0092,22.5483]]}];
+let PORTS = [];
+let polPort = null, podPort = null;
+let suezToggle = 'use', panamaToggle = 'use';
+let ecaPolygons = null;
+
+function loadPorts() {
+  try {
+    const data = window.ARCTIUM_PORTS;
+    if (!Array.isArray(data) || !data.length) throw new Error('ports.js not loaded');
+    PORTS = dedupePorts(data.filter(p => !p.is_inactive));
+  } catch (e) {
+    document.getElementById('port-banner').classList.add('visible');
+  }
+}
+
+function initECA() {
+  ecaPolygons = ECA_ZONES.map(z => turf.polygon([[...z.polygon, z.polygon[0]]]));
+}
+
+function haversineNM(lat1, lon1, lat2, lon2) {
+  const R = 3440.065;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = Math.sin(dLat / 2) ** 2 +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+function debugRoute(waypoints, ctx = {}) {
+  console.log('route debug:', {
+    waypointCount: waypoints.length,
+    routeNM: ctx.routeNM != null ? ctx.routeNM.toFixed(1) : 'n/a',
+    greatCircleNM: ctx.gcNM != null ? ctx.gcNM.toFixed(1) : 'n/a',
+    detourRatio: ctx.properties?.detourRatio?.toFixed(2) ?? 'n/a',
+    passages: ctx.passages,
+    restrictions: ctx.restrictions,
+    units: ctx.properties?.units,
+  });
+}
+
+function calculateECADistance(waypoints, routeNM) {
+  let ecaNM = 0, haversineTotal = 0;
+  const zonesHit = new Set();
+  for (let i = 0; i < waypoints.length - 1; i++) {
+    const from = waypoints[i], to = waypoints[i + 1];
+    const segNM = haversineNM(from[1], from[0], to[1], to[0]);
+    haversineTotal += segNM;
+    const steps = Math.max(1, Math.ceil(segNM / ECA_SUBDIVIDE_NM));
+    for (let s = 0; s < steps; s++) {
+      const t0 = s / steps, t1 = (s + 1) / steps;
+      const lon0 = from[0] + t0 * (to[0] - from[0]);
+      const lat0 = from[1] + t0 * (to[1] - from[1]);
+      const lon1 = from[0] + t1 * (to[0] - from[0]);
+      const lat1 = from[1] + t1 * (to[1] - from[1]);
+      const subNM = haversineNM(lat0, lon0, lat1, lon1);
+      const mid = turf.point([(lon0 + lon1) / 2, (lat0 + lat1) / 2]);
+      ECA_ZONES.forEach((zone, idx) => {
+        if (turf.booleanPointInPolygon(mid, ecaPolygons[idx])) {
+          ecaNM += subNM;
+          zonesHit.add(zone.name);
+        }
+      });
+    }
+  }
+  const scale = haversineTotal > 0 ? routeNM / haversineTotal : 1;
+  ecaNM *= scale;
+  return { ecaNM, nonEcaNM: routeNM - ecaNM, totalNM: routeNM, zonesHit: [...zonesHit] };
+}
+
+function fmtNM(n) { return n.toLocaleString('en-US', { maximumFractionDigits: 0 }) + ' NM'; }
+function fmtNum(n, d = 1) { return n.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d }); }
+function fmtMoney(n) { return '$' + n.toLocaleString('en-US', { maximumFractionDigits: 0 }); }
+function ecaClass(pct) {
+  if (pct < 20) return 'eca-low';
+  if (pct <= 40) return 'eca-mid';
+  return 'eca-high';
+}
+
+function showError(msg) {
+  const el = document.getElementById('input-error');
+  el.textContent = msg;
+  el.classList.add('visible');
+}
+function clearError() { document.getElementById('input-error').classList.remove('visible'); }
+
+function setupToggle(id, setter) {
+  const group = document.getElementById(id);
+  group.querySelectorAll('.toggle-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      group.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      setter(btn.dataset.value);
+    });
+  });
+}
+
+function filterPorts(q) {
+  const ql = q.toLowerCase();
+  return PORTS.filter(p =>
+    (p.name && p.name.toLowerCase().includes(ql)) ||
+    (p.port_name_full && p.port_name_full.toLowerCase().includes(ql)) ||
+    (p.port_country && p.port_country.toLowerCase().includes(ql))
+  ).slice(0, 10);
+}
+
+function setupAutocomplete(inputId, listId, metaId, setPort, getPort) {
+  const input = document.getElementById(inputId);
+  const list = document.getElementById(listId);
+  const meta = document.getElementById(metaId);
+  let activeIdx = -1;
+  let lastMatches = [];
+
+  function render(matches) {
+    lastMatches = matches;
+    list.innerHTML = '';
+    if (!matches.length) {
+      list.innerHTML = '<div class="autocomplete-empty">No ports found</div>';
+      list.classList.add('open');
+      return;
+    }
+    matches.forEach((p, i) => {
+      const div = document.createElement('div');
+      div.className = 'autocomplete-item';
+      div.textContent = portLabel(p);
+      div.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+        selectPort(p);
+      });
+      list.appendChild(div);
+    });
+    list.classList.add('open');
+    activeIdx = -1;
+  }
+
+  function clearSelection() {
+    setPort(null);
+    meta.textContent = '';
+    input.classList.remove('port-valid');
+  }
+
+  function selectPort(p) {
+    if (!isValidPort(p)) return;
+    console.log(`[${inputId}] Port selected:`, p);
+    setPort(p);
+    input.value = portLabel(p);
+    input.classList.add('port-valid');
+    const draft = p.draft != null ? p.draft.toFixed(1) : '—';
+    meta.textContent = `lat: ${Number(p.lat).toFixed(2)}  lon: ${Number(p.lon).toFixed(2)}  draft: ${draft} m`;
+    list.classList.remove('open');
+    clearError();
+  }
+
+  function syncFromInput() {
+    const exact = findExactPort(input.value);
+    if (exact) {
+      selectPort(exact);
+      return true;
+    }
+    const p = getPort();
+    if (p && portMatchesSelection(p, input.value)) return true;
+    clearSelection();
+    return false;
+  }
+
+  function updateActive() {
+    const items = list.querySelectorAll('.autocomplete-item');
+    items.forEach((el, i) => el.classList.toggle('active', i === activeIdx));
+    if (activeIdx >= 0 && items[activeIdx]) items[activeIdx].scrollIntoView({ block: 'nearest' });
+  }
+
+  input.addEventListener('input', () => {
+    input.classList.remove('port-valid');
+    const p = getPort();
+    if (p && !portMatchesSelection(p, input.value)) clearSelection();
+    if (input.value.length < 2) {
+      list.classList.remove('open');
+      return;
+    }
+    render(filterPorts(input.value));
+  });
+
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (list.classList.contains('open') && activeIdx >= 0 && lastMatches[activeIdx]) {
+        selectPort(lastMatches[activeIdx]);
+      } else if (lastMatches.length === 1) {
+        selectPort(lastMatches[0]);
+      } else {
+        syncFromInput();
+      }
+      return;
+    }
+    const items = list.querySelectorAll('.autocomplete-item');
+    if (!list.classList.contains('open') || !items.length) return;
+    if (e.key === 'ArrowDown') { e.preventDefault(); activeIdx = Math.min(activeIdx + 1, items.length - 1); updateActive(); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); activeIdx = Math.max(activeIdx - 1, 0); updateActive(); }
+    else if (e.key === 'Escape') list.classList.remove('open');
+  });
+
+  input.addEventListener('blur', () => {
+    setTimeout(() => {
+      list.classList.remove('open');
+      syncFromInput();
+    }, 150);
+  });
+}
+
+function syncPolPodFromInputs() {
+  const polInput = document.getElementById('pol-input');
+  const podInput = document.getElementById('pod-input');
+  if (!polPort || !portMatchesSelection(polPort, polInput.value)) {
+    const exact = findExactPort(polInput.value);
+    polPort = exact && isValidPort(exact) ? exact : null;
+  }
+  if (!podPort || !portMatchesSelection(podPort, podInput.value)) {
+    const exact = findExactPort(podInput.value);
+    podPort = exact && isValidPort(exact) ? exact : null;
+  }
+}
+
+async function calculateRoute() {
+  clearError();
+  if (!routeEngineReady) {
+    showError('Routing engine failed to load. Refresh the page (requires network for searoute-ts CDN).');
+    return;
+  }
+
+  syncPolPodFromInputs();
+
+  if (!isValidPort(polPort) || !isValidPort(podPort)) {
+    showError('Select a port from the dropdown');
+    return;
+  }
+
+  const speed = parseFloat(document.getElementById('speed').value) || 12.5;
+  const vlsfoRate = parseFloat(document.getElementById('vlsfo-rate').value) || 25;
+  const lsmgoRate = parseFloat(document.getElementById('lsmgo-rate').value) || 25;
+  const vlsfoPrice = parseFloat(document.getElementById('vlsfo-price').value) || 500;
+  const lsmgoPrice = parseFloat(document.getElementById('lsmgo-price').value) || 650;
+  const portDaysTotal = parseFloat(document.getElementById('port-days').value) || 1.5;
+
+  const suez = suezToggle === 'use';
+  const panama = panamaToggle === 'use';
+
+  const from = portCoords(polPort);
+  const to = portCoords(podPort);
+  console.log('calculateRoute polPort:', polPort);
+  console.log('calculateRoute podPort:', podPort);
+  console.log('POL [lon, lat]:', from, 'POD [lon, lat]:', to);
+
+  let routeResult;
+  try {
+    routeResult = buildRoute(from, to, { suez, panama });
+  } catch (e) {
+    console.error('Route calculation error:', e);
+    renderError(e.message || 'Route calculation failed. Try different ports or canal settings.');
+    return;
+  }
+
+  if (routeResult.error) {
+    console.error('Invalid route geometry:', routeResult.error);
+    renderError(routeResult.error);
+    return;
+  }
+
+  const waypoints = routeResult.waypoints;
+  const totalNM = routeResult.routeNM;
+  const gcNM = greatCircleNM(polPort.lat, polPort.lon, podPort.lat, podPort.lon);
+
+  debugRoute(waypoints, {
+    routeNM: totalNM,
+    gcNM,
+    passages: routeResult.passages,
+    properties: routeResult.properties,
+    restrictions: [
+      ...(!suez ? ['suez'] : []),
+      ...(!panama ? ['panama'] : []),
+    ],
+  });
+
+  let ecaNM, nonEcaNM, zonesHit;
+  try {
+    ({ ecaNM, nonEcaNM, zonesHit } = calculateECADistance(waypoints, totalNM));
+  } catch (e) {
+    console.error('ECA calculation error:', e);
+    renderError('Route found but ECA analysis failed: ' + (e.message || 'unknown error'));
+    return;
+  }
+  const seaDays = totalNM / (speed * 24);
+  const totalDays = seaDays + portDaysTotal;
+  const vlsfoSeaMT = (nonEcaNM / (speed * 24)) * vlsfoRate;
+  const lsmgoSeaMT = (ecaNM / (speed * 24)) * lsmgoRate;
+  const lsmgoPortMT = portDaysTotal * 2.5;
+  const totalFuelMT = vlsfoSeaMT + lsmgoSeaMT + lsmgoPortMT;
+  const vlsfoCost = vlsfoSeaMT * vlsfoPrice;
+  const lsmgoCost = (lsmgoSeaMT + lsmgoPortMT) * lsmgoPrice;
+  const totalCost = vlsfoCost + lsmgoCost;
+  const ecaPct = totalNM > 0 ? (ecaNM / totalNM) * 100 : 0;
+  const canalsLabel = formatPassages(routeResult.passages);
+  const isMrv = polPort.ismrv === 'Y' || podPort.ismrv === 'Y';
+
+  renderResults({
+    polPort, podPort, totalNM, gcNM, ecaNM, nonEcaNM, ecaPct, zonesHit, canalsLabel,
+    speed, seaDays, portDaysTotal, totalDays,
+    vlsfoSeaMT, lsmgoSeaMT, lsmgoPortMT, totalFuelMT,
+    vlsfoCost, lsmgoCost, totalCost, isMrv,
+  });
+}
+
+function renderError(msg) {
+  document.getElementById('empty-state').style.display = 'none';
+  const content = document.getElementById('results-content');
+  content.style.display = 'block';
+  content.innerHTML = `<div class="verdict-box" style="border-left-color:var(--red);color:var(--red)">${msg}</div>`;
+}
+
+function renderResults(d) {
+  document.getElementById('empty-state').style.display = 'none';
+  const content = document.getElementById('results-content');
+  content.style.display = 'block';
+  const polName = (d.polPort.name || d.polPort.port_name_full).toUpperCase();
+  const podName = (d.podPort.name || d.podPort.port_name_full).toUpperCase();
+  const zones = d.zonesHit.length ? d.zonesHit.join(', ') : 'None';
+  const ecaPctFmt = fmtNum(d.ecaPct, 1);
+  const ecaPctClass = ecaClass(d.ecaPct);
+
+  let html = '';
+  if (d.isMrv) {
+    html += `<div class="mrv-warning">⚠ EU MRV-relevant port detected — EU ETS and FuelEU obligations may apply</div>`;
+  }
+  html += `<div class="verdict-box"><strong>${polName} → ${podName}</strong> | ${fmtNM(d.totalNM)} total | ${fmtNum(d.totalDays)} days | <span class="${ecaPctClass}">${ecaPctFmt}% ECA exposure</span></div>`;
+
+  html += `<div class="card"><div class="card-title">Distance Breakdown</div><table class="summary-table">
+    <tr><td>Total Distance</td><td>${fmtNM(d.totalNM)}</td></tr>
+    <tr><td>Great Circle</td><td>${fmtNM(d.gcNM)}</td></tr>
+    <tr><td>ECA Distance</td><td class="${ecaPctClass}">${fmtNM(d.ecaNM)} (${ecaPctFmt}%)</td></tr>
+    <tr><td>Non-ECA Distance</td><td>${fmtNM(d.nonEcaNM)} (${fmtNum(100 - d.ecaPct, 1)}%)</td></tr>
+    <tr><td>Canals Used</td><td>${d.canalsLabel}</td></tr>
+    <tr><td>ECA Zones Crossed</td><td style="text-align:right;font-size:0.75rem">${zones}</td></tr>
+  </table></div>`;
+
+  html += `<div class="card"><div class="card-title">Voyage Duration</div><table class="summary-table">
+    <tr><td>Speed</td><td>${fmtNum(d.speed)} kn</td></tr>
+    <tr><td>Sea Days</td><td>${fmtNum(d.seaDays)} days</td></tr>
+    <tr><td>Port Days</td><td>${fmtNum(d.portDaysTotal, d.portDaysTotal % 1 === 0 ? 0 : 1)} days</td></tr>
+    <tr><td>Total Days</td><td>${fmtNum(d.totalDays)} days</td></tr>
+  </table></div>`;
+
+  html += `<div class="card"><div class="card-title">Bunker Consumption</div><table class="summary-table">
+    <tr><td>VLSFO (non-ECA sea)</td><td>${fmtNum(d.vlsfoSeaMT)} mt</td></tr>
+    <tr><td>LSMGO (ECA sea)</td><td>${fmtNum(d.lsmgoSeaMT)} mt</td></tr>
+    <tr><td>LSMGO (port days)</td><td>${fmtNum(d.lsmgoPortMT)} mt</td></tr>
+    <tr class="total"><td>Total Fuel</td><td>${fmtNum(d.totalFuelMT)} mt</td></tr>
+    <tr><td>VLSFO Cost</td><td>${fmtMoney(d.vlsfoCost)}</td></tr>
+    <tr><td>LSMGO Cost</td><td>${fmtMoney(d.lsmgoCost)}</td></tr>
+    <tr class="total"><td>Total Bunker Cost</td><td>${fmtMoney(d.totalCost)}</td></tr>
+  </table></div>`;
+
+  html += `<p class="estimate-note">All figures above are rough estimates for planning only — not for navigation, charter party, or regulatory compliance. Sea distance uses a modelled maritime network; ECA exposure is sampled along the route; bunker and cost assume fixed rates and speed.</p>`;
+
+  content.innerHTML = html;
+}
+
+setupToggle('suez-toggle', v => { suezToggle = v; });
+setupToggle('panama-toggle', v => { panamaToggle = v; });
+setupAutocomplete('pol-input', 'pol-list', 'pol-meta', p => { polPort = p; }, () => polPort);
+setupAutocomplete('pod-input', 'pod-list', 'pod-meta', p => { podPort = p; }, () => podPort);
+document.getElementById('run-btn').addEventListener('click', calculateRoute);
+
+loadPorts();
+initECA();
+console.log(`[route-engine] Ready: ${routeEngineReady} (${ROUTE_ENGINE_PKG})`);
+console.log(`[ports] Loaded ${PORTS.length} valid ports`);
+const btn = document.getElementById('run-btn');
+if (!routeEngineReady) {
+  btn.disabled = true;
+  btn.textContent = '▶ Routing engine unavailable';
+  showError('Routing engine failed to load. Check network access to esm.sh and refresh.');
+}
+</script>
+</body>
+</html>
