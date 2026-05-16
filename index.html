@@ -3263,9 +3263,83 @@
     width: 100%;
   }
 
-  #tab-voy .port-ac-wrap input {
+  #tab-voy .port-ac-wrap input,
+  #tab-bunkers .route-port-wrap input,
+  #tab-emissions .route-port-wrap input {
     width: 100%;
     box-sizing: border-box;
+  }
+
+  .route-port-wrap {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+    position: relative;
+  }
+
+  .route-port-wrap .port-meta {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    margin-top: 0.2rem;
+    min-height: 1em;
+    letter-spacing: normal;
+    text-transform: none;
+  }
+
+  .route-port-wrap input.port-valid {
+    border-color: var(--accent-dim);
+  }
+
+  .route-port-list {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    z-index: 25000;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    max-height: 220px;
+    overflow-y: auto;
+    display: none;
+    text-align: left;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+
+  .route-port-list.open { display: block; }
+
+  .route-port-item {
+    padding: 8px 10px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+
+  .route-port-item:last-child { border-bottom: none; }
+
+  .route-port-item:hover,
+  .route-port-item.active {
+    background: var(--accent-glow);
+    color: var(--accent);
+  }
+
+  .route-port-empty {
+    padding: 8px 10px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  #tab-voy .leg-ports .route-port-wrap .port-meta {
+    font-size: 0.6rem;
+    margin-top: 2px;
+  }
+
+  #tab-voy .leg-ports .route-port-list {
+    min-width: 200px;
   }
 
   .port-ac-list {
@@ -4651,9 +4725,10 @@
         </div>
         <div class="field port-ac-field">
           <label>Port</label>
-          <div class="port-ac-wrap">
-            <input type="text" id="bunk-port" autocomplete="off" onchange="bunkUpdateTitle()">
-            <div class="port-ac-list" role="listbox" hidden aria-hidden="true"></div>
+          <div class="port-ac-wrap route-port-wrap">
+            <input type="text" id="bunk-port" autocomplete="off" placeholder="Search port…" onchange="bunkUpdateTitle()">
+            <div class="port-meta" id="bunk-port-meta"></div>
+            <div class="route-port-list" id="bunk-port-list"></div>
           </div>
         </div>
         <div class="field">
@@ -4727,16 +4802,18 @@
           </div>
           <div class="field port-ac-field">
             <label>Load Port</label>
-            <div class="port-ac-wrap">
-              <input type="text" id="em-pol" autocomplete="off">
-              <div class="port-ac-list" role="listbox" hidden aria-hidden="true"></div>
+            <div class="port-ac-wrap route-port-wrap">
+              <input type="text" id="em-pol" autocomplete="off" placeholder="Search port…">
+              <div class="port-meta" id="em-pol-meta"></div>
+              <div class="route-port-list" id="em-pol-list"></div>
             </div>
           </div>
           <div class="field port-ac-field">
             <label>Discharge Port</label>
-            <div class="port-ac-wrap">
-              <input type="text" id="em-pod" autocomplete="off">
-              <div class="port-ac-list" role="listbox" hidden aria-hidden="true"></div>
+            <div class="port-ac-wrap route-port-wrap">
+              <input type="text" id="em-pod" autocomplete="off" placeholder="Search port…">
+              <div class="port-meta" id="em-pod-meta"></div>
+              <div class="route-port-list" id="em-pod-list"></div>
             </div>
           </div>
           <div class="field">
@@ -4887,6 +4964,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="ports.js"></script>
 <script>
 // ═════════════════════════════════════════════════════════════════════════════
 // Supabase (replace YOUR_PROJECT_URL / YOUR_ANON_KEY with your project values)
@@ -8716,340 +8794,297 @@ function updateChain(id, field, val) {
   debouncePersist('voy', () => { void saveVoyageChains(); });
 }
 
-// ─── Port autocomplete (Spot / Bunkers) — ports.json ─────────────────────────
+// ─── Port autocomplete (Spot / Bunkers / Emissions) — same as Route tab ─────
 let portsCatalog = null;
-let portsCatalogPromise = null;
 
-function getArctiumPortsJsonUrl() {
+function getArctiumPortsCatalog() {
+  if (portsCatalog) return portsCatalog;
   try {
-    return new URL('ports.json', document.baseURI || window.location.href).href;
+    const data = window.ARCTIUM_PORTS;
+    if (!Array.isArray(data) || !data.length) throw new Error('ports.js not loaded');
+    portsCatalog = dedupePortsCatalog(data.filter(p => !p.is_inactive));
   } catch {
-    return 'ports.json';
+    portsCatalog = [];
   }
-}
-
-function restorePortListIfFloating(list) {
-  if (!list || !list._portAcWrapRef) return;
-  const w = list._portAcWrapRef;
-  if (list.parentNode === document.body) {
-    if (w.isConnected) w.appendChild(list);
-    else list.remove();
-  }
-  list._portAcWrapRef = null;
-  list.classList.remove('port-ac-list--floating');
-  list.style.left = '';
-  list.style.top = '';
-  list.style.width = '';
+  return portsCatalog;
 }
 
 function loadPortsCatalog() {
-  if (portsCatalogPromise) return portsCatalogPromise;
-  const href = getArctiumPortsJsonUrl();
-  portsCatalogPromise = fetch(href, { credentials: 'same-origin' })
-    .then(r => {
-      if (!r.ok) throw new Error('ports');
-      return r.json();
-    })
-    .then(data => {
-      const arr = Array.isArray(data) ? data : [];
-      for (let i = 0; i < arr.length; i++) {
-        const p = arr[i];
-        p._hay = `${p.name || ''} ${p.port_name_full || ''} ${p.value || ''} ${p.port_country || ''} ${p.bp_code || ''}`.toLowerCase();
-      }
-      portsCatalog = arr;
-      return portsCatalog;
-    })
-    .catch(() => {
-      portsCatalog = [];
-      return portsCatalog;
-    });
-  return portsCatalogPromise;
+  return Promise.resolve(getArctiumPortsCatalog());
+}
+
+function isValidPortCatalogEntry(p) {
+  if (!p) return false;
+  const lat = Number(p.lat);
+  const lon = Number(p.lon);
+  if (!Number.isFinite(lat) || !Number.isFinite(lon)) return false;
+  if (Math.abs(lat) < 0.01 && Math.abs(lon) < 0.01) return false;
+  if (lat < -90 || lat > 90 || lon < -180 || lon > 180) return false;
+  return true;
+}
+
+function portCatalogLabel(p) {
+  return `${(p.name || p.port_name_full).toUpperCase()} — ${p.port_country || ''}`;
+}
+
+function portCatalogSearchKeys(p) {
+  const keys = new Set();
+  if (p.name) keys.add(p.name.toLowerCase().trim());
+  if (p.port_name_full) keys.add(p.port_name_full.toLowerCase().trim());
+  keys.add(portCatalogLabel(p).toLowerCase());
+  return keys;
+}
+
+function dedupePortsCatalog(ports) {
+  const byName = new Map();
+  for (const p of ports) {
+    if (!isValidPortCatalogEntry(p)) continue;
+    const key = (p.name || p.port_name_full || '').toLowerCase().trim();
+    if (!key) continue;
+    const existing = byName.get(key);
+    if (!existing || (Math.abs(p.lat) + Math.abs(p.lon) > Math.abs(existing.lat) + Math.abs(existing.lon))) {
+      byName.set(key, p);
+    }
+  }
+  return [...byName.values()].sort((a, b) =>
+    (a.name || '').localeCompare(b.name || '', undefined, { sensitivity: 'base' })
+  );
+}
+
+function escapePortRegex(s) {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function portCatalogMatchScore(p, ql) {
+  const name = (p.name || '').toLowerCase();
+  const full = (p.port_name_full || '').toLowerCase();
+  const country = (p.port_country || '').toLowerCase();
+
+  function scoreText(text, w) {
+    if (!text || !text.includes(ql)) return 0;
+    if (text === ql) return w.exact;
+    if (text.startsWith(ql)) return w.prefix;
+    const wordRe = new RegExp('(?:^|[\\s(/-])' + escapePortRegex(ql), 'i');
+    if (wordRe.test(text)) return w.wordStart;
+    return w.includes;
+  }
+
+  const nameW = { exact: 10000, prefix: 5000, wordStart: 3000, includes: 400 };
+  const fullW = { exact: 2000, prefix: 1500, wordStart: 900, includes: 150 };
+  const countryW = { exact: 200, prefix: 150, wordStart: 100, includes: 50 };
+
+  let score = Math.max(
+    scoreText(name, nameW),
+    scoreText(full, fullW),
+    scoreText(country, countryW)
+  );
+  if (score <= 0) return 0;
+
+  const parenIdx = name.indexOf('(');
+  if (parenIdx >= 0) {
+    const before = name.slice(0, parenIdx);
+    const inside = name.slice(parenIdx);
+    if (!before.includes(ql) && inside.includes(ql) && scoreText(name, nameW) <= nameW.wordStart) {
+      score -= 2500;
+    }
+  }
+  if (scoreText(name, nameW) === 0 && scoreText(full, fullW) > 0 && scoreText(full, fullW) < fullW.wordStart) {
+    score -= 500;
+  }
+  return Math.max(score, 1);
 }
 
 function filterPortsByQuery(q) {
-  if (!portsCatalog || !portsCatalog.length) return [];
-  const qq = (q || '').trim().toLowerCase();
-  if (!qq) return [];
-  const out = [];
-  for (let i = 0; i < portsCatalog.length; i++) {
-    const p = portsCatalog[i];
-    if ((p._hay || '').includes(qq)) out.push(p);
+  const ports = getArctiumPortsCatalog();
+  if (!ports.length) return [];
+  const ql = q.trim().toLowerCase();
+  if (ql.length < 2) return [];
+  const scored = [];
+  for (const p of ports) {
+    const s = portCatalogMatchScore(p, ql);
+    if (s > 0) scored.push({ p, s });
   }
-  return out;
-}
-
-function portAutocompleteRowLabel(p) {
-  const name = (p.name || p.port_name_full || p.value || '').trim();
-  const country = (p.port_country || '').trim();
-  return { name, country };
-}
-
-function portAutocompleteCanonical(p) {
-  return (p.port_name_full || p.value || p.name || '').trim();
-}
-
-// ─── Cargo autocomplete — all_cargo_grades.json + wet_cargo_grades.json ─────
-let cargoCatalog = null;
-let cargoCatalogPromise = null;
-
-function getArctiumJsonUrl(filename) {
-  try {
-    return new URL(filename, document.baseURI || window.location.href).href;
-  } catch {
-    return filename;
-  }
-}
-
-function mergeCargoCatalogRows(rows) {
-  const byKey = new Map();
-  for (const raw of rows) {
-    if (!raw || typeof raw !== 'object') continue;
-    const grade = String(raw.cargo_grade || raw.grade_description || '').trim();
-    if (!grade) continue;
-    const entry = {
-      cargo_grade: grade,
-      cargo_type_description: String(raw.cargo_type_description || '').trim(),
-      dry_or_wet: String(raw.dry_or_wet || '').trim(),
-      grade_description: String(raw.grade_description || '').trim(),
-    };
-    const key = `${entry.cargo_grade.toLowerCase()}|${entry.cargo_type_description.toLowerCase()}`;
-    if (!byKey.has(key)) byKey.set(key, entry);
-  }
-  const arr = Array.from(byKey.values());
-  for (let i = 0; i < arr.length; i++) {
-    const c = arr[i];
-    c._hay = `${c.cargo_grade} ${c.grade_description} ${c.cargo_type_description} ${c.dry_or_wet}`.toLowerCase();
-  }
-  return arr;
-}
-
-function loadCargoCatalog() {
-  if (cargoCatalogPromise) return cargoCatalogPromise;
-  const files = ['all_cargo_grades.json', 'wet_cargo_grades.json'];
-  cargoCatalogPromise = Promise.all(
-    files.map(name =>
-      fetch(getArctiumJsonUrl(name), { credentials: 'same-origin' })
-        .then(r => (r.ok ? r.json() : []))
-        .catch(() => [])
-    )
-  ).then(parts => {
-    const combined = parts.flatMap(p => (Array.isArray(p) ? p : []));
-    cargoCatalog = mergeCargoCatalogRows(combined);
-    return cargoCatalog;
+  scored.sort((a, b) => {
+    if (b.s !== a.s) return b.s - a.s;
+    const an = (a.p.name || a.p.port_name_full || '').length;
+    const bn = (b.p.name || b.p.port_name_full || '').length;
+    if (an !== bn) return an - bn;
+    return (a.p.name || '').localeCompare(b.p.name || '', undefined, { sensitivity: 'base' });
   });
-  return cargoCatalogPromise;
+  return scored.slice(0, 10).map(x => x.p);
 }
 
-function filterCargosByQuery(q) {
-  if (!cargoCatalog || !cargoCatalog.length) return [];
-  const qq = (q || '').trim().toLowerCase();
-  if (!qq) return [];
-  const out = [];
-  for (let i = 0; i < cargoCatalog.length && out.length < 40; i++) {
-    const c = cargoCatalog[i];
-    if ((c._hay || '').includes(qq)) out.push(c);
+function findExactPortInCatalog(inputVal) {
+  const v = inputVal.trim().toLowerCase();
+  if (!v) return null;
+  const matches = getArctiumPortsCatalog().filter(p => portCatalogSearchKeys(p).has(v));
+  return matches.length === 1 ? matches[0] : null;
+}
+
+function portCatalogMatchesSelection(p, inputVal) {
+  if (!p || !isValidPortCatalogEntry(p)) return false;
+  return portCatalogSearchKeys(p).has(inputVal.trim().toLowerCase());
+}
+
+function ensureRoutePortChrome(wrap, input) {
+  let meta = wrap.querySelector(':scope > .port-meta');
+  if (!meta) {
+    meta = document.createElement('div');
+    meta.className = 'port-meta';
+    input.insertAdjacentElement('afterend', meta);
   }
-  return out;
+  let list = wrap.querySelector(':scope > .route-port-list');
+  if (!list) {
+    list = document.createElement('div');
+    list.className = 'route-port-list';
+    wrap.appendChild(list);
+  }
+  return { meta, list };
 }
 
-function cargoAutocompleteRowLabel(c) {
-  const name = (c.cargo_grade || '').trim();
-  const type = (c.cargo_type_description || '').trim();
-  const dw = c.dry_or_wet === 'W' ? 'Wet' : c.dry_or_wet === 'D' ? 'Dry' : '';
-  const country = [type, dw].filter(Boolean).join(' · ');
-  return { name, country };
-}
-
-function cargoAutocompleteCanonical(c) {
-  return (c.cargo_grade || '').trim();
-}
-
-function closeAllPortAutocompleteLists() {
-  document.querySelectorAll('.port-ac-list').forEach(list => {
-    restorePortListIfFloating(list);
-    list.hidden = true;
-    list.innerHTML = '';
-    list.setAttribute('aria-hidden', 'true');
-    list.setAttribute('hidden', '');
-  });
-}
-
-function positionPortDropdown(input, list, wrapForRef) {
-  restorePortListIfFloating(list);
-  list._portAcWrapRef = wrapForRef;
-  const r = input.getBoundingClientRect();
-  const pad = 8;
-  const vw = window.innerWidth;
-  let width = Math.max(r.width, 220);
-  let left = r.left;
-  if (left + width > vw - pad) left = Math.max(pad, vw - pad - width);
-  document.body.appendChild(list);
-  list.classList.add('port-ac-list--floating');
-  list.style.left = `${left}px`;
-  list.style.top = `${r.bottom + 2}px`;
-  list.style.width = `${width}px`;
-}
-
-if (!window._portAcGlobalCloseBound) {
-  window._portAcGlobalCloseBound = true;
-  document.addEventListener('mousedown', (e) => {
-    if (e.target.closest('.port-ac-wrap') || e.target.closest('.port-ac-list')) return;
-    closeAllPortAutocompleteLists();
-  }, true);
-}
-
-if (!window._portAcScrollBound) {
-  window._portAcScrollBound = true;
-  document.addEventListener('scroll', (e) => {
-    const t = e.target;
-    if (t && t.nodeType === 1) {
-      if (t.classList && t.classList.contains('port-ac-list')) return;
-      if (typeof t.closest === 'function' && t.closest('.port-ac-list')) return;
-    }
-    closeAllPortAutocompleteLists();
-  }, true);
-  window.addEventListener('resize', () => closeAllPortAutocompleteLists());
-}
-
-function bindAcDropdown(input, opts) {
-  const boundKey = opts.boundKey;
-  if (!input || input.dataset[boundKey] === '1') return;
+function bindRoutePortAutocomplete(input) {
+  if (!input || input.dataset.portAcBound === '1') return;
   const wrap = input.closest('.port-ac-wrap');
-  const list = wrap && wrap.querySelector('.port-ac-list');
-  if (!wrap || !list) return;
-  input.dataset[boundKey] = '1';
+  if (!wrap) return;
+  wrap.classList.add('route-port-wrap');
+  const { meta, list } = ensureRoutePortChrome(wrap, input);
+  input.dataset.portAcBound = '1';
+  input.setAttribute('autocomplete', 'off');
 
   let activeIdx = -1;
   let lastMatches = [];
+  let selectedPort = null;
+  let suppressPortSearch = false;
 
   function closeList() {
-    restorePortListIfFloating(list);
-    list.hidden = true;
+    list.classList.remove('open');
     list.innerHTML = '';
-    list.setAttribute('aria-hidden', 'true');
-    list.setAttribute('hidden', '');
     activeIdx = -1;
     lastMatches = [];
   }
 
-  function setActiveRow(idx) {
-    const items = list.querySelectorAll('.port-ac-item');
-    if (!items.length) return;
-    activeIdx = Math.max(0, Math.min(idx, items.length - 1));
-    items.forEach((el, i) => el.classList.toggle('active', i === activeIdx));
-    const activeEl = items[activeIdx];
-    const rowTop = activeEl.offsetTop;
-    const rowBottom = rowTop + activeEl.offsetHeight;
-    const viewTop = list.scrollTop;
-    const viewBottom = viewTop + list.clientHeight;
-    if (rowTop < viewTop) list.scrollTop = rowTop;
-    else if (rowBottom > viewBottom) list.scrollTop = rowBottom - list.clientHeight;
+  function clearSelection() {
+    selectedPort = null;
+    meta.textContent = '';
+    input.classList.remove('port-valid');
   }
 
-  function applyIndex(i) {
-    const item = lastMatches[i];
-    if (!item) return;
-    input.value = opts.canonical(item);
+  function selectPort(p) {
+    if (!isValidPortCatalogEntry(p)) return;
+    selectedPort = p;
+    input.value = portCatalogLabel(p);
+    input.classList.add('port-valid');
+    const draft = p.draft != null ? p.draft.toFixed(1) : '—';
+    meta.textContent = `lat: ${Number(p.lat).toFixed(2)}  lon: ${Number(p.lon).toFixed(2)}  draft: ${draft} m`;
     closeList();
+    suppressPortSearch = true;
     input.dispatchEvent(new Event('input', { bubbles: true }));
     input.dispatchEvent(new Event('change', { bubbles: true }));
+    suppressPortSearch = false;
   }
 
-  function renderListItems(matches) {
+  function render(matches) {
     lastMatches = matches;
-    activeIdx = matches.length ? 0 : -1;
     list.innerHTML = '';
-    matches.forEach((item, i) => {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'port-ac-item' + (i === 0 ? ' active' : '');
-      btn.setAttribute('role', 'option');
-      const { name, country } = opts.rowLabel(item);
-      const nEl = document.createElement('div');
-      nEl.className = 'port-ac-item-name';
-      nEl.textContent = name;
-      const cEl = document.createElement('div');
-      cEl.className = 'port-ac-item-country';
-      cEl.textContent = country;
-      btn.appendChild(nEl);
-      btn.appendChild(cEl);
-      btn.addEventListener('mousedown', (e) => {
-        e.preventDefault();
-        applyIndex(i);
-      });
-      list.appendChild(btn);
-    });
-    positionPortDropdown(input, list, wrap);
-    list.removeAttribute('hidden');
-    list.hidden = false;
-    list.setAttribute('aria-hidden', 'false');
-  }
-
-  async function refreshList() {
-    const q = input.value;
-    if (!q.trim()) {
-      closeList();
-      return;
-    }
-    try {
-      await opts.loadCatalog();
-    } catch {
-      closeList();
-      return;
-    }
-    const matches = opts.filterByQuery(q);
     if (!matches.length) {
+      list.innerHTML = '<div class="route-port-empty">No ports found</div>';
+      list.classList.add('open');
+      return;
+    }
+    matches.forEach((p, i) => {
+      const div = document.createElement('div');
+      div.className = 'route-port-item';
+      div.textContent = portCatalogLabel(p);
+      div.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+        selectPort(p);
+      });
+      list.appendChild(div);
+    });
+    list.classList.add('open');
+    activeIdx = -1;
+  }
+
+  function syncFromInput() {
+    const exact = findExactPortInCatalog(input.value);
+    if (exact) {
+      selectPort(exact);
+      return true;
+    }
+    if (selectedPort && portCatalogMatchesSelection(selectedPort, input.value)) return true;
+    clearSelection();
+    return false;
+  }
+
+  function updateActive() {
+    const items = list.querySelectorAll('.route-port-item');
+    items.forEach((el, i) => el.classList.toggle('active', i === activeIdx));
+    if (activeIdx >= 0 && items[activeIdx]) items[activeIdx].scrollIntoView({ block: 'nearest' });
+  }
+
+  input.addEventListener('input', () => {
+    if (suppressPortSearch) return;
+    if (selectedPort && portCatalogMatchesSelection(selectedPort, input.value)) {
+      input.classList.add('port-valid');
       closeList();
       return;
     }
-    document.querySelectorAll('.port-ac-list').forEach(el => {
-      if (el !== list) {
-        restorePortListIfFloating(el);
-        el.hidden = true;
-        el.innerHTML = '';
-        el.setAttribute('aria-hidden', 'true');
-        el.setAttribute('hidden', '');
-      }
-    });
-    renderListItems(matches);
-  }
-
-  function scheduleRefresh(e) {
-    if (e && e.type === 'input' && e.isTrusted === false) return;
-    clearTimeout(input._acDebounce);
-    input._acDebounce = setTimeout(() => { void refreshList(); }, 100);
-  }
-
-  input.addEventListener('input', scheduleRefresh);
-  input.addEventListener('focus', scheduleRefresh);
+    input.classList.remove('port-valid');
+    if (selectedPort && !portCatalogMatchesSelection(selectedPort, input.value)) clearSelection();
+    if (input.value.trim().length < 2) {
+      closeList();
+      return;
+    }
+    render(filterPortsByQuery(input.value));
+  });
 
   input.addEventListener('keydown', (e) => {
-    if (list.hidden || !lastMatches.length) return;
-    const n = lastMatches.length;
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (list.classList.contains('open') && activeIdx >= 0 && lastMatches[activeIdx]) {
+        selectPort(lastMatches[activeIdx]);
+      } else if (lastMatches.length === 1) {
+        selectPort(lastMatches[0]);
+      } else {
+        syncFromInput();
+      }
+      return;
+    }
+    const items = list.querySelectorAll('.route-port-item');
+    if (!list.classList.contains('open') || !items.length) return;
     if (e.key === 'ArrowDown') {
       e.preventDefault();
-      setActiveRow(activeIdx < 0 ? 0 : activeIdx + 1);
+      activeIdx = Math.min(activeIdx + 1, items.length - 1);
+      updateActive();
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
-      setActiveRow(activeIdx < 0 ? n - 1 : activeIdx - 1);
-    } else if (e.key === 'Enter') {
-      e.preventDefault();
-      if (activeIdx >= 0) applyIndex(activeIdx);
+      activeIdx = Math.max(activeIdx - 1, 0);
+      updateActive();
     } else if (e.key === 'Escape') {
-      e.preventDefault();
-      closeList();
+      list.classList.remove('open');
     }
+  });
+
+  input.addEventListener('blur', () => {
+    setTimeout(() => {
+      closeList();
+      syncFromInput();
+    }, 150);
   });
 }
 
 function bindPortAutocomplete(input) {
-  bindAcDropdown(input, {
-    boundKey: 'portAcBound',
-    loadCatalog: loadPortsCatalog,
-    filterByQuery: filterPortsByQuery,
-    rowLabel: portAutocompleteRowLabel,
-    canonical: portAutocompleteCanonical,
-  });
+  bindRoutePortAutocomplete(input);
+}
+
+function clearRoutePortField(inputId, metaId) {
+  const input = document.getElementById(inputId);
+  const meta = metaId ? document.getElementById(metaId) : input?.closest('.route-port-wrap')?.querySelector('.port-meta');
+  if (input) {
+    input.value = '';
+    input.classList.remove('port-valid');
+  }
+  if (meta) meta.textContent = '';
 }
 
 function bindCargoAutocomplete(input) {
@@ -9188,14 +9223,16 @@ function renderLeg(chain, leg, idx) {
         <option value="spec" ${leg.type==='spec'?'selected':''}>Speculative</option>
       </select>
       <div class="leg-ports">
-        <div class="port-ac-wrap">
-          <input class="leg-port-input" placeholder="POL" value="${leg.from}" oninput="updateLeg(${chain.id},${leg.id},'from',this.value)">
-          <div class="port-ac-list" role="listbox" hidden aria-hidden="true"></div>
+        <div class="port-ac-wrap route-port-wrap">
+          <input class="leg-port-input" placeholder="Search port…" value="${leg.from}" oninput="updateLeg(${chain.id},${leg.id},'from',this.value)">
+          <div class="port-meta"></div>
+          <div class="route-port-list"></div>
         </div>
         <span class="leg-arrow">→</span>
-        <div class="port-ac-wrap">
-          <input class="leg-port-input" placeholder="POD" value="${leg.to}" oninput="updateLeg(${chain.id},${leg.id},'to',this.value)">
-          <div class="port-ac-list" role="listbox" hidden aria-hidden="true"></div>
+        <div class="port-ac-wrap route-port-wrap">
+          <input class="leg-port-input" placeholder="Search port…" value="${leg.to}" oninput="updateLeg(${chain.id},${leg.id},'to',this.value)">
+          <div class="port-meta"></div>
+          <div class="route-port-list"></div>
         </div>
       </div>
       <button class="remove-btn" data-admin-only onclick="removeLeg(${chain.id},${leg.id})">×</button>
@@ -10399,7 +10436,7 @@ async function bunkExportPDF() {
 
 function bunkResetAll() {
   document.getElementById('bunk-vessel').value = '';
-  document.getElementById('bunk-port').value = '';
+  clearRoutePortField('bunk-port', 'bunk-port-meta');
   document.getElementById('bunk-date-from').value = '';
   document.getElementById('bunk-date-to').value = '';
   document.getElementById('bunk-qty-fo').value = '';
@@ -10759,8 +10796,8 @@ function emRemoveFuelRow(id) {
 function emResetETS() {
   document.getElementById('em-vessel').value = '';
   emSetCoverage('100');
-  document.getElementById('em-pol').value = '';
-  document.getElementById('em-pod').value = '';
+  clearRoutePortField('em-pol', 'em-pol-meta');
+  clearRoutePortField('em-pod', 'em-pod-meta');
   document.getElementById('em-voyage-days').value = '';
   document.getElementById('em-eua-price').value = '80';
   emInitComplianceYear();

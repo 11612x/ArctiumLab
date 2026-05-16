@@ -16,6 +16,7 @@
   --surface: #141714;
   --surface2: #1a1d1a;
   --border: #252825;
+  --border-light: #2e322e;
   --text: #e8ede8;
   --text-dim: #b8beb8;
   --text-muted: #949a94;
@@ -168,23 +169,72 @@ body {
   font-weight: 700;
 }
 .toggle-btn + .toggle-btn { border-left: 1px solid var(--border); }
-.run-btn {
-  width: 100%;
+
+.spot-actions-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
   margin-top: 0.5rem;
-  padding: 0.65rem;
-  background: var(--surface2);
-  border: 1px solid var(--accent-dim);
-  color: var(--accent);
-  font-family: inherit;
-  font-size: 0.85rem;
-  cursor: pointer;
-  border-radius: 3px;
-  transition: background 0.15s;
 }
-.run-btn:hover { background: var(--accent-glow); }
+
+.spot-actions {
+  display: grid;
+  grid-template-columns: 9fr 1fr;
+  gap: 8px;
+}
+
+.spot-actions .run-btn,
+.spot-actions .spot-reset-btn {
+  width: 100%;
+}
+
+.run-btn {
+  background: var(--accent);
+  border: none;
+  border-radius: 4px;
+  color: #0d0f0e;
+  cursor: pointer;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 13px;
+  text-transform: uppercase;
+  transition: opacity 0.15s;
+}
+
+.run-btn:hover { opacity: 0.88; }
+
 .run-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.spot-reset-btn {
+  align-items: center;
+  background: transparent;
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  color: var(--text-dim);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  line-height: 1;
+  min-width: 0;
+  padding: 13px 0;
+  transition: opacity 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.spot-reset-btn svg {
+  display: block;
+  height: 18px;
+  width: 18px;
+}
+
+.spot-reset-btn:hover {
+  opacity: 0.88;
+  border-color: var(--accent-dim);
+  color: var(--text);
 }
 .inline-error {
   color: var(--red);
@@ -302,8 +352,13 @@ body {
       <div class="field"><label for="lsmgo-price">LSMGO $/mt</label><input type="number" id="lsmgo-price" value="650" step="10"></div>
       <div class="field"><label for="port-days">Port days</label><input type="number" id="port-days" value="1.5" step="0.5"></div>
     </div>
-    <button type="button" class="run-btn" id="run-btn">▶ Calculate Route</button>
-    <div class="inline-error" id="input-error"></div>
+    <div class="spot-actions-wrap">
+      <div class="spot-actions">
+        <button type="button" class="run-btn" id="run-btn">Calculate Route</button>
+        <button type="button" class="spot-reset-btn" id="route-reset-btn" aria-label="Reset" title="Reset"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true"><path fill="#a8b8a8" d="M8.884 3.116a1.25 1.25 0 0 1 0 1.768L6.018 7.75H17.5c5.937 0 10.75 4.813 10.75 10.75S23.437 29.25 17.5 29.25S6.75 24.437 6.75 18.5a1.25 1.25 0 1 1 2.5 0a8.25 8.25 0 1 0 8.25-8.25H6.018l2.866 2.866a1.25 1.25 0 0 1-1.768 1.768l-5-5a1.25 1.25 0 0 1 0-1.768l5-5a1.25 1.25 0 0 1 1.768 0"/></svg></button>
+      </div>
+      <div class="inline-error" id="input-error"></div>
+    </div>
   </aside>
   <main class="panel-right" id="results-panel">
     <div class="empty-state" id="empty-state">Select ports and run calculation</div>
@@ -584,13 +639,111 @@ function setupToggle(id, setter) {
   });
 }
 
+function setToggleUi(id, value) {
+  const group = document.getElementById(id);
+  if (!group) return;
+  group.querySelectorAll('.toggle-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.value === value);
+  });
+}
+
+function resetRouteCalculator() {
+  polPort = null;
+  podPort = null;
+
+  ['pol', 'pod'].forEach(side => {
+    const input = document.getElementById(`${side}-input`);
+    const meta = document.getElementById(`${side}-meta`);
+    const list = document.getElementById(`${side}-list`);
+    if (input) {
+      input.value = '';
+      input.classList.remove('port-valid');
+    }
+    if (meta) meta.textContent = '';
+    if (list) {
+      list.classList.remove('open');
+      list.innerHTML = '';
+    }
+  });
+
+  suezToggle = 'use';
+  panamaToggle = 'use';
+  setToggleUi('suez-toggle', 'use');
+  setToggleUi('panama-toggle', 'use');
+
+  document.getElementById('speed').value = '12.5';
+  document.getElementById('vlsfo-rate').value = '25';
+  document.getElementById('lsmgo-rate').value = '25';
+  document.getElementById('vlsfo-price').value = '500';
+  document.getElementById('lsmgo-price').value = '650';
+  document.getElementById('port-days').value = '1.5';
+
+  clearError();
+  document.getElementById('empty-state').style.display = '';
+  const content = document.getElementById('results-content');
+  content.style.display = 'none';
+  content.innerHTML = '';
+}
+
+function escapeRegex(s) {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function portMatchScore(p, ql) {
+  const name = (p.name || '').toLowerCase();
+  const full = (p.port_name_full || '').toLowerCase();
+  const country = (p.port_country || '').toLowerCase();
+
+  function scoreText(text, w) {
+    if (!text || !text.includes(ql)) return 0;
+    if (text === ql) return w.exact;
+    if (text.startsWith(ql)) return w.prefix;
+    const wordRe = new RegExp('(?:^|[\\s(/-])' + escapeRegex(ql), 'i');
+    if (wordRe.test(text)) return w.wordStart;
+    return w.includes;
+  }
+
+  const nameW = { exact: 10000, prefix: 5000, wordStart: 3000, includes: 400 };
+  const fullW = { exact: 2000, prefix: 1500, wordStart: 900, includes: 150 };
+  const countryW = { exact: 200, prefix: 150, wordStart: 100, includes: 50 };
+
+  let score = Math.max(
+    scoreText(name, nameW),
+    scoreText(full, fullW),
+    scoreText(country, countryW)
+  );
+  if (score <= 0) return 0;
+
+  const parenIdx = name.indexOf('(');
+  if (parenIdx >= 0) {
+    const before = name.slice(0, parenIdx);
+    const inside = name.slice(parenIdx);
+    if (!before.includes(ql) && inside.includes(ql) && scoreText(name, nameW) <= nameW.wordStart) {
+      score -= 2500;
+    }
+  }
+  if (scoreText(name, nameW) === 0 && scoreText(full, fullW) > 0 && scoreText(full, fullW) < fullW.wordStart) {
+    score -= 500;
+  }
+  return Math.max(score, 1);
+}
+
 function filterPorts(q) {
-  const ql = q.toLowerCase();
-  return PORTS.filter(p =>
-    (p.name && p.name.toLowerCase().includes(ql)) ||
-    (p.port_name_full && p.port_name_full.toLowerCase().includes(ql)) ||
-    (p.port_country && p.port_country.toLowerCase().includes(ql))
-  ).slice(0, 10);
+  const ql = q.trim().toLowerCase();
+  if (ql.length < 2) return [];
+  const scored = [];
+  for (const p of PORTS) {
+    const s = portMatchScore(p, ql);
+    if (s > 0) scored.push({ p, s });
+  }
+  scored.sort((a, b) => {
+    if (b.s !== a.s) return b.s - a.s;
+    const an = (a.p.name || a.p.port_name_full || '').length;
+    const bn = (b.p.name || b.p.port_name_full || '').length;
+    if (an !== bn) return an - bn;
+    return (a.p.name || '').localeCompare(b.p.name || '', undefined, { sensitivity: 'base' });
+  });
+  return scored.slice(0, 10).map(x => x.p);
 }
 
 function setupAutocomplete(inputId, listId, metaId, setPort, getPort) {
@@ -599,6 +752,13 @@ function setupAutocomplete(inputId, listId, metaId, setPort, getPort) {
   const meta = document.getElementById(metaId);
   let activeIdx = -1;
   let lastMatches = [];
+
+  function closeList() {
+    list.innerHTML = '';
+    list.classList.remove('open');
+    activeIdx = -1;
+    lastMatches = [];
+  }
 
   function render(matches) {
     lastMatches = matches;
@@ -636,7 +796,7 @@ function setupAutocomplete(inputId, listId, metaId, setPort, getPort) {
     input.classList.add('port-valid');
     const draft = p.draft != null ? p.draft.toFixed(1) : '—';
     meta.textContent = `lat: ${Number(p.lat).toFixed(2)}  lon: ${Number(p.lon).toFixed(2)}  draft: ${draft} m`;
-    list.classList.remove('open');
+    closeList();
     clearError();
   }
 
@@ -659,11 +819,16 @@ function setupAutocomplete(inputId, listId, metaId, setPort, getPort) {
   }
 
   input.addEventListener('input', () => {
-    input.classList.remove('port-valid');
     const p = getPort();
+    if (p && portMatchesSelection(p, input.value)) {
+      input.classList.add('port-valid');
+      closeList();
+      return;
+    }
+    input.classList.remove('port-valid');
     if (p && !portMatchesSelection(p, input.value)) clearSelection();
     if (input.value.length < 2) {
-      list.classList.remove('open');
+      closeList();
       return;
     }
     render(filterPorts(input.value));
@@ -690,7 +855,7 @@ function setupAutocomplete(inputId, listId, metaId, setPort, getPort) {
 
   input.addEventListener('blur', () => {
     setTimeout(() => {
-      list.classList.remove('open');
+      closeList();
       syncFromInput();
     }, 150);
   });
@@ -857,6 +1022,7 @@ setupToggle('panama-toggle', v => { panamaToggle = v; });
 setupAutocomplete('pol-input', 'pol-list', 'pol-meta', p => { polPort = p; }, () => polPort);
 setupAutocomplete('pod-input', 'pod-list', 'pod-meta', p => { podPort = p; }, () => podPort);
 document.getElementById('run-btn').addEventListener('click', calculateRoute);
+document.getElementById('route-reset-btn').addEventListener('click', resetRouteCalculator);
 
 loadPorts();
 initECA();
@@ -865,7 +1031,7 @@ console.log(`[ports] Loaded ${PORTS.length} valid ports`);
 const btn = document.getElementById('run-btn');
 if (!routeEngineReady) {
   btn.disabled = true;
-  btn.textContent = '▶ Routing engine unavailable';
+  btn.textContent = 'Routing engine unavailable';
   showError('Routing engine failed to load. Check network access to esm.sh and refresh.');
 }
 </script>
