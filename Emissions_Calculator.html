@@ -215,9 +215,19 @@ document.addEventListener('blur', e => {
 
       <div class="card">
         <div class="card-title">ETS Parameters</div>
-        <div class="field">
-          <label>EUA price €/tCO₂</label>
-          <input type="text" inputmode="decimal" class="num-fmt" id="em-eua-price" data-decimals="0" value="80">
+        <div class="em-ets-grid">
+          <div class="field">
+            <label>Speed (kn)</label>
+            <input type="text" inputmode="decimal" class="num-fmt" id="em-speed" data-decimals="1" value="12.5">
+          </div>
+          <div class="field">
+            <label>Consumption (mt/day)</label>
+            <input type="text" inputmode="decimal" class="num-fmt" id="em-fuel-rate" data-decimals="1" value="25">
+          </div>
+          <div class="field span-2">
+            <label>EUA price €/tCO₂</label>
+            <input type="text" inputmode="decimal" class="num-fmt" id="em-eua-price" data-decimals="0" value="80">
+          </div>
         </div>
       </div>
 
@@ -237,6 +247,14 @@ document.addEventListener('blur', e => {
     </div>
   </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+<script type="module">
+  import searoute from 'https://esm.sh/searoute-ts@2.0.0';
+  window.searoute = searoute;
+  window.dispatchEvent(new Event('searoute-ready'));
+</script>
+<script src="eca-zones.js"></script>
+<script src="route-engine.js"></script>
 <script src="emissions-tab.js"></script>
 </body>
 </html>

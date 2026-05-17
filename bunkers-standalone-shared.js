@@ -245,6 +245,7 @@ function bindRoutePortAutocomplete(input) {
 
   function clearSelection() {
     selectedPort = null;
+    delete input._arctiumPort;
     meta.textContent = '';
     input.classList.remove('port-valid');
   }
@@ -252,6 +253,7 @@ function bindRoutePortAutocomplete(input) {
   function selectPort(p) {
     if (!isValidPortCatalogEntry(p)) return;
     selectedPort = p;
+    input._arctiumPort = p;
     input.value = portCatalogLabel(p);
     input.classList.add('port-valid');
     const draft = p.draft != null ? p.draft.toFixed(1) : '—';
@@ -363,8 +365,16 @@ function clearRoutePortField(inputId, metaId) {
   if (input) {
     input.value = '';
     input.classList.remove('port-valid');
+    delete input._arctiumPort;
   }
   if (meta) meta.textContent = '';
+}
+
+function getRoutePortFromInput(inputOrId) {
+  const input = typeof inputOrId === 'string' ? document.getElementById(inputOrId) : inputOrId;
+  if (!input) return null;
+  if (input._arctiumPort && isValidPortCatalogEntry(input._arctiumPort)) return input._arctiumPort;
+  return findExactPortInCatalog(input.value);
 }
 const ARC_LOADING_MIN_MS = 1500;
 let arcLoadingDepth = 0;

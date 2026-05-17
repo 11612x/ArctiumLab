@@ -4096,9 +4096,19 @@
 
       <div class="card">
         <div class="card-title">ETS Parameters</div>
-        <div class="field">
-          <label>EUA price €/tCO₂</label>
-          <input type="text" inputmode="decimal" class="num-fmt" id="em-eua-price" data-decimals="0" value="80">
+        <div class="em-ets-grid">
+          <div class="field">
+            <label>Speed (kn)</label>
+            <input type="text" inputmode="decimal" class="num-fmt" id="em-speed" data-decimals="1" value="12.5">
+          </div>
+          <div class="field">
+            <label>Consumption (mt/day)</label>
+            <input type="text" inputmode="decimal" class="num-fmt" id="em-fuel-rate" data-decimals="1" value="25">
+          </div>
+          <div class="field span-2">
+            <label>EUA price €/tCO₂</label>
+            <input type="text" inputmode="decimal" class="num-fmt" id="em-eua-price" data-decimals="0" value="80">
+          </div>
         </div>
       </div>
 
@@ -8268,6 +8278,7 @@ function bindRoutePortAutocomplete(input) {
 
   function clearSelection() {
     selectedPort = null;
+    delete input._arctiumPort;
     meta.textContent = '';
     input.classList.remove('port-valid');
   }
@@ -8275,6 +8286,7 @@ function bindRoutePortAutocomplete(input) {
   function selectPort(p) {
     if (!isValidPortCatalogEntry(p)) return;
     selectedPort = p;
+    input._arctiumPort = p;
     input.value = portCatalogLabel(p);
     input.classList.add('port-valid');
     const draft = p.draft != null ? p.draft.toFixed(1) : '—';
@@ -8386,8 +8398,16 @@ function clearRoutePortField(inputId, metaId) {
   if (input) {
     input.value = '';
     input.classList.remove('port-valid');
+    delete input._arctiumPort;
   }
   if (meta) meta.textContent = '';
+}
+
+function getRoutePortFromInput(inputOrId) {
+  const input = typeof inputOrId === 'string' ? document.getElementById(inputOrId) : inputOrId;
+  if (!input) return null;
+  if (input._arctiumPort && isValidPortCatalogEntry(input._arctiumPort)) return input._arctiumPort;
+  return findExactPortInCatalog(input.value);
 }
 
 function bindCargoAutocomplete(input) {
@@ -9505,6 +9525,14 @@ function whenDashboardTabVisible(run) {
 whenDashboardTabVisible(initDashboardLayout);
 </script>
 <script src="bunkers-tab.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+<script type="module">
+  import searoute from 'https://esm.sh/searoute-ts@2.0.0';
+  window.searoute = searoute;
+  window.dispatchEvent(new Event('searoute-ready'));
+</script>
+<script src="eca-zones.js"></script>
+<script src="route-engine.js"></script>
 <script src="emissions-tab.js"></script>
 </body>
 </html>

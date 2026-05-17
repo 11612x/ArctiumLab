@@ -24,6 +24,16 @@ box-sizing: border-box;
     grid-column: 1 / -1;
 }
 
+#emissions-app .em-ets-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+#emissions-app .em-ets-grid .field.span-2 {
+    grid-column: 1 / -1;
+}
+
 #emissions-app .coverage-toggle {
     border: 1px solid var(--border);
     border-radius: 3px;

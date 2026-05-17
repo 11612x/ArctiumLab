@@ -10,6 +10,41 @@ function initEmissionsPortAutocomplete() {
 
 function wireEmissionsPorts() {
   initEmissionsPortAutocomplete();
+  wireEmissionsCoverageAuto();
+}
+
+function wireEmissionsCoverageAuto() {
+  ['em-pol', 'em-pod'].forEach(id => {
+    const inp = document.getElementById(id);
+    if (!inp || inp.dataset.emCoverageBound === '1') return;
+    inp.dataset.emCoverageBound = '1';
+    inp.addEventListener('change', emSyncCoverageFromPorts);
+  });
+}
+
+function emIsEuPort(port) {
+  return port && String(port.ismrv || '').toUpperCase() === 'Y';
+}
+
+function emCoverageValueFromPorts(pol, pod) {
+  const euCount = [pol, pod].filter(emIsEuPort).length;
+  if (euCount >= 2) return '100';
+  if (euCount === 1) return '50';
+  return '0';
+}
+
+function emApplyCoverageFromPorts(pol, pod) {
+  if (!pol || !pod) return null;
+  const value = emCoverageValueFromPorts(pol, pod);
+  emSetCoverage(value);
+  return value;
+}
+
+function emSyncCoverageFromPorts() {
+  if (typeof getRoutePortFromInput !== 'function') return;
+  const pol = getRoutePortFromInput('em-pol');
+  const pod = getRoutePortFromInput('em-pod');
+  if (pol && pod) emApplyCoverageFromPorts(pol, pod);
 }
 
 // ─── EMISSIONS TAB ────────────────────────────────────────────────────────────
@@ -114,7 +149,15 @@ function emFmtEurPrecise(n) {
 }
 
 function emCoverageFromType(voyageType) {
-  return voyageType === '50' ? 0.5 : 1.0;
+  if (voyageType === '50') return 0.5;
+  if (voyageType === '0') return 0;
+  return 1.0;
+}
+
+function emCoverageLabelFromFactor(coverage) {
+  if (coverage >= 1) return '100%';
+  if (coverage >= 0.5) return '50%';
+  return '0%';
 }
 
 function emSetCoverage(value) {
@@ -221,12 +264,94 @@ function emRemoveFuelRow(id) {
   emRenderFuelRows();
 }
 
+function emFmtNM(n) {
+  if (n === null || n === undefined || isNaN(n)) return '—';
+  return Math.round(n).toLocaleString('en-US', { maximumFractionDigits: 0 }) + ' NM';
+}
+
+function emGetSpeedAndFuelRate() {
+  const speed = parseNum(document.getElementById('em-speed')?.value);
+  const mtPerDay = parseNum(document.getElementById('em-fuel-rate')?.value);
+  return {
+    speedKn: speed != null && speed > 0 ? speed : 12.5,
+    mtPerDay: mtPerDay != null && mtPerDay > 0 ? mtPerDay : 25,
+  };
+}
+
+function emFindFuelRow(fuelType) {
+  return emFuelRows.find(row => {
+    const select = document.getElementById(`em-fuel-type-${row.id}`);
+    const fuel = select?.value || row.fuel;
+    return fuel === fuelType;
+  });
+}
+
+function emSetFuelRowMt(fuelType, mt) {
+  let row = emFindFuelRow(fuelType);
+  if (!row) {
+    emAddFuelRow({ fuel: fuelType, mt });
+    return;
+  }
+  row.mt = mt;
+  row.fuel = fuelType;
+  const mtEl = document.getElementById(`em-fuel-mt-${row.id}`);
+  const typeEl = document.getElementById(`em-fuel-type-${row.id}`);
+  if (typeEl) typeEl.value = fuelType;
+  if (mtEl) mtEl.value = fmtNumInput(mt, 3);
+  emRecalcFuelRow(row.id);
+}
+
+async function emApplyRouteFuelFromPorts() {
+  const pol = typeof getRoutePortFromInput === 'function' ? getRoutePortFromInput('em-pol') : null;
+  const pod = typeof getRoutePortFromInput === 'function' ? getRoutePortFromInput('em-pod') : null;
+  if (!pol || !pod) {
+    return { ok: false, error: 'Select load and discharge ports from the dropdown' };
+  }
+  const engine = window.ArctiumRouteEngine;
+  if (!engine?.calculateLegRoute) {
+    return { ok: false, error: 'Route engine not available' };
+  }
+
+  const route = await engine.calculateLegRoute(pol, pod);
+  if (route.error) return { ok: false, error: route.error };
+
+  const { speedKn, mtPerDay } = emGetSpeedAndFuelRate();
+  const fuel = engine.computeSeaFuelMT({
+    nonEcaNM: route.nonEcaNM,
+    ecaNM: route.ecaNM,
+    speedKn,
+    mtPerDay,
+  });
+
+  emSetFuelRowMt('VLSFO', fuel.vlsfoMT);
+  emSetFuelRowMt('LSMGO', fuel.lsmgoMT);
+  emApplyCoverageFromPorts(pol, pod);
+
+  const voyageDaysEl = document.getElementById('em-voyage-days');
+  if (voyageDaysEl && fuel.seaDays > 0) {
+    voyageDaysEl.value = fmtNumInput(fuel.seaDays, 1);
+    formatAllNumInputs(document.getElementById('emissions-app'));
+  }
+
+  return {
+    ok: true,
+    totalNM: route.totalNM,
+    ecaNM: route.ecaNM,
+    nonEcaNM: route.nonEcaNM,
+    seaDays: fuel.seaDays,
+  };
+}
+
 function emResetETS() {
   document.getElementById('em-vessel').value = '';
   emSetCoverage('100');
   clearRoutePortField('em-pol', 'em-pol-meta');
   clearRoutePortField('em-pod', 'em-pod-meta');
   document.getElementById('em-voyage-days').value = '';
+  const speedEl = document.getElementById('em-speed');
+  const rateEl = document.getElementById('em-fuel-rate');
+  if (speedEl) speedEl.value = '12.5';
+  if (rateEl) rateEl.value = '25';
   document.getElementById('em-eua-price').value = '80';
   emInitComplianceYear();
   emFuelRows = [];
@@ -247,7 +372,7 @@ function emGatherFuelData() {
   });
 }
 
-function emCalcETS() {
+async function emCalcETS() {
   if (!emFuelRows.length) {
     emShowEmptyState();
     return;
@@ -259,6 +384,18 @@ function emCalcETS() {
     return;
   }
 
+  let routeMeta = null;
+  const pol = typeof getRoutePortFromInput === 'function' ? getRoutePortFromInput('em-pol') : null;
+  const pod = typeof getRoutePortFromInput === 'function' ? getRoutePortFromInput('em-pod') : null;
+  if (pol && pod) {
+    const routeResult = await emApplyRouteFuelFromPorts();
+    if (!routeResult.ok) {
+      emShowWarning(routeResult.error);
+      return;
+    }
+    routeMeta = routeResult;
+  }
+
   const fuels = emGatherFuelData();
   const totalMt = fuels.reduce((sum, row) => sum + row.mt, 0);
   if (totalMt <= 0) {
@@ -268,7 +405,7 @@ function emCalcETS() {
 
   const voyageType = document.getElementById('em-voyage-type').value;
   const coverage = emCoverageFromType(voyageType);
-  const coverageLabel = coverage === 1.0 ? '100%' : '50%';
+  const coverageLabel = emCoverageLabelFromFactor(coverage);
   const totalCo2 = fuels.reduce((sum, row) => sum + row.co2, 0);
   const coveredCo2 = totalCo2 * coverage;
   const euasRequired = Math.ceil(coveredCo2);
@@ -288,7 +425,8 @@ function emCalcETS() {
     totalCost,
     voyageDays,
     costPerDay,
-    complianceYear
+    complianceYear,
+    routeMeta,
   });
 }
 
@@ -450,6 +588,13 @@ function emRenderResults(data) {
 
   const summaryRows = [
     emSummaryRow('Total CO₂ emitted', emFmtCo2Whole(data.totalCo2)),
+  ];
+  if (data.routeMeta?.totalNM != null) {
+    summaryRows.push(emSummaryRow('Total distance', emFmtNM(data.routeMeta.totalNM)));
+    summaryRows.push(emSummaryRow('ECA distance', emFmtNM(data.routeMeta.ecaNM)));
+    summaryRows.push(emSummaryRow('Non-ECA distance', emFmtNM(data.routeMeta.nonEcaNM)));
+  }
+  summaryRows.push(
     emSummaryRow('Route coverage factor', data.coverageLabel),
     emSummaryRow('EUAs required', emFmtEua(data.euasRequired)),
     emSummaryRow('EUA price', emFmtEur(data.euaPrice) + '/tCO₂'),
@@ -458,7 +603,7 @@ function emRenderResults(data) {
     emSummaryRow('EU ETS cost', emFmtEur(data.totalCost)),
     emSummaryRow('FuelEU penalty', fuelEuPenaltyValue, { valueClass: fuelEuPenaltyClass }),
     emSummaryRow('Total emissions cost', emFmtEur(totalEmissionsCost), true),
-  ];
+  );
   if (data.costPerDay !== null) {
     summaryRows.splice(4, 0, emSummaryRow('Cost per day', emFmtEurDay(data.costPerDay)));
   }
