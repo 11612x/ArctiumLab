@@ -4512,7 +4512,13 @@ function authToggleUserMenu() {
   }
 }
 
+let authUserMenuBound = false;
+let headerChromeBound = false;
+let headerLogoRotation = 0;
+
 function authBindUserMenu() {
+  if (authUserMenuBound) return;
+  authUserMenuBound = true;
   const wrap = document.getElementById('authUserWrap');
   const chip = document.getElementById('authUserChip');
   const light = document.getElementById('themeLightBtn');
@@ -4551,6 +4557,39 @@ function authBindUserMenu() {
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') authCloseUserMenu();
   });
+}
+
+function bindHeaderChrome() {
+  if (headerChromeBound) return;
+  headerChromeBound = true;
+  const title = document.querySelector('header h1');
+  if (title) {
+    title.addEventListener('click', reloadArctiumLabs);
+    title.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        reloadArctiumLabs();
+      }
+    });
+  }
+  const logo = document.querySelector('.header-logo');
+  if (logo) {
+    logo.addEventListener('click', () => {
+      headerLogoRotation += 30;
+      logo.style.transform = `rotate(${headerLogoRotation}deg)`;
+    });
+  }
+}
+
+function bootHeaderChrome() {
+  bindHeaderChrome();
+  authBindUserMenu();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', bootHeaderChrome);
+} else {
+  bootHeaderChrome();
 }
 
 function authShowLogin() {
@@ -4617,14 +4656,22 @@ async function authOnLogin(user) {
   hydratedUserId = user.id;
   authHideLogin();
   authShowChip();
-  if (needFullLoad) await loadAllData();
   applyRoleUI();
-  if (getActiveTab() === 'tab-bunkers') postBunkerUiState();
   vesselCommentsSubscribe();
-  livePosRefreshUI();
   dashE2UnresolvedInit();
-  void reloadDashE2UnresolvedComments();
-  if (typeof twelveQuotesUpdateAdminUi === 'function') twelveQuotesUpdateAdminUi();
+  const afterDataReady = () => {
+    applyRoleUI();
+    if (getActiveTab() === 'tab-bunkers') postBunkerUiState();
+    livePosRefreshUI();
+    void reloadDashE2UnresolvedComments();
+    if (typeof twelveQuotesUpdateAdminUi === 'function') twelveQuotesUpdateAdminUi();
+  };
+  if (needFullLoad) {
+    livePosRefreshUI();
+    void loadAllData().then(afterDataReady);
+  } else {
+    afterDataReady();
+  }
 }
 
 async function authInit() {
@@ -4681,8 +4728,6 @@ async function authInit() {
       }
     });
   }
-
-  authBindUserMenu();
 }
 
 // ═════════════════════════════════════════════════════════════════════════════
@@ -6565,22 +6610,6 @@ window.onload = async () => {
 
   const savedTab = sessionStorage.getItem(TAB_STORAGE_KEY);
   if (savedTab && VALID_TABS.includes(savedTab)) switchTab(savedTab);
-
-  const title = document.querySelector('header h1');
-  title.addEventListener('click', reloadArctiumLabs);
-  title.addEventListener('keydown', e => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      reloadArctiumLabs();
-    }
-  });
-
-  const logo = document.querySelector('.header-logo');
-  let logoRotation = 0;
-  logo.addEventListener('click', () => {
-    logoRotation += 30;
-    logo.style.transform = `rotate(${logoRotation}deg)`;
-  });
 
   const voyTab = document.getElementById('tab-voy');
   if (voyTab) {
