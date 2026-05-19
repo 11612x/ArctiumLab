@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Marnet resolution tester</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
   <style>
     * { box-sizing: border-box; }
     body {
@@ -73,6 +75,47 @@
     }
     th { color: #9aa89a; font-weight: 500; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; }
     td.num { font-variant-numeric: tabular-nums; }
+    #map {
+      width: 100%;
+      height: 500px;
+      margin-top: 16px;
+      border-radius: 8px;
+      border: 1px solid #2a322a;
+      background: #1a1f1a;
+    }
+    #map .leaflet-container {
+      background: #1a1f1a;
+      font-family: inherit;
+    }
+    .route-legend {
+      padding: 8px 10px;
+      background: rgba(15, 18, 16, 0.92);
+      border: 1px solid #2a322a;
+      border-radius: 6px;
+      color: #e4ebe4;
+      font-size: 0.75rem;
+      line-height: 1.5;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+    }
+    .route-legend-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #9aa89a;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .route-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .route-legend-swatch {
+      width: 20px;
+      height: 3px;
+      border-radius: 1px;
+      flex-shrink: 0;
+    }
     #log {
       margin-top: 16px;
       font-size: 0.8rem;
@@ -135,8 +178,11 @@
     </tbody>
   </table>
 
+  <div id="map"></div>
+
   <div id="log"></div>
 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script src="ports.js"></script>
   <script type="module">
     import seaRoute, { clearFinderCache } from 'https://esm.sh/searoute-ts@2.0.0';
@@ -150,6 +196,112 @@
     const logEl = document.getElementById('log');
     const tbody = document.getElementById('results-body');
     const btn = document.getElementById('btn-run');
+
+    const ROUTE_COLORS = {
+      100: '#7898b8',
+      20: '#b89858',
+      5: '#78b8a8',
+    };
+
+    let map;
+    let routeLayerGroup;
+    let markerLayerGroup;
+    let mapLegendControl;
+
+    function initMap() {
+      map = L.map('map', { zoomControl: true }).setView([20, 0], 2);
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        referrerPolicy: 'strict-origin-when-cross-origin',
+      }).addTo(map);
+      routeLayerGroup = L.layerGroup().addTo(map);
+      markerLayerGroup = L.layerGroup().addTo(map);
+    }
+
+    function portDisplayName(p) {
+      return p.name || p.port_name_full || p.value || 'Port';
+    }
+
+    function clearMapRoutes() {
+      routeLayerGroup.clearLayers();
+      markerLayerGroup.clearLayers();
+      if (mapLegendControl) {
+        map.removeControl(mapLegendControl);
+        mapLegendControl = null;
+      }
+    }
+
+    function isValidRouteGeoJson(route) {
+      const coords = route?.geometry?.coordinates;
+      return Array.isArray(coords) && coords.length >= 2;
+    }
+
+    function updateMapRoutes(validRoutes, pFrom, pTo) {
+      clearMapRoutes();
+
+      const fromLatLng = [Number(pFrom.lat), Number(pFrom.lon)];
+      const toLatLng = [Number(pTo.lat), Number(pTo.lon)];
+      const bounds = L.latLngBounds([fromLatLng, toLatLng]);
+
+      const markerOpts = {
+        radius: 5,
+        weight: 2,
+        fillOpacity: 0.85,
+      };
+
+      L.circleMarker(fromLatLng, {
+        ...markerOpts,
+        color: '#9ab89a',
+        fillColor: '#6a8a6a',
+      })
+        .bindTooltip(portDisplayName(pFrom), { direction: 'top', offset: [0, -6] })
+        .addTo(markerLayerGroup);
+
+      L.circleMarker(toLatLng, {
+        ...markerOpts,
+        color: '#b8a89a',
+        fillColor: '#8a7a6a',
+      })
+        .bindTooltip(portDisplayName(pTo), { direction: 'top', offset: [0, -6] })
+        .addTo(markerLayerGroup);
+
+      for (const { km, label, route } of validRoutes) {
+        const latlngs = route.geometry.coordinates.map((c) => [c[1], c[0]]);
+        L.polyline(latlngs, {
+          color: ROUTE_COLORS[km] || '#7898b8',
+          weight: 2,
+        }).addTo(routeLayerGroup);
+        for (const ll of latlngs) bounds.extend(ll);
+      }
+
+      if (validRoutes.length) {
+        mapLegendControl = L.control({ position: 'topright' });
+        mapLegendControl.onAdd = function () {
+          const div = L.DomUtil.create('div', 'route-legend');
+          div.innerHTML =
+            '<div class="route-legend-title">Routes</div>' +
+            validRoutes
+              .map(
+                ({ km, label }) =>
+                  '<div class="route-legend-item"><span class="route-legend-swatch" style="background:' +
+                  (ROUTE_COLORS[km] || '#7898b8') +
+                  '"></span>' +
+                  label +
+                  '</div>'
+              )
+              .join('');
+          L.DomEvent.disableClickPropagation(div);
+          return div;
+        };
+        mapLegendControl.addTo(map);
+      }
+
+      map.fitBounds(bounds, { padding: [40, 40], maxZoom: 8 });
+      map.invalidateSize();
+    }
+
+    initMap();
 
     function log(msg) {
       logEl.textContent += msg + '\n';
@@ -386,6 +538,7 @@
       log('');
 
       const loadTimings = { 100: 0 };
+      const validMapRoutes = [];
 
       for (const res of RESOLUTIONS) {
         const tr = document.createElement('tr');
@@ -421,6 +574,9 @@
           if (res.km !== 100 && loadTimings[res.km]) {
             log('  network load: ' + fmtMs(loadTimings[res.km]));
           }
+          if (isValidRouteGeoJson(route1)) {
+            validMapRoutes.push({ km: res.km, label: res.label, route: route1 });
+          }
         } catch (e) {
           tr.innerHTML =
             '<td>' + res.label + '</td>' +
@@ -428,6 +584,8 @@
           log(res.label + ': ERROR — ' + e.message);
         }
       }
+
+      updateMapRoutes(validMapRoutes, pFrom, pTo);
 
       btn.disabled = false;
     });

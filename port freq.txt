@@ -1,0 +1,50 @@
+Houston — 76
+Singapore — 54
+Balboa — 41
+Suape — 39
+Tuxpan — 34
+Cristobal — 28
+Rio de Janeiro — 26
+Sao Luiz De Maranhao — 26
+Pajaritos — 23
+Sao Sebastiao — 23
+Fujairah — 22
+Santos — 21
+Paranagua — 20
+Belem — 20
+Beaumont — 19
+Ciudad Madero — 19
+Fortaleza — 19
+Tanjung Pelepas — 18
+Port Arthur, Texas — 17
+Gibraltar — 17
+Las Palmas — 13
+New York — 12
+Lome — 12
+
+Routes 5x and above:
+Houston → Tuxpan — 13
+Tuxpan → Ciudad Madero — 12
+Suape → Fortaleza — 12
+Singapore → Tanjung Pelepas — 10
+Dardanelles N → Bosporus N — 10
+Bosporus S → Dardanelles S — 9
+Tanjung Pelepas → Singapore — 9
+Beaumont → Tuxpan — 8
+Ciudad Madero → Houston — 8
+Fortaleza → Suape — 8
+Bosporus N → Novorossiysk — 7
+Paranagua → Santos — 7
+Sao Luiz De Maranhao → Belem — 7
+Sao Sebastiao → Paranagua — 7
+Belem → Suape — 7
+Salina Cruz → Balboa — 7
+New York → Houston — 6
+Houston → Pajaritos — 6
+Novorossiysk → Bosporus S — 6
+Paranagua → Sao Sebastiao — 6
+Houston → Cristobal — 5
+Cristobal → Balboa — 5
+Balboa → Texas City — 5
+Beaumont → Houston — 5
+Tuxpan → Houston — 5
